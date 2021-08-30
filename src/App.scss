@@ -1,9 +1,16 @@
+.app {
+  height: 100%;
+  display: flex;
+}
+
 .bg {
+  position: absolute;
   display: block;
-  float: right;
   width: calc(100vw - 220px);
   height: 100vh;
+  left: 220px;
   object-fit: cover;
+  z-index: -1;
 }
 
 .shadow {
@@ -14,15 +21,29 @@
   top: 218px;
   bottom: 59px;
   z-index: 1;
+  pointer-events: none;
 }
 
 .sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
   width: 220px;
-  height: 100%;
   background: #151B25;
+}
+
+.main {
+  flex-grow: 1;
+  padding-left: 78px;
+}
+
+.save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 161px;
+  height: 34px;
+  width: 164px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 17px;
+  cursor: pointer;
 }
 
 .player {
@@ -38,6 +59,23 @@
   z-index: 3;
 }
 
+.player__album-cover {
+  margin: 0 16px 0 0;
+}
+
+.player__track-info {
+  width: 150px;
+}
+
+.player__track {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.player__artist {
+  font-size: 12px;
+}
+
 .player_red {
   background: linear-gradient(182deg, rgba(147,58,175, 0.9) 0%, rgba(230,60,86, 0.9) 100%);
   filter: drop-shadow(0px -5px 43px rgba(0, 0, 0, 0.31383));
@@ -51,10 +89,7 @@
   }
 }
 
-.player__album {}
-
 .player__buttons {
-  margin-left: 100px;
   width: 100px;
 }
 
