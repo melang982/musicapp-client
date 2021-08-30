@@ -10,3 +10,16 @@
   background: #3B8BFD;
   border-radius: 3px;
 }
+
+.button {
+  padding: 5px;
+  cursor: pointer;
+
+  svg path {
+    opacity: 0.5;
+  }
+
+  &:hover svg path {
+    opacity: 1;
+  }
+}
