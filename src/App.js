@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import './App.css';
+import './App.scss';
+import './components/components.scss';
 import IconPlay from './components/icons/IconPlay';
 import IconPause from './components/icons/IconPause';
 import IconVolume from './components/icons/IconVolume';
