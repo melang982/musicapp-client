@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import './App.css';
+import IconPlay from './components/icons/IconPlay';
+import IconPause from './components/icons/IconPause';
+import IconVolume from './components/icons/IconVolume';
+import ProgressBar from './components/ProgressBar';
 
 import {loadFile} from './audio.js';
 
 function App() {
 
   const [player, setPlayer] = useState(null);
-  //const [playState, setPlayState] = useState('play');
+  const [playButtonState, setPlayButtonState] = useState(true);
 
   function onPlayButtonClick() {
     if (!player) {
@@ -16,22 +20,41 @@ function App() {
     } else {
       player.play();
     }
+    setPlayButtonState(false);
   }
 
   function onStopButtonClick() {
     console.log(player);
     player.stop();
-    //setPlayState('stop');
+    setPlayButtonState(true);
   }
 
-  return (<div className=" App">
-    hello react
-    <button onClick={onPlayButtonClick}>
-      Play
-    </button>
-    <button onClick={onStopButtonClick}>
-      Stop
-    </button>
+  return (<div className="app">
+    <img className="bg" src="BG.png" alt="background"/>
+    <div className="shadow"></div>
+
+    <div className="sidebar"></div>
+    <div className="player player_red">
+      <img className="player__album" src="Album.png" alt="Album cover" width="40" height="40"/>
+      <div className="player__buttons">
+        <div className="player__oval">
+          <img src="Oval.svg" alt="Oval"/> {
+            playButtonState
+              ? <IconPlay/>
+              : <IconPause/>
+          }
+        </div>
+      </div>
+      <IconVolume/>
+      <ProgressBar style={{
+          width: '106px',
+          marginLeft: '20px'
+        }}/>
+      <ProgressBar style={{
+          width: '586px',
+          marginLeft: '50px'
+        }}/>
+    </div>
   </div>);
 }
 
