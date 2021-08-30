@@ -4,6 +4,7 @@ import './components/components.scss';
 
 import ProgressBar from './components/ProgressBar';
 import Button from './components/Button';
+import Track from './components/Track';
 
 import {loadFile} from './audio.js';
 
@@ -37,6 +38,12 @@ function App() {
     <div className="main">
       <div className="save">Save to My stars</div>
       <h1>Gorillaz</h1>
+      <div className="tracks">
+        <Track/>
+        <Track/>
+        <Track/>
+        <Track/>
+      </div>
     </div>
 
     <div className="player player_red">
@@ -59,7 +66,7 @@ function App() {
           }
         </div>
       </div>
-      <Button icon="Z" onClicked={onStopButtonClick}/>
+      <Button icon="volume" onClicked={onStopButtonClick}/>
       <ProgressBar style={{
           width: '106px',
           marginLeft: '20px'
