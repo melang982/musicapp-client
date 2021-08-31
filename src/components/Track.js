@@ -1,17 +1,19 @@
 import SoundBars from './SoundBars';
 
-function Track() {
-  return <div class="track">
+function Track(props) {
+  const { track } = props;
+
+  return <div className="track">
     <div>
-      <p class="track__name">
-        Division
+      <p className="track__name">
+        {track.title}
       </p>
-      <p class="track__album">
+      <p className="track__album">
         Epoch
       </p>
     </div>
     <SoundBars/>
-    <p class="track__time">
+    <p className="track__time">
       3:53
     </p>
   </div>

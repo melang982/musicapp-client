@@ -8,6 +8,19 @@ import Track from './components/Track';
 
 import {loadFile} from './audio.js';
 
+import {useQuery, gql} from '@apollo/client';
+
+const ARTIST_QUERY = gql `
+  {
+    artist(id:1){
+    name
+    albums {
+      title
+    }
+  }
+  }
+`;
+
 function App() {
 
   const [player, setPlayer] = useState(null);
@@ -31,6 +44,9 @@ function App() {
     setPlayButtonState(true);
   }
 
+  const {data} = useQuery(ARTIST_QUERY);
+  //console.log(data);
+
   return (<div className="app">
     <img className="bg" src="BG.png" alt="background"/>
     <div className="shadow"></div>
@@ -38,22 +54,17 @@ function App() {
     <div className="main">
       <div className="save">Save to My stars</div>
       <h1>Gorillaz</h1>
-      <div className="tracks">
-        <Track/>
-        <Track/>
-        <Track/>
-        <Track/>
-      </div>
+      <div className="tracks">{data && data.artist.albums.map((track) => <Track key={track.id} track={track}/>)}</div>
     </div>
 
     <div className="player player_red">
 
       <img className="player__album-cover" src="Album.png" alt="Album cover"/>
       <div className="player__track-info">
-        <p class="player__track">
+        <p className="player__track">
           Rhinestone Eyes
         </p>
-        <p class="player__artist">
+        <p className="player__artist">
           Gorillaz
         </p>
       </div>
