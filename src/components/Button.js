@@ -5,13 +5,19 @@ import IconVolume from './icons/IconVolume';
 function Button({onClicked, icon}) {
 
   let iconComp;
-  if (icon == 'play') 
-    iconComp = <IconPlay/>;
-  else if (icon == 'pause') 
-    iconComp = <IconPause/>;
-  else if (icon == 'volume') 
-    iconComp = <IconVolume/>;
-  
+  switch (icon) {
+    case 'play':
+      iconComp = <IconPlay/>;
+      break;
+    case 'pause':
+      iconComp = <IconPause/>;
+      break;
+    case 'volume':
+      iconComp = <IconVolume/>;
+      break;
+    default:
+  }
+
   return <div className="button" onClick={onClicked}>
     {iconComp}
   </div>;

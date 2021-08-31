@@ -86,7 +86,7 @@ const loadFile = () => {
   let socket = io();
 
   console.log('test hello');
-  socket.emit('track', () => {});
+  socket.emit('track', '1', () => {});
   ss(socket).on('track-stream', (stream, {stat}) => {
     const size = stat.size;
     let total = 0;
