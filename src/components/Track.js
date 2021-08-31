@@ -1,9 +1,15 @@
+import {connect} from 'react-redux'
 import SoundBars from './SoundBars';
 
 function Track(props) {
-  const { track } = props;
+  const {track, currentTrack} = props;
 
-  return <div className="track">
+  function onClicked() {
+    console.log('clicked!');
+    props.dispatch({type: 'SET_TRACK', payload: track.id})
+  }
+
+  return <div className="track" onClick={onClicked}>
     <div>
       <p className="track__name">
         {track.title}
@@ -12,10 +18,19 @@ function Track(props) {
         Epoch
       </p>
     </div>
-    <SoundBars/>
+    {currentTrack == track.id && <SoundBars/>}
     <p className="track__time">
       3:53
     </p>
   </div>
 }
-export default Track;
+
+const mapStateToProps = state => {
+  return {currentTrack: state.currentTrack}
+}
+
+const mapDispatchToProps = dispatch => {
+  return {dispatch}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Track)
