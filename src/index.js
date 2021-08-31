@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
 import {ApolloProvider, ApolloClient, createHttpLink, InMemoryCache} from '@apollo/client';
 const httpLink = createHttpLink({uri: 'http://localhost:4000'});
 const client = new ApolloClient({
@@ -13,7 +14,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+     <App />
   </ApolloProvider>,
   document.getElementById('root')
 );
