@@ -15,7 +15,7 @@ function Track(props) {
         {track.title}
       </p>
       <p className="track__album">
-        Epoch
+        {track.album}
       </p>
     </div>
     {currentTrack == track.id && <SoundBars/>}

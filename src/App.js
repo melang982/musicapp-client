@@ -1,38 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.scss';
 import './components/components.scss';
 
-import ProgressBar from './components/ProgressBar';
 import Artist from './components/Artist';
 import Album from './components/Album';
-import Button from './components/Button';
+import Player from './components/Player';
 
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
-import {loadFile} from './audio.js';
-
 function App() {
-
-  const [player, setPlayer] = useState(null);
-  const [playButtonState, setPlayButtonState] = useState(true);
-
-  function onPlayButtonClick() {
-    console.log("onPlayButtonClick");
-    if (!player) {
-      let newPlayer = loadFile();
-      console.log(newPlayer);
-      setPlayer(newPlayer);
-    } else {
-      player.play();
-    }
-    setPlayButtonState(false);
-  }
-
-  function onStopButtonClick() {
-    console.log(player);
-    player.stop();
-    setPlayButtonState(true);
-  }
 
   return (<Router>
     <div className="app">
@@ -49,37 +25,7 @@ function App() {
         </Route>
       </Switch>
 
-      <div className="player player_red">
-
-        <img className="player__album-cover" src="/Album.png" alt="Album cover"/>
-        <div className="player__track-info">
-          <p className="player__track">
-            Rhinestone Eyes
-          </p>
-          <p className="player__artist">
-            Gorillaz
-          </p>
-        </div>
-        <div className="player__buttons">
-          <div className="player__oval">
-            <img src="/Oval.svg" alt="Oval"/> {
-              playButtonState
-                ? <Button icon="play" onClicked={onPlayButtonClick}/>
-                : <Button icon="pause" onClicked={onStopButtonClick}/>
-            }
-          </div>
-        </div>
-        <Button icon="volume" onClicked={onStopButtonClick}/>
-        <ProgressBar style={{
-            width: '106px',
-            marginLeft: '20px'
-          }}/>
-        <ProgressBar style={{
-            width: '586px',
-            marginLeft: '50px'
-          }}/>
-      </div>
-
+      <Player/>
     </div>
   </Router>);
 }

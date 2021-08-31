@@ -28,7 +28,13 @@ function Artist() {
   const {data} = useQuery(ARTIST_QUERY);
   console.log(data);
 
-  const tracks = data && data.artist.albums.flatMap((elem) => elem.tracks);
+  const tracks = data && data.artist.albums.flatMap( x => {  //add album name to tracks
+    let newTracks = x.tracks.map(y => ({
+      ...y,
+      album: x.title
+    }));
+    return newTracks
+    })
 
   console.log(tracks);
 
