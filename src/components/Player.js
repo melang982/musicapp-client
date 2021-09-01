@@ -1,12 +1,15 @@
 import {useState} from 'react';
+import {connect} from 'react-redux'
 import Button from './Button';
 import ProgressBar from './ProgressBar';
 import {loadFile} from './../audio.js';
 
-function Player() {
-
+function Player(props) {
+  const {currentTrack} = props;
   const [player, setPlayer] = useState(null);
   const [playButtonState, setPlayButtonState] = useState(true);
+
+  let albumCoverUrl = currentTrack && '/images/album/' + currentTrack.album.id + '.jpg';
 
   function onPlayButtonClick() {
     console.log("onPlayButtonClick");
@@ -27,13 +30,15 @@ function Player() {
   }
 
   return <div className="player player_red">
-    <img className="player__album-cover" src="/Album.png" alt="Album cover"/>
+
+    { currentTrack && <img className="player__album-cover" src={albumCoverUrl} alt="Album cover"/> }
+
     <div className="player__track-info">
       <p className="player__track">
-        Rhinestone Eyes
+          { currentTrack && currentTrack.title }
       </p>
       <p className="player__artist">
-        Gorillaz
+          { currentTrack && currentTrack.artist }
       </p>
     </div>
     <div className="player__buttons">
@@ -56,4 +61,9 @@ function Player() {
       }}/>
   </div>;
 }
-export default Player;
+
+const mapStateToProps = state => {
+  return {currentTrack: state.currentTrack}
+}
+
+export default connect(mapStateToProps)(Player)

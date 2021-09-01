@@ -3,7 +3,7 @@ import './App.scss';
 import './components/components.scss';
 
 import Artist from './components/Artist';
-import Album from './components/Album';
+import AlbumPage from './components/AlbumPage';
 import Player from './components/Player';
 
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
@@ -21,7 +21,7 @@ function App() {
           <Artist/>
         </Route>
         <Route path="/album">
-          <Album/>
+          <AlbumPage/>
         </Route>
       </Switch>
 

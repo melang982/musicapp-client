@@ -6,7 +6,7 @@ function Track(props) {
 
   function onClicked() {
     console.log('clicked!');
-    props.dispatch({type: 'SET_TRACK', payload: track.id})
+    props.dispatch({type: 'SET_TRACK', payload: track})
   }
 
   return <div className="track" onClick={onClicked}>
@@ -15,10 +15,10 @@ function Track(props) {
         {track.title}
       </p>
       <p className="track__album">
-        {track.album}
+        {track.album.title}
       </p>
     </div>
-    {currentTrack == track.id && <SoundBars/>}
+    {currentTrack && currentTrack.id == track.id && <SoundBars/>}
     <p className="track__time">
       3:53
     </p>

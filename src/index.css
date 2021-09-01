@@ -38,3 +38,9 @@ h1 {
   src: local('AvenirNextDemi'), url(./fonts/AvenirNextCyr-Demi.woff) format('woff');
   font-weight: 600;
 }
+
+@font-face {
+  font-family: 'AvenirNext';
+  src: local('AvenirNextMedium'), url(./fonts/AvenirNextCyr-Medium.woff) format('woff');
+  font-weight: 500;
+}

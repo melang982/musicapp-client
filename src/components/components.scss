@@ -1,6 +1,48 @@
 .artist {
   flex-grow: 1;
   padding-left: 78px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.artist__menu {
+  padding: 20px 0;
+}
+
+.artist__menu-button {
+  width: 100px;
+  font-weight: 500;
+}
+
+.artist__menu-slider {
+  width: 100%;
+}
+
+.artist__menu-bar {
+  height: 3px;
+  width: 100px;
+  background: #3191FB;
+}
+
+.artist__albums {
+  display: grid;
+  width: 50%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-row-gap: 5px;
+  grid-column-gap: 22px;
+}
+
+.album {
+  display: flex;
+  flex-direction: column;
+}
+
+.album__cover {
+  width: 100%;
+}
+
+.album__title {
+  font-weight: 500;
 }
 
 .progressBar__wrapper {

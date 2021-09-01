@@ -1,6 +1,12 @@
-function Album() {
-  return <div class="album">
-    album
+function Album(props) {
+  const {album} = props;
+
+  let albumCoverUrl = '/images/album/' + album.id + '.jpg';
+
+  return <div className="album">
+    <img className="album__cover" src={albumCoverUrl} alt="album cover"/>
+    <p className="album__title">{album.title}</p>
+    <p>{album.year}</p>
   </div>;
 }
 export default Album;
