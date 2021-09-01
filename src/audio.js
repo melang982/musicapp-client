@@ -39,6 +39,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
   }
 
   const resume = (resumeTime = 0) => {
+    console.log('resume ' + resumeTime)
     source = audioContext.createBufferSource();
     source.buffer = audioBuffer;
 
@@ -51,7 +52,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
     console.log('play player, pausedAt: ' + pausedAt);
     isPlaying = true;
     startAt = new Date(Date.now() - pausedAt * 1000);
-    setStartedAt(startAt); //td: maybe use single startAt/startedAt?
+    setStartedAt(startAt);
 
     if (audioBuffer) resume(pausedAt);
     else playWhileLoading(pausedAt);
@@ -112,6 +113,9 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
         console.log('fully loaded');
         clearInterval(whileLoadingInterval);
         audioBuffer = source.buffer;
+        activeSource.stop();
+        const inSec = (Date.now() - startAt) / 1000;
+        resume(inSec);
       }
 
       const audioBufferChunk = await audioContext.decodeAudioData(withWaveHeader(data, 2, 44100));
