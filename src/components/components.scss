@@ -6,12 +6,19 @@
 }
 
 .artist__menu {
-  padding: 20px 0;
+  display: flex;
+  padding: 20px 0 13px;
 }
 
 .artist__menu-button {
   width: 100px;
   font-weight: 500;
+  //opacity: 0.75;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .artist__menu-slider {
@@ -20,7 +27,7 @@
 
 .artist__menu-bar {
   height: 3px;
-  width: 100px;
+  width: 50px;
   background: #3191FB;
 }
 
@@ -30,11 +37,22 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-row-gap: 5px;
   grid-column-gap: 22px;
+  margin: 30px 0 90px;
 }
 
 .album {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  margin-bottom: 12px;
+
+  p {
+    //opacity: 0.75;
+  }
+
+  &:hover p {
+    opacity: 1;
+  }
 }
 
 .album__cover {
@@ -42,6 +60,7 @@
 }
 
 .album__title {
+  margin-top: 3px;
   font-weight: 500;
 }
 

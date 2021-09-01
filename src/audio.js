@@ -10,7 +10,7 @@ function getAudioContext() {
   return {audioContext, analyser};
 };
 
-const loadFile = () => {
+const loadFile = (trackId) => {
 
   let source = null;
   let playWhileLoadingDuration = 0;
@@ -86,7 +86,7 @@ const loadFile = () => {
   let socket = io();
 
   console.log('test hello');
-  socket.emit('track', '1', () => {});
+  socket.emit('track', trackId, () => {});
   ss(socket).on('track-stream', (stream, {stat}) => {
     const size = stat.size;
     let total = 0;

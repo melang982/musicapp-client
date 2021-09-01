@@ -14,7 +14,7 @@ function Player(props) {
   function onPlayButtonClick() {
     console.log("onPlayButtonClick");
     if (!player) {
-      let newPlayer = loadFile();
+      let newPlayer = loadFile(currentTrack.id);
       console.log(newPlayer);
       setPlayer(newPlayer);
     } else {
@@ -29,7 +29,7 @@ function Player(props) {
     setPlayButtonState(true);
   }
 
-  return <div className="player player_red">
+  return <div className="player">
 
     { currentTrack && <img className="player__album-cover" src={albumCoverUrl} alt="Album cover"/> }
 

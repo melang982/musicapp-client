@@ -48,6 +48,7 @@ function Artist() {
   return <div className="artist">
 
     <img className="bg" src={backgroundUrl} alt="background"/>
+    <div className="bg bg-gradient"/>
 
     <div className="save">Save to My stars</div>
     <h1>{data && data.artist.name}</h1>
@@ -56,9 +57,9 @@ function Artist() {
       <div className="artist__menu-button">Albums</div>
       <div className="artist__menu-button">About</div>
       <div className="artist__menu-button">Related artists</div>
-      <div className="artist__menu-slider">
-        <div className="artist__menu-bar"/>
-      </div>
+    </div>
+    <div className="artist__menu-slider">
+      <div className="artist__menu-bar"/>
     </div>
 
     <div className="artist__albums">

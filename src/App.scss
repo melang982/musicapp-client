@@ -13,6 +13,10 @@
   z-index: -1;
 }
 
+.bg-gradient {
+  background: linear-gradient(180deg , rgba(255, 255, 255, 0) 15%, #0e3c4a 75%);
+}
+
 .shadow {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, #000000 100%);
   opacity: 0.22;
@@ -26,7 +30,7 @@
 
 .sidebar {
   width: 220px;
-  background: #151B25;
+  background: linear-gradient(180deg , #151B25 0%, #1C212B 100%);
 }
 
 .save {
@@ -52,8 +56,8 @@
   bottom: 0;
   width: 100%;
   height: 62px;
-  background: #03070F;
-  opacity: 0.9235;
+  background: rgba(35, 34, 41, 0.93);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   padding: 0 13px;
