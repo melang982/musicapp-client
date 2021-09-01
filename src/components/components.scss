@@ -12,9 +12,11 @@
     display: inline-block;
     width: 100px;
     font-weight: 500;
+    padding-bottom: 10px;
 
     &:hover {
       opacity: 1;
+      //color: #3191FB;
     }
 
     &:nth-child(2).active ~ hr {
@@ -30,9 +32,9 @@
     border: none;
     height: 3px;
     width: 50px;
-    margin: 10px 0 0;
+    margin: 0;
     background: #3191FB;
-    transition: 0.3s ease-in-out;
+    //transition: 0.3s ease-in-out;
   }
 }
 
@@ -85,6 +87,7 @@
   height: 100%;
   background: #3B8BFD;
   border-radius: 3px;
+  transition: 0.1s ease-in-out;
 }
 
 .button {

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {connect} from 'react-redux'
 import Button from './Button';
 import ProgressBar from './ProgressBar';
@@ -7,14 +7,35 @@ import {loadFile} from './../audio.js';
 function Player(props) {
   const {currentTrack} = props;
   const [player, setPlayer] = useState(null);
+  const [startedAt, setStartedAt] = useState(null);
+  const [duration, setDuration] = useState(null);
+  const [playbackTime, setPlaybackTime] = useState(null);
+  const [progress, setProgress] = useState(null);
+
   const [playButtonState, setPlayButtonState] = useState(true);
 
   let albumCoverUrl = currentTrack && '/images/album/' + currentTrack.album.id + '.jpg';
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+
+      if (startedAt) {
+        const playbackTime = (Date.now() - startedAt) / 1000;
+
+        setProgress(Math.min(playbackTime / duration, 1));
+        setPlaybackTime(playbackTime);
+      }
+    }, 50)
+
+    return() => {
+      clearInterval(interval);
+    }
+  });
+
   function onPlayButtonClick() {
     console.log("onPlayButtonClick");
     if (!player) {
-      let newPlayer = loadFile(currentTrack.id);
+      let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration);
       console.log(newPlayer);
       setPlayer(newPlayer);
     } else {
@@ -29,16 +50,20 @@ function Player(props) {
     setPlayButtonState(true);
   }
 
+  function secondsToTime(seconds) {
+    return new Date(1000 * seconds).toISOString().substr(14, 5);
+  }
+
   return <div className="player">
 
-    { currentTrack && <img className="player__album-cover" src={albumCoverUrl} alt="Album cover"/> }
+    {currentTrack && <img className="player__album-cover" src={albumCoverUrl} alt="Album cover"/>}
 
     <div className="player__track-info">
       <p className="player__track">
-          { currentTrack && currentTrack.title }
+        {currentTrack && currentTrack.title}
       </p>
       <p className="player__artist">
-          { currentTrack && currentTrack.artist }
+        {currentTrack && currentTrack.artist}
       </p>
     </div>
     <div className="player__buttons">
@@ -51,14 +76,15 @@ function Player(props) {
       </div>
     </div>
     <Button icon="volume" onClicked={onStopButtonClick}/>
+
     <ProgressBar style={{
         width: '106px',
         marginLeft: '20px'
-      }}/>
-    <ProgressBar style={{
+      }}/> {secondsToTime(playbackTime)}
+    <ProgressBar progress={progress} style={{
         width: '586px',
         marginLeft: '50px'
-      }}/>
+      }}/> {secondsToTime(duration)}
   </div>;
 }
 

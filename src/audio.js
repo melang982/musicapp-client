@@ -7,10 +7,13 @@ function getAudioContext() {
   const audioContext = new AudioContext();
   const analyser = audioContext.createAnalyser();
 
-  return {audioContext, analyser};
+  return {
+    audioContext,
+    analyser
+  };
 };
 
-const loadFile = (trackId) => {
+const loadFile = (trackId, setStartedAt, setDuration) => {
 
   let source = null;
   let playWhileLoadingDuration = 0;
@@ -20,7 +23,10 @@ const loadFile = (trackId) => {
   let activeSource = null;
   let pausedAt = 0; //seconds
 
-  const {audioContext, analyser} = getAudioContext();
+  const {
+    audioContext,
+    analyser
+  } = getAudioContext();
 
   const playWhileLoading = (offset = 0) => {
 
@@ -33,18 +39,19 @@ const loadFile = (trackId) => {
   }
 
   const resume = (resumeTime = 0) => {
-     source = audioContext.createBufferSource();
-     source.buffer = audioBuffer;
+    source = audioContext.createBufferSource();
+    source.buffer = audioBuffer;
 
-     source.connect(audioContext.destination);
-     source.start(0, resumeTime);
-     activeSource = source;
+    source.connect(audioContext.destination);
+    source.start(0, resumeTime);
+    activeSource = source;
   }
 
   const play = () => {
     console.log('play player, pausedAt: ' + pausedAt);
     isPlaying = true;
     startAt = new Date(Date.now() - pausedAt * 1000);
+    setStartedAt(startAt); //td: maybe use single startAt/startedAt?
 
     if (audioBuffer) resume(pausedAt);
     else playWhileLoading(pausedAt);
@@ -63,7 +70,7 @@ const loadFile = (trackId) => {
         console.log('playWhileLoadingDuration: ' + playWhileLoadingDuration + ' inSec: ' + inSec);
         if (playWhileLoadingDuration && inSec >= (playWhileLoadingDuration - intervalTime * 0.001)) {
           playWhileLoading(inSec);
-          playWhileLoadingDuration = source.buffer.duration
+          playWhileLoadingDuration = source.buffer.duration;
         }
       }
     } else if (source) { //first time
@@ -71,6 +78,7 @@ const loadFile = (trackId) => {
       playWhileLoadingDuration = source.buffer.duration;
 
       startAt = Date.now();
+      setStartedAt(startAt);
       playWhileLoading();
     }
   }, intervalTime);
@@ -87,12 +95,15 @@ const loadFile = (trackId) => {
 
   console.log('test hello');
   socket.emit('track', trackId, () => {});
-  ss(socket).on('track-stream', (stream, {stat}) => {
+  ss(socket).on('track-stream', (stream, {
+    stat
+  }) => {
     const size = stat.size;
     let total = 0;
 
     console.log('audio file size: ' + size);
     stream.on('data', async (data) => { //chunk
+
       total = total + data.length;
       const loadProgress = total / size;
       //console.log(loadProgress);
@@ -105,9 +116,18 @@ const loadFile = (trackId) => {
 
       const audioBufferChunk = await audioContext.decodeAudioData(withWaveHeader(data, 2, 44100));
 
-      const newaudioBuffer = (source && source.buffer)
-        ? appendBuffer(source.buffer, audioBufferChunk, audioContext)
-        : audioBufferChunk;
+      if (total == data.length && data.length > 0) { //first chunk
+
+        const loadRate = data.length / size;
+        const duration = (1 / loadRate) * audioBufferChunk.duration;
+        console.log('CALCULATE DURATION: ' + duration);
+        setDuration(duration)
+      }
+
+
+      const newaudioBuffer = (source && source.buffer) ?
+        appendBuffer(source.buffer, audioBufferChunk, audioContext) :
+        audioBufferChunk;
 
       source = audioContext.createBufferSource();
       source.buffer = newaudioBuffer;
@@ -115,7 +135,10 @@ const loadFile = (trackId) => {
     })
   });
 
-  return {play, stop};
+  return {
+    play,
+    stop
+  };
 }
 
 function concat(buffer1, buffer2) {
