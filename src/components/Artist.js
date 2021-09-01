@@ -4,6 +4,8 @@ import {useQuery, gql} from '@apollo/client';
 import Album from './Album';
 import Track from './Track';
 
+import {NavLink} from 'react-router-dom';
+
 function Artist() {
 
   let {id} = useParams();
@@ -54,12 +56,12 @@ function Artist() {
     <h1>{data && data.artist.name}</h1>
 
     <div className="artist__menu">
-      <div className="artist__menu-button">Albums</div>
-      <div className="artist__menu-button">About</div>
-      <div className="artist__menu-button">Related artists</div>
-    </div>
-    <div className="artist__menu-slider">
-      <div className="artist__menu-bar"/>
+      
+      <NavLink to={'/artist/' + id + '/albums'}>Albums</NavLink>
+      <NavLink to={'/artist/' + id + '/about'}>About</NavLink>
+      <NavLink to={'/artist/' + id + '/related'}>Related artists</NavLink>
+      <hr/>
+
     </div>
 
     <div className="artist__albums">

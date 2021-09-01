@@ -6,29 +6,34 @@
 }
 
 .artist__menu {
-  display: flex;
-  padding: 20px 0 13px;
-}
+  padding-top: 20px;
 
-.artist__menu-button {
-  width: 100px;
-  font-weight: 500;
-  //opacity: 0.75;
-  cursor: pointer;
+  a {
+    display: inline-block;
+    width: 100px;
+    font-weight: 500;
 
-  &:hover {
-    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
+
+    &:nth-child(2).active ~ hr {
+      margin-left: 100px;
+    }
+
+    &:nth-child(3).active ~ hr {
+      margin-left: 200px;
+    }
   }
-}
 
-.artist__menu-slider {
-  width: 100%;
-}
-
-.artist__menu-bar {
-  height: 3px;
-  width: 50px;
-  background: #3191FB;
+  hr {
+    border: none;
+    height: 3px;
+    width: 50px;
+    margin: 10px 0 0;
+    background: #3191FB;
+    transition: 0.3s ease-in-out;
+  }
 }
 
 .artist__albums {

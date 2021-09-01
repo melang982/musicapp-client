@@ -11,6 +11,11 @@ body {
   font-size: 14px;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
 p {
   margin: 0;
   line-height: 1.46;
