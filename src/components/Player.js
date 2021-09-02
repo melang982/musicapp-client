@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Button from './Button';
 import ProgressBar from './ProgressBar';
 import {loadFile} from './../audio.js';
+import {secondsToTime} from './../utils.js';
 import '../styles/player.scss';
 
 function Player(props) {
@@ -34,7 +35,7 @@ function Player(props) {
   });
 
   function onPlayButtonClick() {
-    console.log("onPlayButtonClick");
+    console.log('onPlayButtonClick');
     if (!player) {
       let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration);
       console.log(newPlayer);
@@ -49,10 +50,6 @@ function Player(props) {
     console.log(player);
     player.stop();
     setPlayButtonState(true);
-  }
-
-  function secondsToTime(seconds) {
-    return new Date(1000 * seconds).toISOString().substr(15, 4);
   }
 
   return <div className="player">

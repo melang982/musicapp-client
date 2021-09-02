@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 import SoundBars from './SoundBars';
+import {secondsToTime} from './../utils.js';
 
 function Track(props) {
   const {track, currentTrack} = props;
@@ -20,7 +21,7 @@ function Track(props) {
     </div>
     {currentTrack && currentTrack.id == track.id && <SoundBars/>}
     <p className="track__time">
-      3:53
+      {secondsToTime(track.duration)}
     </p>
   </div>
 }
