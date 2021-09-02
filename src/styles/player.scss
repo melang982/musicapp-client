@@ -1,0 +1,67 @@
+@import './variables.scss';
+
+.player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 4.53vw; //62px;
+  background: rgba(35, 34, 41, 0.93);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  padding: 0 13px;
+  font-weight: 450;
+  font-size: $size-small;
+  z-index: 3;
+}
+
+.player__album-cover {
+  max-width: 40px;
+  max-height: 40px;
+  margin: 0 16px 0 0;
+}
+
+.player__track-info {
+  width: 150px;
+}
+
+.player__track {
+  font-size: $size-smaller;
+  font-weight: 600;
+}
+
+.player__artist {
+  font-size: $size-small;
+}
+
+.player_red {
+  background: linear-gradient(182deg, rgba(147,58,175, 0.9) 0%, rgba(230,60,86, 0.9) 100%);
+  filter: drop-shadow(0px -5px 43px rgba(0, 0, 0, 0.31383));
+
+  .progressBar {
+    background: rgba(255, 255, 255, 0.3924);
+  }
+
+  .progressBar__inner {
+    background: #fff;
+  }
+}
+
+.player__buttons {
+  width: 100px;
+}
+
+.player__oval {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  svg {
+    margin: 1px 0 0 1px;
+  }
+}

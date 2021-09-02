@@ -1,8 +1,10 @@
+@import './variables.scss';
+
 .artist {
   flex-grow: 1;
   padding-left: 78px;
-  overflow: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
+  //overflow-y: scroll;
 }
 
 .artist__menu {
@@ -10,7 +12,7 @@
 
   a {
     display: inline-block;
-    width: 100px;
+    width: 6.6vw; //100px;
     font-weight: 500;
     padding-bottom: 10px;
 
@@ -34,7 +36,7 @@
     width: 50px;
     margin: 0;
     background: #3191FB;
-    //transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
 }
 
@@ -103,15 +105,23 @@
   }
 }
 
+.tracks {
+  position: absolute;
+  right: 2.8vw; //38px;
+  top: 50px;
+}
+
 .track {
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  width: 442px;
-  padding: 10px 44px 10px 23px;
+  width: 32.34vw; //442px;
+  padding: 0.71vw 44px 0.71vw 1.68vw; //10px 44px 10px 23px;
   margin: 6px 0;
   cursor: pointer;
+  //background: rgba(67, 72, 80, 0.32);
+  border-radius: 4px;
 
   &:hover {
     background: rgba(24, 30, 40, 0.310377);
@@ -126,11 +136,13 @@
 }
 
 .track__album {
-  font-size: 13px;
+  font-size: $size-smaller;
   opacity: 0.7;
 }
 
-.track__time {}
+.track__time {
+  font-size: $size-smaller;
+}
 
 .bars {
   display: flex;

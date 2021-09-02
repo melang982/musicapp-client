@@ -1,4 +1,8 @@
-html, body, #root {
+@import './variables.scss';
+
+#root,
+body,
+html {
   height: 100%;
 }
 
@@ -8,7 +12,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
-  font-size: 14px;
+  font-size: $size-regular;
+  overflow: hidden;
 }
 
 a {
@@ -23,29 +28,25 @@ p {
 
 h1 {
   font-weight: 750;
-  font-size: 90px;
+  font-size: 6.57vw; //90px;
   margin: 10px 0;
 }
-
 @font-face {
   font-family: 'AvenirNext';
-  src: local('AvenirNext'), url(./fonts/AvenirNextCyr-Regular.woff) format('woff');
+  src: local('AvenirNext'), url("../fonts/AvenirNextCyr-Regular.woff") format('woff');
 }
-
 @font-face {
   font-family: 'AvenirNext';
-  src: local('AvenirNextBold'), url(./fonts/AvenirNextCyr-Bold.woff) format('woff');
+  src: local('AvenirNextBold'), url("../fonts/AvenirNextCyr-Bold.woff") format('woff');
   font-weight: bold;
 }
-
 @font-face {
   font-family: 'AvenirNext';
-  src: local('AvenirNextDemi'), url(./fonts/AvenirNextCyr-Demi.woff) format('woff');
+  src: local('AvenirNextDemi'), url("../fonts/AvenirNextCyr-Demi.woff") format('woff');
   font-weight: 600;
 }
-
 @font-face {
   font-family: 'AvenirNext';
-  src: local('AvenirNextMedium'), url(./fonts/AvenirNextCyr-Medium.woff) format('woff');
+  src: local('AvenirNextMedium'), url("../fonts/AvenirNextCyr-Medium.woff") format('woff');
   font-weight: 500;
 }

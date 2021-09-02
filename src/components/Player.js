@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Button from './Button';
 import ProgressBar from './ProgressBar';
 import {loadFile} from './../audio.js';
+import '../styles/player.scss';
 
 function Player(props) {
   const {currentTrack} = props;
@@ -51,7 +52,7 @@ function Player(props) {
   }
 
   function secondsToTime(seconds) {
-    return new Date(1000 * seconds).toISOString().substr(14, 5);
+    return new Date(1000 * seconds).toISOString().substr(15, 4);
   }
 
   return <div className="player">
