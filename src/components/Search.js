@@ -1,9 +1,14 @@
-import {useState} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import {useLazyQuery, gql} from '@apollo/client';
+import {withRouter} from 'react-router-dom'; //to detect route change in effect
 import {NavLink} from 'react-router-dom';
 import Icon from './Icon';
 
-function Search() {
+function Search(props) {
+  const {location} = props;
+  //const wrapperRef = useRef(null);
+  //useOutsideAlerter(wrapperRef);
+
   const SEARCH_QUERY = gql `
     query SearchQuery($filter: String!) {
       artists(filter: $filter) {
@@ -39,23 +44,29 @@ function Search() {
     setSearchString(str);
   };
 
+  useEffect(() => {
+    console.log('updated location');
+    setSearchString(null);
+  }, [location]);
+
   return <div className="search">
     <Icon icon='search'/>
 
-    <input type="text" placeholder="Type here to search" onInput={(e) => onSearch(e.target.value)}/>
-    <div className="search__results">
-      {
-        searchString && data && data.artists.map((artist) => <NavLink to={'/artist/' + artist.id} key={artist.id}>
-          {artist.name}
-        </NavLink>)
-      }
-      {
-        searchString && data && data.albums.map((album) => (<p key={album.id}>
-          {album.title}
-        </p>))
-      }
-    </div>
+    <input type="text" placeholder="Type here to search" onInput={(e) => onSearch(e.target.value)}/> {
+      searchString && data && <div className="search__results">
+          {
+            data.artists.map((artist) => <NavLink to={'/artist/' + artist.id} key={artist.id}>
+              {artist.name}
+            </NavLink>)
+          }
+          {
+            data.albums.map((album) => (<p key={album.id}>
+              {album.title}
+            </p>))
+          }
+        </div>
+    }
   </div>;
 
 }
-export default Search;
+export default withRouter(Search);
