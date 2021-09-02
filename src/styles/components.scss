@@ -52,10 +52,16 @@
 }
 
 .search {
+  position: relative;
   display: flex;
   align-items: center;
 
   svg {
     margin-right: 13px;
   }
+}
+
+.search__results {
+  position: absolute;
+  top: 33px;
 }

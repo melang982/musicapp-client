@@ -16,6 +16,16 @@ body {
   overflow: hidden;
 }
 
+input {
+  font-family: 'AvenirNext', sans-serif;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  color: #fff;
+  font-size: $size-regular;
+}
+
 a {
   color: white;
   text-decoration: none;
