@@ -1,10 +1,12 @@
 import {useParams} from 'react-router-dom';
 import {useQuery, gql} from '@apollo/client';
 
+import SaveButton from './SaveButton';
 import Album from './Album';
 import Track from './Track';
 
 import {NavLink} from 'react-router-dom';
+import '../styles/artist.scss';
 
 function Artist() {
 
@@ -52,16 +54,15 @@ function Artist() {
     <img className="bg" src={backgroundUrl} alt="background"/>
     <div className="bg bg-gradient"/>
 
-    <div className="save">Save to My stars</div>
+    <SaveButton/>
+
     <h1>{data && data.artist.name}</h1>
 
     <div className="artist__menu">
-      
       <NavLink to={'/artist/' + id + '/albums'}>Albums</NavLink>
       <NavLink to={'/artist/' + id + '/about'}>About</NavLink>
       <NavLink to={'/artist/' + id + '/related'}>Related artists</NavLink>
       <hr/>
-
     </div>
 
     <div className="artist__albums">
