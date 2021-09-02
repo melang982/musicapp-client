@@ -1,6 +1,7 @@
 import {useParams} from 'react-router-dom';
 import {useQuery, gql} from '@apollo/client';
 
+import Search from './Search';
 import SaveButton from './SaveButton';
 import Album from './Album';
 import Track from './Track';
@@ -54,6 +55,8 @@ function Artist() {
     <img className="bg" src={backgroundUrl} alt="background"/>
     <div className="bg bg-gradient"/>
 
+    <Search/>
+
     <SaveButton/>
 
     <h1>{data && data.artist.name}</h1>
@@ -73,6 +76,5 @@ function Artist() {
       {tracks && tracks.map((track) => <Track key={track.id} track={track}/>)}
     </div>
   </div>
-
 }
 export default Artist;

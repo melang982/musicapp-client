@@ -50,3 +50,12 @@
   background: linear-gradient(225deg, #933AAF 0%, #E63C56 100%);
   border: none;
 }
+
+.search {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 13px;
+  }
+}
