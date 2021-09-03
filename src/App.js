@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import './styles/app.scss';
 import './styles/components.scss';
 
 import Sidebar from './components/Sidebar';
@@ -16,7 +16,7 @@ function App() {
     <div className="app">
       <div className="shadow"></div>
       <Sidebar/>
-      
+
       <Switch >
         <Route path="/artist/:id">
           <Artist/>

@@ -13,15 +13,37 @@
   font-weight: 450;
   font-size: $size-small;
   z-index: 3;
+
+  .button {
+    padding: 15px;
+  }
+}
+
+.button-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+  //background: rebeccapurple;
+  border: 1px solid #A1A4B2;
+  padding: 0 !important;
+
+  &:hover {
+    border-color: #fff;
+  }
 }
 
 .player__album-cover {
+  position: absolute;
   max-width: 40px;
   max-height: 40px;
   margin: 0 16px 0 0;
 }
 
 .player__track-info {
+  margin-left: 50px;
   width: 150px;
 }
 
@@ -32,6 +54,7 @@
 
 .player__artist {
   font-size: $size-small;
+  color: #A1A4B2;
 }
 
 .player_red {
@@ -44,24 +67,5 @@
 
   .progressBar__inner {
     background: #fff;
-  }
-}
-
-.player__buttons {
-  width: 100px;
-}
-
-.player__oval {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    position: absolute;
-    pointer-events: none;
-  }
-
-  svg {
-    margin: 1px 0 0 1px;
   }
 }

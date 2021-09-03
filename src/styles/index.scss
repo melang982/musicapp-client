@@ -24,6 +24,14 @@ input {
   padding: 0;
   color: #fff;
   font-size: $size-regular;
+
+  &::placeholder {
+    color: #fff;
+  }
+
+  &:focus::placeholder {
+    opacity: 0.5;
+  }
 }
 
 a {
@@ -38,7 +46,7 @@ p {
 
 h1 {
   font-weight: 750;
-  font-size: 6.57vw; //90px;
+  font-size: calc(clamp(32px, 6.57vw, 111px)); //6.57vw; //90px;
   margin: 10px 0;
 }
 @font-face {

@@ -24,11 +24,12 @@
   cursor: pointer;
 
   svg path {
-    opacity: 0.5;
+    //opacity: 0.5;
+    fill: #A1A4B2;
   }
 
   &:hover svg path {
-    opacity: 1;
+    fill: #fff;
   }
 }
 

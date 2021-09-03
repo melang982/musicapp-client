@@ -13,7 +13,7 @@
 
   a {
     display: inline-block;
-    width: 6.6vw; //100px;
+    padding: 0 1.7%;
     font-weight: 500;
     padding-bottom: 10px;
 
@@ -67,6 +67,8 @@
 
 .album__cover {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .album__title {
@@ -114,7 +116,8 @@
 }
 
 .bars {
-  display: flex;
+  display: none;
+  //display: flex;
   align-items: flex-end;
   height: 30px;
 }

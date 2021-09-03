@@ -1,8 +1,13 @@
 import Icon from './Icon';
 
-function Button({onClicked, icon}) {
+function Button({onClicked, icon, styleName}) {
 
-  return <div className="button" onClick={onClicked}>
+  const className = 'button' + (
+    styleName
+    ? ' button-play'
+    : '');
+
+  return <div className={className} onClick={onClicked}>
     <Icon icon={icon}/>
   </div>;
 }

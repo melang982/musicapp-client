@@ -64,15 +64,15 @@ function Player(props) {
         {currentTrack && currentTrack.artist}
       </p>
     </div>
-    <div className="player__buttons">
-      <div className="player__oval">
-        <img src="/Oval.svg" alt="Oval"/> {
-          playButtonState
-            ? <Button icon="play" onClicked={onPlayButtonClick}/>
-            : <Button icon="pause" onClicked={onStopButtonClick}/>
-        }
-      </div>
-    </div>
+
+    <Button icon="shuffle" onClicked={onPlayButtonClick}/>
+    <Button icon="previous" onClicked={onPlayButtonClick}/> {
+      playButtonState
+        ? <Button icon="play" styleName="button-play" onClicked={onPlayButtonClick}/>
+        : <Button icon="pause" onClicked={onStopButtonClick}/>
+    }
+    <Button icon="next" onClicked={onPlayButtonClick}/>
+    <Button icon="repeat" onClicked={onPlayButtonClick}/>
     <Button icon="volume" onClicked={onStopButtonClick}/>
 
     <ProgressBar style={{
