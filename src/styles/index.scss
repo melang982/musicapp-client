@@ -47,7 +47,13 @@ p {
 h1 {
   font-weight: 750;
   font-size: calc(clamp(32px, 6.57vw, 111px)); //6.57vw; //90px;
-  margin: 10px 0;
+}
+
+h2 {
+  font-weight: 750;
+  text-transform: uppercase;
+  font-size: $size-smaller;
+  letter-spacing: 0.08em;
 }
 @font-face {
   font-family: 'AvenirNext';

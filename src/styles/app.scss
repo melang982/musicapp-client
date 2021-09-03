@@ -23,12 +23,31 @@
   position: absolute;
   width: 100%;
   top: 218px;
-  bottom: 59px;
+  bottom: 4.58vw; //59px;
   z-index: 1;
   pointer-events: none;
 }
 
 .sidebar {
-  width: 16.1%; //220px;
-  background: linear-gradient(180deg , #151B25 0%, #1C212B 100%);
+  width: 13.5%; //16.1%; //220px;
+  padding: 7.3vw 0 0 2.57vw;
+  background: linear-gradient(180deg, #151B25 0%, #1C212B 100%);
+  z-index: 1;
+
+  a {
+    color: #B4CFF2;
+    padding: 0.56vw 0;
+  }
+}
+
+.sidebar__menu {
+  display: flex;
+  flex-direction: column;
+  margin: 1.1vw 0 1.9vw;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0.2vw;
 }

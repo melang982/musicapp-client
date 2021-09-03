@@ -73,6 +73,7 @@ function Artist() {
     </div>
 
     <div className="tracks">
+      <div className="tracks__title">Random selection</div>
       {tracks && tracks.map((track) => <Track key={track.id} track={track}/>)}
     </div>
   </div>
