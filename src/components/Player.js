@@ -72,7 +72,7 @@ function Player(props) {
         : <Button icon="pause" onClicked={onStopButtonClick}/>
     }
     <Button icon="next" onClicked={onPlayButtonClick}/>
-    <Button icon="repeat" onClicked={onPlayButtonClick}/>
+    <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/>
     <Button icon="volume" onClicked={onStopButtonClick}/>
 
     <ProgressBar style={{

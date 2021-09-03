@@ -14,13 +14,13 @@
 .progressBar__inner {
   width: 50px;
   height: 100%;
-  background: #3B8BFD;
+  background: $main-color;
   border-radius: 3px;
   transition: 0.1s ease-in-out;
 }
 
 .button {
-  padding: 5px;
+  //padding: 5px;
   cursor: pointer;
 
   svg path {
@@ -31,6 +31,10 @@
   &:hover svg path {
     fill: #fff;
   }
+}
+
+.button-activated svg path {
+  fill: $main-color;
 }
 
 .save {
