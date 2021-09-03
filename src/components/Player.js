@@ -53,7 +53,8 @@ function Player(props) {
   }
 
   return <div className="player">
-
+    <div className="player__shadow"></div>
+    
     {currentTrack && <img className="player__album-cover" src={albumCoverUrl} alt="Album cover"/>}
 
     <div className="player__track-info">

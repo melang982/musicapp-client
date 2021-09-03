@@ -54,7 +54,8 @@ function Artist() {
 
     <img className="bg" src={backgroundUrl} alt="background"/>
     <div className="bg bg-gradient"/>
-
+    <div className="shadow"></div>
+    
     <Search/>
 
     <SaveButton/>

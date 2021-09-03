@@ -14,7 +14,7 @@ function App() {
   return (<Router>
 
     <div className="app">
-      <div className="shadow"></div>
+      
       <Sidebar/>
 
       <Switch >
