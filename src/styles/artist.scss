@@ -104,10 +104,13 @@
 
   &:hover {
     background: rgba(24, 30, 40, 0.310377);
-    backdrop-filter: blur(13px);
-    /* 27.1828px*/
-    border-radius: 4px;
+    backdrop-filter: blur(13px); //27.1828px
   }
+}
+
+.track_active {
+  background: rgba(24, 30, 40, 0.310377);
+  backdrop-filter: blur(13px);
 }
 
 .track__name {

@@ -2,15 +2,19 @@ import {connect} from 'react-redux'
 import SoundBars from './SoundBars';
 import {secondsToTime} from './../utils.js';
 
-function Track(props) {
-  const {track, currentTrack} = props;
+function Track({track, currentTrack, dispatch}) {
 
   function onClicked() {
     console.log('clicked!');
-    props.dispatch({type: 'SET_TRACK', payload: track})
+    dispatch({type: 'SET_TRACK', payload: track})
   }
 
-  return <div className="track" onClick={onClicked}>
+  const isActiveTrack = currentTrack && currentTrack.id == track.id;
+  let className = 'track';
+  if (isActiveTrack) 
+    className += ' track_active';
+  
+  return <div className={className} onClick={onClicked}>
     <div>
       <p className="track__name">
         {track.title}
@@ -19,7 +23,7 @@ function Track(props) {
         {track.album.title}
       </p>
     </div>
-    {currentTrack && currentTrack.id == track.id && <SoundBars/>}
+    {isActiveTrack && <SoundBars/>}
     <p className="track__time">
       {secondsToTime(track.duration)}
     </p>
