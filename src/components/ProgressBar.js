@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import {clamp} from './../utils.js';
 
-function ProgressBar({onClicked, style}) {
+function ProgressBar({updateValue, style}) {
   const [progress, setProgress] = useState(0.5);
   const [mouseDown, setMouseDown] = useState(false);
   const [addedEvents, setAddedEvents] = useState(false);
@@ -24,6 +24,7 @@ function ProgressBar({onClicked, style}) {
       const value = clamp((x - rect.left) / divRef.current.offsetWidth, 0, 1);
       //console.log(value);
       setProgress(value);
+      updateValue(value);
     };
 
     const removeEvents = () => {
@@ -59,9 +60,9 @@ function ProgressBar({onClicked, style}) {
     const x = e.nativeEvent.offsetX;
 
     const value = x / divRef.current.offsetWidth;
-    setProgress(value);
 
-    //onClicked(value);
+    setProgress(value);
+    updateValue(value);
   }
 }
 

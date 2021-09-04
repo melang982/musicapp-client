@@ -55,7 +55,7 @@ function Player(props) {
   }
 
   function ChangeVolume(value) {
-    console.log(value);
+    //console.log(value);
     setVolumeProgress(value);
     player && player.setVolume(value);
   }
@@ -84,7 +84,7 @@ function Player(props) {
     <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/>
     <Button icon="volume" styleName="button_volume" onClicked={() => ChangeVolume(0)}/>
 
-    <ProgressBar onClicked={ChangeVolume} style={{
+    <ProgressBar updateValue={ChangeVolume} style={{
         width: '106px',
         marginRight: '23.3px'
       }}/>
