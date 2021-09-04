@@ -107,6 +107,12 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
     pausedAt = elapsed;
   };
 
+  const shutdown = () => {
+    clearInterval(whileLoadingInterval);
+    stop();
+    socket.disconnect();
+  }
+
   const setVolume = (level) => {
     level = level * 2 - 1;
     console.log(level);
@@ -117,6 +123,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
 
   console.log('test hello');
   socket.emit('track', trackId, () => {});
+
   ss(socket).on('track-stream', (stream, {
     stat
   }) => {
@@ -163,7 +170,8 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
   return {
     play,
     stop,
-    setVolume
+    setVolume,
+    shutdown
   };
 }
 

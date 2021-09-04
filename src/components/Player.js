@@ -36,12 +36,29 @@ function Player(props) {
     }
   });
 
+  useEffect(() => {
+    console.log('CHANGED TRACK');
+
+    if (currentTrack) {
+      createPlayer();
+      setPlayButtonState(false);
+    }
+
+  }, [currentTrack]);
+
+  function createPlayer() {
+    if (player) 
+      player.shutdown();
+    
+    let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration);
+    console.log(newPlayer);
+    setPlayer(newPlayer);
+  }
+
   function onPlayButtonClick() {
     console.log('onPlayButtonClick');
     if (!player) {
-      let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration);
-      console.log(newPlayer);
-      setPlayer(newPlayer);
+      createPlayer()
     } else {
       player.play();
     }
