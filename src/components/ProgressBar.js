@@ -1,8 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import {clamp} from './../utils.js';
 
-function ProgressBar({updateValue, style}) {
-  const [progress, setProgress] = useState(0.5);
+function ProgressBar({progress, style, updateValue, shouldUpdateOnDrag}) {
   const [mouseDown, setMouseDown] = useState(false);
   const [addedEvents, setAddedEvents] = useState(false);
 
@@ -23,10 +22,11 @@ function ProgressBar({updateValue, style}) {
 
       const value = clamp((x - rect.left) / divRef.current.offsetWidth, 0, 1);
       //console.log(value);
-      setProgress(value);
-      updateValue(value);
-    };
 
+      if (shouldUpdateOnDrag) 
+        updateValue(value);
+      };
+    
     const removeEvents = () => {
       console.log('mouse up');
       window.removeEventListener('mousemove', onWindowMouseMove);
@@ -61,7 +61,6 @@ function ProgressBar({updateValue, style}) {
 
     const value = x / divRef.current.offsetWidth;
 
-    setProgress(value);
     updateValue(value);
   }
 }

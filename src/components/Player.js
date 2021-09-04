@@ -60,6 +60,8 @@ function Player(props) {
     player && player.setVolume(value);
   }
 
+  function JumpTo(time) {}
+
   return <div className="player">
     <div className="player__shadow"></div>
 
@@ -84,14 +86,14 @@ function Player(props) {
     <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/>
     <Button icon="volume" styleName="button_volume" onClicked={() => ChangeVolume(0)}/>
 
-    <ProgressBar updateValue={ChangeVolume} style={{
+    <ProgressBar progress={volumeProgress} updateValue={ChangeVolume} shouldUpdateOnDrag="true" style={{
         width: '106px',
         marginRight: '23.3px'
       }}/>
 
     <span className="player_time">{secondsToTime(playbackTime)}</span>
 
-    <ProgressBar style={{
+    <ProgressBar progress={progress} updateValue={JumpTo} style={{
         width: '586px',
         marginRight: '1px'
       }}/>
