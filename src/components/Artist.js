@@ -55,7 +55,7 @@ function Artist() {
     <img className="bg" src={backgroundUrl} alt="background"/>
     <div className="bg bg-gradient"/>
     <div className="shadow"></div>
-    
+
     <Search/>
 
     <SaveButton/>
@@ -68,7 +68,7 @@ function Artist() {
       <NavLink to={'/artist/' + id + '/related'}>Related artists</NavLink>
       <hr/>
     </div>
-
+    
     <div className="artist__albums">
       {data && data.artist.albums.map((album) => <Album key={album.id} album={album}/>)}
     </div>

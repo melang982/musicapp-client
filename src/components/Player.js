@@ -4,6 +4,7 @@ import Button from './Button';
 import ProgressBar from './ProgressBar';
 import {loadFile} from './../audio.js';
 import {secondsToTime} from './../utils.js';
+
 import '../styles/player.scss';
 
 function Player(props) {
@@ -54,7 +55,7 @@ function Player(props) {
 
   return <div className="player">
     <div className="player__shadow"></div>
-    
+
     {currentTrack && <img className="player__album-cover" src={albumCoverUrl} alt="Album cover"/>}
 
     <div className="player__track-info">
@@ -69,21 +70,25 @@ function Player(props) {
     <Button icon="shuffle" onClicked={onPlayButtonClick}/>
     <Button icon="previous" onClicked={onPlayButtonClick}/> {
       playButtonState
-        ? <Button icon="play" styleName="button-play" onClicked={onPlayButtonClick}/>
-        : <Button icon="pause" onClicked={onStopButtonClick}/>
+        ? <Button icon="play" styleName="button_play" onClicked={onPlayButtonClick}/>
+        : <Button icon="pause" styleName="button_play" onClicked={onStopButtonClick}/>
     }
     <Button icon="next" onClicked={onPlayButtonClick}/>
     <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/>
-    <Button icon="volume" onClicked={onStopButtonClick}/>
+    <Button icon="volume" styleName="button_volume" onClicked={onStopButtonClick}/>
 
-    <ProgressBar style={{
+    <ProgressBar progress='0.78' style={{
         width: '106px',
-        marginLeft: '20px'
-      }}/> {secondsToTime(playbackTime)}
-    <ProgressBar progress={progress} style={{
+        marginRight: '23.3px'
+      }}/>
+
+    <span class="player_time">{secondsToTime(playbackTime)}</span>
+
+    <ProgressBar progress='0.7' style={{
         width: '586px',
-        marginLeft: '50px'
-      }}/> {secondsToTime(duration)}
+        marginRight: '1px'
+      }}/>
+    <span class="player_time">{secondsToTime(duration)}</span>
   </div>;
 }
 

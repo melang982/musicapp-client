@@ -6,7 +6,7 @@ function SaveButton({onClicked}) {
 
   let className = 'save';
   if (saved) {
-    className += ' save-saved';
+    className += ' save_saved';
   }
 
   const label = (

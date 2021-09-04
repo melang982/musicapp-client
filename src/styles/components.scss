@@ -7,7 +7,7 @@
 
 .progressBar {
   height: 3px;
-  background: #A1A4B2;
+  background: rgba(161, 164, 178, 0.1708);
   border-radius: 3px;
 }
 
@@ -17,6 +17,11 @@
   background: $main-color;
   border-radius: 3px;
   transition: 0.1s ease-in-out;
+}
+
+.player_time {
+  color: #737785;
+  margin: 0 12px 0 11px;
 }
 
 .button {
@@ -33,7 +38,7 @@
   }
 }
 
-.button-activated svg path {
+.button_activated svg path {
   fill: $main-color;
 }
 
@@ -55,7 +60,7 @@
   }
 }
 
-.save-saved {
+.save_saved {
   background: linear-gradient(225deg, #933AAF 0%, #E63C56 100%);
   border: none;
 }

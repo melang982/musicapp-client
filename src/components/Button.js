@@ -4,9 +4,9 @@ function Button({onClicked, icon, styleName, activated}) {
 
   let className = 'button';
   if (styleName) 
-    className += ' button-play';
+    className += ' ' + styleName;
   if (activated) 
-    className += ' button-activated';
+    className += ' button_activated';
   
   return <div className={className} onClick={onClicked}>
     <Icon icon={icon}/>
