@@ -14,7 +14,7 @@ function Player(props) {
   const [duration, setDuration] = useState(null);
   const [playbackTime, setPlaybackTime] = useState(null);
   const [progress, setProgress] = useState(null);
-  const [volumeProgress, setVolumeProgress] = useState(null);
+  const [volumeProgress, setVolumeProgress] = useState(0.5);
 
   const [playButtonState, setPlayButtonState] = useState(true);
 

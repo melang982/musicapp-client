@@ -49,6 +49,8 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
 
     source.connect(audioContext.destination);
     source.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
     source.start(0, resumeTime);
     activeSource = source;
   }
@@ -57,7 +59,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
     console.log('play player, pausedAt: ' + pausedAt);
     isPlaying = true;
     startAt = new Date(Date.now() - pausedAt * 1000);
-    setStartedAt(startAt);
+    setStartedAt(startAt)
 
     if (audioBuffer) resume(pausedAt);
     else playWhileLoading(pausedAt);
@@ -98,7 +100,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
   };
 
   const setVolume = (level) => {
-    level = level * 1.5 - 1;
+    level = level * 2 - 1;
     console.log(level);
     gainNode.gain.setValueAtTime(level, audioContext.currentTime);
   };
