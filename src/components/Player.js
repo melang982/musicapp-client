@@ -14,6 +14,7 @@ function Player(props) {
   const [duration, setDuration] = useState(null);
   const [playbackTime, setPlaybackTime] = useState(null);
   const [progress, setProgress] = useState(null);
+  const [volumeProgress, setVolumeProgress] = useState(null);
 
   const [playButtonState, setPlayButtonState] = useState(true);
 
@@ -53,6 +54,12 @@ function Player(props) {
     setPlayButtonState(true);
   }
 
+  function ChangeVolume(value) {
+    console.log(value);
+    setVolumeProgress(value);
+    player.setVolume(value);
+  }
+
   return <div className="player">
     <div className="player__shadow"></div>
 
@@ -75,23 +82,22 @@ function Player(props) {
     }
     <Button icon="next" onClicked={onPlayButtonClick}/>
     <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/>
-    <Button icon="volume" styleName="button_volume" onClicked={onStopButtonClick}/>
+    <Button icon="volume" styleName="button_volume" onClicked={() => ChangeVolume(0)}/>
 
-    <ProgressBar progress='0.78' style={{
+    <ProgressBar progress={volumeProgress} onClicked={ChangeVolume} style={{
         width: '106px',
         marginRight: '23.3px'
       }}/>
 
     <span class="player_time">{secondsToTime(playbackTime)}</span>
 
-    <ProgressBar progress='0.7' style={{
+    <ProgressBar progress={progress} style={{
         width: '586px',
         marginRight: '1px'
       }}/>
     <span class="player_time">{secondsToTime(duration)}</span>
   </div>;
 }
-
 const mapStateToProps = state => {
   return {currentTrack: state.currentTrack}
 }

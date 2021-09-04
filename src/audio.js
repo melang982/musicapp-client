@@ -27,11 +27,15 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
     audioContext,
     analyser
   } = getAudioContext();
+  const gainNode = audioContext.createGain();
 
   const playWhileLoading = (offset = 0) => {
 
     activeSource && activeSource.stop();
     source.connect(audioContext.destination);
+    source.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
     console.log('calling start');
     source.start(0, offset);
     activeSource = source;
@@ -44,6 +48,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
     source.buffer = audioBuffer;
 
     source.connect(audioContext.destination);
+    source.connect(gainNode);
     source.start(0, resumeTime);
     activeSource = source;
   }
@@ -90,6 +95,12 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
 
     const elapsed = (Date.now() - startAt) / 1000;
     pausedAt = elapsed;
+  };
+
+  const setVolume = (level) => {
+    level = level * 1.5 - 1;
+    console.log(level);
+    gainNode.gain.setValueAtTime(level, audioContext.currentTime);
   };
 
   let socket = io();
@@ -141,7 +152,8 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
 
   return {
     play,
-    stop
+    stop,
+    setVolume
   };
 }
 

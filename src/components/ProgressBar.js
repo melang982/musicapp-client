@@ -1,11 +1,27 @@
-function ProgressBar(props) {
+import {useRef} from 'react';
 
-  return <div className="progressBar__wrapper" style={props.style}>
+function ProgressBar({onClicked, style, progress}) {
+
+  const divRef = useRef(null);
+
+  return <div ref={divRef} className="progressBar__wrapper" style={style} onClick={e => onClickedProgressBar(e)}>
     <div className="progressBar">
       <div className="progressBar__inner" style={{
-          width: props.progress * 100 + '%'
+          width: progress * 100 + '%'
         }}></div>
     </div>
   </div>;
+
+  function onClickedProgressBar(e) {
+    //console.log('clicked on progress bar');
+
+    const x = e.nativeEvent.offsetX;
+
+    const value = x / divRef.current.offsetWidth;
+    //console.log(value);
+
+    onClicked(value);
+  }
 }
+
 export default ProgressBar;
