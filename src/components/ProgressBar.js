@@ -4,41 +4,52 @@ import {clamp} from './../utils.js';
 function ProgressBar({progress, style, updateValue, shouldUpdateOnDrag}) {
   const [mouseDown, setMouseDown] = useState(false);
   const [addedEvents, setAddedEvents] = useState(false);
+  const [tempProgress, setTempProgress] = useState(0);
 
   const divRef = useRef(null);
 
   function onMouseDown() {
     setMouseDown(true);
-    //console.log('mouse down!');
+    setTempProgress(progress);
   }
 
   useEffect(() => {
 
-    const onWindowMouseMove = (e) => {
-      //console.log('dragging');
+    const calculateValue = (e) => {
       const x = e.pageX;
 
       const rect = divRef.current.getBoundingClientRect();
 
-      const value = clamp((x - rect.left) / divRef.current.offsetWidth, 0, 1);
-      //console.log(value);
+      return clamp((x - rect.left) / divRef.current.offsetWidth, 0, 1);
+    }
+
+    const onWindowMouseMove = (e) => {
 
       if (shouldUpdateOnDrag) 
-        updateValue(value);
-      };
-    
-    const removeEvents = () => {
+        updateValue(calculateValue(e));
+      else 
+        setTempProgress(calculateValue(e));
+      }
+    ;
+
+    const onMouseUp = (e) => {
       console.log('mouse up');
+      updateValue(calculateValue(e));
+      removeEvents();
+    };
+
+    const removeEvents = () => {
+
       window.removeEventListener('mousemove', onWindowMouseMove);
-      window.removeEventListener('mouseup', removeEvents);
-      //console.log('removed events');
+      window.removeEventListener('mouseup', onMouseUp);
+      console.log('removed events');
       setMouseDown(false);
       setAddedEvents(false);
     };
 
     if (mouseDown && !addedEvents) {
       window.addEventListener('mousemove', onWindowMouseMove);
-      window.addEventListener('mouseup', removeEvents);
+      window.addEventListener('mouseup', onMouseUp);
       //console.log('added events');
       setAddedEvents(true);
     }
@@ -47,22 +58,26 @@ function ProgressBar({progress, style, updateValue, shouldUpdateOnDrag}) {
     [mouseDown]
   });
 
-  return <div ref={divRef} className="progressBar__wrapper" style={style} onClick={e => onClickedProgressBar(e)} onMouseDown={onMouseDown}>
+  let width = (mouseDown && !shouldUpdateOnDrag)
+    ? tempProgress * 100 + '%'
+    : progress * 100 + '%';
+
+  return <div ref={divRef} className="progressBar__wrapper" style={style} onMouseDown={onMouseDown}>
     <div className="progressBar">
       <div className="progressBar__inner" style={{
-          width: progress * 100 + '%'
+          width: width
         }}></div>
     </div>
   </div>;
 
-  function onClickedProgressBar(e) {
+  /*function onClickedProgressBar(e) {
 
     const x = e.nativeEvent.offsetX;
 
     const value = x / divRef.current.offsetWidth;
 
-    updateValue(value);
-  }
+
+  }*/
 }
 
 export default ProgressBar;

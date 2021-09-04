@@ -50,7 +50,6 @@ function Player(props) {
 
   function onStopButtonClick() {
     console.log(player);
-    console.log(player.getInSec());
     player && player.stop();
     setPlayButtonState(true);
   }
@@ -63,8 +62,9 @@ function Player(props) {
 
   function JumpTo(value) {
     let timeSeconds = duration * value;
-    console.log(timeSeconds);
+    //console.log(timeSeconds);
     player.play(timeSeconds);
+    setProgress(value);
   }
 
   return <div className="player">
