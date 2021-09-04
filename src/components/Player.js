@@ -50,14 +50,14 @@ function Player(props) {
 
   function onStopButtonClick() {
     console.log(player);
-    player.stop();
+    player && player.stop();
     setPlayButtonState(true);
   }
 
   function ChangeVolume(value) {
     console.log(value);
     setVolumeProgress(value);
-    player.setVolume(value);
+    player && player.setVolume(value);
   }
 
   return <div className="player">
@@ -84,18 +84,18 @@ function Player(props) {
     <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/>
     <Button icon="volume" styleName="button_volume" onClicked={() => ChangeVolume(0)}/>
 
-    <ProgressBar progress={volumeProgress} onClicked={ChangeVolume} style={{
+    <ProgressBar onClicked={ChangeVolume} style={{
         width: '106px',
         marginRight: '23.3px'
       }}/>
 
-    <span class="player_time">{secondsToTime(playbackTime)}</span>
+    <span className="player_time">{secondsToTime(playbackTime)}</span>
 
-    <ProgressBar progress={progress} style={{
+    <ProgressBar style={{
         width: '586px',
         marginRight: '1px'
       }}/>
-    <span class="player_time">{secondsToTime(duration)}</span>
+    <span className="player_time">{secondsToTime(duration)}</span>
   </div>;
 }
 const mapStateToProps = state => {

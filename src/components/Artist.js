@@ -68,7 +68,7 @@ function Artist() {
       <NavLink to={'/artist/' + id + '/related'}>Related artists</NavLink>
       <hr/>
     </div>
-    
+
     <div className="artist__albums">
       {data && data.artist.albums.map((album) => <Album key={album.id} album={album}/>)}
     </div>

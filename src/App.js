@@ -13,8 +13,8 @@ function App() {
 
   return (<Router>
 
-    <div className="app">
-      
+    <div className="app noselect">
+
       <Sidebar/>
 
       <Switch >
