@@ -43,7 +43,9 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
   }
 
   const resume = (resumeTime = 0) => {
+
     console.log('resume ' + resumeTime)
+    activeSource && activeSource.stop();
     source = audioContext.createBufferSource();
     source.buffer = audioBuffer;
 
@@ -55,14 +57,20 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
     activeSource = source;
   }
 
-  const play = () => {
+  const play = (timeSeconds) => {
     console.log('play player, pausedAt: ' + pausedAt);
     isPlaying = true;
-    startAt = new Date(Date.now() - pausedAt * 1000);
-    setStartedAt(startAt)
 
-    if (audioBuffer) resume(pausedAt);
-    else playWhileLoading(pausedAt);
+    const time = timeSeconds ? timeSeconds : pausedAt;
+
+    startAt = new Date(Date.now() - time * 1000);
+
+    setStartedAt(startAt);
+
+    console.log('startAt: ' + time);
+
+    if (audioBuffer) resume(time);
+    else playWhileLoading(time);
 
     pausedAt = 0;
   };

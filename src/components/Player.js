@@ -50,6 +50,7 @@ function Player(props) {
 
   function onStopButtonClick() {
     console.log(player);
+    console.log(player.getInSec());
     player && player.stop();
     setPlayButtonState(true);
   }
@@ -60,7 +61,11 @@ function Player(props) {
     player && player.setVolume(value);
   }
 
-  function JumpTo(time) {}
+  function JumpTo(value) {
+    let timeSeconds = duration * value;
+    console.log(timeSeconds);
+    player.play(timeSeconds);
+  }
 
   return <div className="player">
     <div className="player__shadow"></div>
