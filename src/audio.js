@@ -5,11 +5,11 @@ function getAudioContext() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
 
   const audioContext = new AudioContext();
-  const analyser = audioContext.createAnalyser();
+  //const analyser = audioContext.createAnalyser();
 
   return {
     audioContext,
-    analyser
+    //analyser
   };
 };
 
@@ -25,7 +25,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
 
   const {
     audioContext,
-    analyser
+    //analyser
   } = getAudioContext();
   const gainNode = audioContext.createGain();
 
@@ -148,7 +148,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
 
       const audioBufferChunk = await audioContext.decodeAudioData(withWaveHeader(data, 2, 44100));
 
-      if (total == data.length && data.length > 0) { //first chunk
+      if (total === data.length && data.length > 0) { //first chunk
 
         const loadRate = data.length / size;
         const duration = (1 / loadRate) * audioBufferChunk.duration;

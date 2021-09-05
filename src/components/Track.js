@@ -1,12 +1,17 @@
-import {connect} from 'react-redux'
+import {useReactiveVar} from '@apollo/client';
+import {currentTrackVar} from '../cache';
+
 import SoundBars from './SoundBars';
 import {secondsToTime} from './../utils.js';
 
-function Track({track, currentTrack, dispatch}) {
+function Track({track}) {
+
+  const currentTrack = useReactiveVar(currentTrackVar);
 
   function onClicked() {
     console.log('clicked!');
-    dispatch({type: 'SET_TRACK', payload: track})
+    currentTrackVar(track);
+    //console.log(currentTrack);
   }
 
   const isActiveTrack = currentTrack && currentTrack.id == track.id;
@@ -30,12 +35,4 @@ function Track({track, currentTrack, dispatch}) {
   </div>
 }
 
-const mapStateToProps = state => {
-  return {currentTrack: state.currentTrack}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {dispatch}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Track)
+export default Track;

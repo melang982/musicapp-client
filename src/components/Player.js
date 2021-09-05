@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
-import {connect} from 'react-redux'
+import {useReactiveVar} from '@apollo/client';
+import {currentTrackVar} from '../cache';
 import Button from './Button';
 import ProgressBar from './ProgressBar';
 import {loadFile} from './../audio.js';
@@ -7,8 +8,10 @@ import {secondsToTime} from './../utils.js';
 
 import '../styles/player.scss';
 
-function Player(props) {
-  const {currentTrack} = props;
+function Player() {
+
+  const currentTrack = useReactiveVar(currentTrackVar);
+
   const [player, setPlayer] = useState(null);
   const [startedAt, setStartedAt] = useState(null);
   const [duration, setDuration] = useState(null);
@@ -122,8 +125,5 @@ function Player(props) {
     <span className="player_time">{secondsToTime(duration)}</span>
   </div>;
 }
-const mapStateToProps = state => {
-  return {currentTrack: state.currentTrack}
-}
 
-export default connect(mapStateToProps)(Player)
+export default Player;
