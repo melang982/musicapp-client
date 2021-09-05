@@ -19,15 +19,20 @@ function Artist() {
     {
       artist(id:${id}){
       name
+      tracks {
+        id
+        title
+        artist
+        album {
+          id
+          title
+        }
+        duration
+      }
       albums {
         id
         title
         year
-        tracks {
-          id
-          title
-          duration
-        }
       }
     }
     }
@@ -36,18 +41,7 @@ function Artist() {
   const {data} = useQuery(ARTIST_QUERY);
   console.log(data);
 
-  const tracks = data && data.artist.albums.flatMap(x => { //add album name to tracks
-    let newTracks = x.tracks.map(y => ({
-      ...y,
-      artist: data.artist.name,
-      album: {
-        title: x.title,
-        id: x.id
-      }
-    }));
-    return newTracks
-  })
-
+  const tracks = data && data.artist.tracks;
   console.log(tracks);
 
   return <div className="artist">

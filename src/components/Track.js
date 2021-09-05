@@ -14,7 +14,7 @@ function Track({track}) {
     //console.log(currentTrack);
   }
 
-  const isActiveTrack = currentTrack && currentTrack.id == track.id;
+  const isActiveTrack = currentTrack && currentTrack.id === track.id;
   let className = 'track';
   if (isActiveTrack) 
     className += ' track_active';

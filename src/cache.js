@@ -1,11 +1,14 @@
 import {
+  ApolloClient,
   InMemoryCache,
+  createHttpLink,
   makeVar
 } from '@apollo/client';
 
-export const currentTrackVar = makeVar();
+const currentTrackVar = makeVar();
+//const trackListVar = makeVar();
 
-export const cache = new InMemoryCache({
+const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
@@ -18,3 +21,18 @@ export const cache = new InMemoryCache({
     }
   }
 });
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000'
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: cache
+})
+
+export {
+  client,
+  currentTrackVar,
+  //  trackListVar
+}
