@@ -5,6 +5,7 @@ import Search from './Search';
 import SaveButton from './SaveButton';
 import Album from './Album';
 import Track from './Track';
+import Player from './Player';
 
 import {NavLink} from 'react-router-dom';
 import '../styles/artist.scss';
@@ -71,6 +72,8 @@ function Artist() {
       <div className="tracks__title">Random selection</div>
       {tracks && tracks.map((track) => <Track key={track.id} track={track}/>)}
     </div>
+
+    <Player trackList={tracks}/>
   </div>
 }
 export default Artist;

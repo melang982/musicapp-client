@@ -8,7 +8,7 @@ import {secondsToTime} from './../utils.js';
 
 import '../styles/player.scss';
 
-function Player() {
+function Player({trackList}) {
 
   const currentTrack = useReactiveVar(currentTrackVar);
 
@@ -87,6 +87,16 @@ function Player() {
     setProgress(value);
   }
 
+  function onNextButtonClick() {
+    let index = trackList.findIndex(x => x.id === currentTrack.id) + 1;
+    if (index > trackList.length - 1) 
+      index = index - trackList.length;
+    
+    const newTrack = trackList[index];
+    console.log(newTrack.title);
+    currentTrackVar(newTrack);
+  }
+
   return <div className="player">
     <div className="player__shadow"></div>
 
@@ -107,7 +117,7 @@ function Player() {
         ? <Button icon="play" styleName="button_play" onClicked={onPlayButtonClick}/>
         : <Button icon="pause" styleName="button_play" onClicked={onStopButtonClick}/>
     }
-    <Button icon="next" onClicked={onPlayButtonClick}/>
+    <Button icon="next" onClicked={onNextButtonClick}/>
     <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/>
     <Button icon="volume" styleName="button_volume" onClicked={() => ChangeVolume(0)}/>
 
