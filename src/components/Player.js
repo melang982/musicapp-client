@@ -70,6 +70,7 @@ function Player({trackList}) {
     newPlayer.setVolume(volume);
     console.log(newPlayer);
     setPlayer(newPlayer);
+    document.title = currentTrack.title + ' · ' + currentTrack.artist;
   }
 
   function onPlayButtonClick() {
@@ -83,6 +84,7 @@ function Player({trackList}) {
     } else {
       player.play();
     }
+
     setPlayButtonState(false);
   }
 
@@ -90,6 +92,7 @@ function Player({trackList}) {
     console.log(player);
     player && player.stop();
     setPlayButtonState(true);
+    document.title = 'Pandora – Web Player';
   }
 
   function jumpTo(value) {
