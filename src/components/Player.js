@@ -14,6 +14,7 @@ function Player({trackList}) {
 
   const [player, setPlayer] = useState(null);
   const [startedAt, setStartedAt] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(null);
   const [duration, setDuration] = useState(null);
   const [playbackTime, setPlaybackTime] = useState(null);
   const [progress, setProgress] = useState(null);
@@ -26,7 +27,7 @@ function Player({trackList}) {
   useEffect(() => {
     const interval = setInterval(() => {
 
-      if (startedAt) {
+      if (startedAt && isPlaying) {
         const playbackTime = (Date.now() - startedAt) / 1000;
 
         setProgress(Math.min(playbackTime / duration, 1));
@@ -53,7 +54,7 @@ function Player({trackList}) {
     if (player) 
       player.shutdown();
     
-    let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration);
+    let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration, setIsPlaying);
     newPlayer.setVolume(volumeProgress);
     console.log(newPlayer);
     setPlayer(newPlayer);

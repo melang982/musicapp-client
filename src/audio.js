@@ -13,7 +13,7 @@ function getAudioContext() {
   };
 };
 
-const loadFile = (trackId, setStartedAt, setDuration) => {
+const loadFile = (trackId, setStartedAt, setDuration, setIsPlaying) => {
 
   let source = null;
   let playWhileLoadingDuration = 0;
@@ -40,6 +40,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
     source.start(0, offset);
     activeSource = source;
     isPlaying = true;
+    setIsPlaying(true);
   }
 
   const resume = (resumeTime = 0) => {
@@ -60,6 +61,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
   const play = (timeSeconds) => {
     console.log('play player, pausedAt: ' + pausedAt);
     isPlaying = true;
+    setIsPlaying(true);
 
     const time = timeSeconds ? timeSeconds : pausedAt;
 
@@ -102,6 +104,7 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
   const stop = () => {
     activeSource && activeSource.stop(0);
     isPlaying = false;
+    setIsPlaying(false);
 
     const elapsed = (Date.now() - startAt) / 1000;
     pausedAt = elapsed;
@@ -141,9 +144,11 @@ const loadFile = (trackId, setStartedAt, setDuration) => {
         console.log('fully loaded');
         clearInterval(whileLoadingInterval);
         audioBuffer = source.buffer;
-        activeSource.stop();
-        const inSec = (Date.now() - startAt) / 1000;
-        resume(inSec);
+        if (isPlaying) {
+          activeSource.stop();
+          const inSec = (Date.now() - startAt) / 1000;
+          resume(inSec);
+        }
       }
 
       const audioBufferChunk = await audioContext.decodeAudioData(withWaveHeader(data, 2, 44100));
