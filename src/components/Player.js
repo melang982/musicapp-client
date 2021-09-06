@@ -5,7 +5,6 @@ import Button from './Button';
 import ProgressBar from './ProgressBar';
 import {loadFile} from './../audio.js';
 import {secondsToTime} from './../utils.js';
-
 import '../styles/player.scss';
 
 function Player({trackList}) {
@@ -20,6 +19,8 @@ function Player({trackList}) {
   const [progress, setProgress] = useState(null);
   const [volume, setVolume] = useState(0.5);
   const [isMuted, setIsMuted] = useState(false);
+  const [shouldRepeat, setShouldRepeat] = useState(false);
+  const [shouldShuffle, setShouldShuffle] = useState(false);
 
   const [playButtonState, setPlayButtonState] = useState(true);
 
@@ -29,12 +30,21 @@ function Player({trackList}) {
     const interval = setInterval(() => {
 
       if (startedAt && isPlaying) {
-        const playbackTime = (Date.now() - startedAt) / 1000;
+        let playbackTime = (Date.now() - startedAt) / 1000;
 
+        if (playbackTime >= duration) {
+          playbackTime = duration;
+
+          if (shouldRepeat) 
+            jumpTo(0);
+          else 
+            playNext();
+          }
+        
         setProgress(Math.min(playbackTime / duration, 1));
         setPlaybackTime(playbackTime);
       }
-    }, 50)
+    }, 50);
 
     return() => {
       clearInterval(interval);
@@ -82,14 +92,14 @@ function Player({trackList}) {
     setPlayButtonState(true);
   }
 
-  function JumpTo(value) {
+  function jumpTo(value) {
     let timeSeconds = duration * value;
     //console.log(timeSeconds);
     player.play(timeSeconds);
     setProgress(value);
   }
 
-  function onPreviousButtonClick() {
+  function playPrevious() {
     let index = trackList.findIndex(x => x.id === currentTrack.id) - 1;
 
     if (index < 0) 
@@ -99,7 +109,7 @@ function Player({trackList}) {
     currentTrackVar(trackList[index]);
   }
 
-  function onNextButtonClick() {
+  function playNext() {
     const index = (trackList.findIndex(x => x.id === currentTrack.id) + 1) % trackList.length;
 
     currentTrackVar(trackList[index]);
@@ -134,20 +144,19 @@ function Player({trackList}) {
         {currentTrack && currentTrack.artist}
       </p>
     </div>
-
-    <Button icon="shuffle" onClicked={onPlayButtonClick}/>
-    <Button icon="previous" onClicked={onPreviousButtonClick}/> {
+    <Button icon="shuffle" activated={shouldShuffle} onClicked={() => setShouldShuffle(!shouldShuffle)}/>
+    <Button icon="previous" onClicked={playPrevious}/> {
       playButtonState
         ? <Button icon="play" styleName="button_play" onClicked={onPlayButtonClick}/>
         : <Button icon="pause" styleName="button_play" onClicked={onStopButtonClick}/>
     }
-    <Button icon="next" onClicked={onNextButtonClick}/>
-    <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/> {
-      isMuted
-        ? <Button icon="volumeOff" styleName="button_volume" onClicked={() => unMute()}/>
-        : <Button icon="volume" styleName="button_volume" onClicked={() => mute()}/>
-    }
+    <Button icon="next" onClicked={playNext}/>
 
+    <Button icon="repeat" activated={shouldRepeat} onClicked={() => setShouldRepeat(!shouldRepeat)}/> {
+      isMuted
+        ? <Button icon="volumeOff" styleName="button_volume" onClicked={unMute}/>
+        : <Button icon="volume" styleName="button_volume" onClicked={mute}/>
+    }
     <ProgressBar progress={isMuted
         ? 0
         : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" style={{
@@ -157,7 +166,7 @@ function Player({trackList}) {
 
     <span className="player_time">{secondsToTime(playbackTime)}</span>
 
-    <ProgressBar progress={progress} updateValue={JumpTo} style={{
+    <ProgressBar progress={progress} updateValue={jumpTo} style={{
         width: '586px',
         marginRight: '1px'
       }}/>
