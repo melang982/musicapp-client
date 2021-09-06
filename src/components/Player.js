@@ -4,7 +4,7 @@ import {currentTrackVar} from '../cache';
 import Button from './Button';
 import ProgressBar from './ProgressBar';
 import {loadFile} from './../audio.js';
-import {secondsToTime} from './../utils.js';
+import {secondsToTime, shuffle} from './../utils.js';
 import '../styles/player.scss';
 
 function Player({trackList}) {
@@ -21,6 +21,7 @@ function Player({trackList}) {
   const [isMuted, setIsMuted] = useState(false);
   const [shouldRepeat, setShouldRepeat] = useState(false);
   const [shouldShuffle, setShouldShuffle] = useState(false);
+  const [shuffledTrackList, setShuffledTrackList] = useState(null);
 
   const [playButtonState, setPlayButtonState] = useState(true);
 
@@ -113,9 +114,13 @@ function Player({trackList}) {
   }
 
   function playNext() {
-    const index = (trackList.findIndex(x => x.id === currentTrack.id) + 1) % trackList.length;
+    const trackListToUse = shouldShuffle
+      ? shuffledTrackList
+      : trackList;
 
-    currentTrackVar(trackList[index]);
+    const index = (trackListToUse.findIndex(x => x.id === currentTrack.id) + 1) % trackList.length;
+
+    currentTrackVar(trackListToUse[index]);
   }
 
   function changeVolume(value) {
@@ -134,6 +139,15 @@ function Player({trackList}) {
     player && player.setVolume(volume);
   }
 
+  function shuffleTracks(value) {
+    setShouldShuffle(value);
+    if (value) {
+      const sList = trackList.slice();
+      shuffle(sList);
+      setShuffledTrackList(sList);
+    }
+  }
+
   return <div className="player">
     <div className="player__shadow"></div>
 
@@ -147,7 +161,7 @@ function Player({trackList}) {
         {currentTrack && currentTrack.artist}
       </p>
     </div>
-    <Button icon="shuffle" activated={shouldShuffle} onClicked={() => setShouldShuffle(!shouldShuffle)}/>
+    <Button icon="shuffle" activated={shouldShuffle} onClicked={() => shuffleTracks(!shouldShuffle)}/>
     <Button icon="previous" onClicked={playPrevious}/> {
       playButtonState
         ? <Button icon="play" styleName="button_play" onClicked={onPlayButtonClick}/>
