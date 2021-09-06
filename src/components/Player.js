@@ -18,7 +18,8 @@ function Player({trackList}) {
   const [duration, setDuration] = useState(null);
   const [playbackTime, setPlaybackTime] = useState(null);
   const [progress, setProgress] = useState(null);
-  const [volumeProgress, setVolumeProgress] = useState(0.5);
+  const [volume, setVolume] = useState(0.5);
+  const [isMuted, setIsMuted] = useState(false);
 
   const [playButtonState, setPlayButtonState] = useState(true);
 
@@ -51,16 +52,20 @@ function Player({trackList}) {
   }, [currentTrack]);
 
   function createPlayer() {
+
     if (player) 
       player.shutdown();
     
     let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration, setIsPlaying);
-    newPlayer.setVolume(volumeProgress);
+    newPlayer.setVolume(volume);
     console.log(newPlayer);
     setPlayer(newPlayer);
   }
 
   function onPlayButtonClick() {
+    if (!currentTrack) 
+      return;
+    
     console.log('onPlayButtonClick');
     if (!player) {
       createPlayer();
@@ -75,12 +80,6 @@ function Player({trackList}) {
     console.log(player);
     player && player.stop();
     setPlayButtonState(true);
-  }
-
-  function ChangeVolume(value) {
-    //console.log(value);
-    setVolumeProgress(value);
-    player && player.setVolume(value);
   }
 
   function JumpTo(value) {
@@ -106,6 +105,22 @@ function Player({trackList}) {
     currentTrackVar(trackList[index]);
   }
 
+  function changeVolume(value) {
+    //console.log(value);
+    setVolume(value);
+    player && player.setVolume(value);
+  }
+
+  function mute() {
+    setIsMuted(true);
+    player && player.setVolume(0);
+  }
+
+  function unMute() {
+    setIsMuted(false);
+    player && player.setVolume(volume);
+  }
+
   return <div className="player">
     <div className="player__shadow"></div>
 
@@ -127,10 +142,15 @@ function Player({trackList}) {
         : <Button icon="pause" styleName="button_play" onClicked={onStopButtonClick}/>
     }
     <Button icon="next" onClicked={onNextButtonClick}/>
-    <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/>
-    <Button icon="volume" styleName="button_volume" onClicked={() => ChangeVolume(0)}/>
+    <Button icon="repeat" activated="activated" onClicked={onPlayButtonClick}/> {
+      isMuted
+        ? <Button icon="volumeOff" styleName="button_volume" onClicked={() => unMute()}/>
+        : <Button icon="volume" styleName="button_volume" onClicked={() => mute()}/>
+    }
 
-    <ProgressBar progress={volumeProgress} updateValue={ChangeVolume} shouldUpdateOnDrag="true" style={{
+    <ProgressBar progress={isMuted
+        ? 0
+        : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" style={{
         width: '106px',
         marginRight: '23.3px'
       }}/>
