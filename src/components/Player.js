@@ -87,14 +87,20 @@ function Player({trackList}) {
     setProgress(value);
   }
 
-  function onNextButtonClick() {
-    let index = trackList.findIndex(x => x.id === currentTrack.id) + 1;
-    if (index > trackList.length - 1) 
-      index = index - trackList.length;
+  function onPreviousButtonClick() {
+    let index = trackList.findIndex(x => x.id === currentTrack.id) - 1;
+
+    if (index < 0) 
+      index = trackList.length + index;
     
-    const newTrack = trackList[index];
-    console.log(newTrack.title);
-    currentTrackVar(newTrack);
+    //console.log(index);
+    currentTrackVar(trackList[index]);
+  }
+
+  function onNextButtonClick() {
+    const index = (trackList.findIndex(x => x.id === currentTrack.id) + 1) % trackList.length;
+
+    currentTrackVar(trackList[index]);
   }
 
   return <div className="player">
@@ -112,7 +118,7 @@ function Player({trackList}) {
     </div>
 
     <Button icon="shuffle" onClicked={onPlayButtonClick}/>
-    <Button icon="previous" onClicked={onPlayButtonClick}/> {
+    <Button icon="previous" onClicked={onPreviousButtonClick}/> {
       playButtonState
         ? <Button icon="play" styleName="button_play" onClicked={onPlayButtonClick}/>
         : <Button icon="pause" styleName="button_play" onClicked={onStopButtonClick}/>
