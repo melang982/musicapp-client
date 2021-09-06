@@ -54,6 +54,7 @@ function Player({trackList}) {
       player.shutdown();
     
     let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration);
+    newPlayer.setVolume(volumeProgress);
     console.log(newPlayer);
     setPlayer(newPlayer);
   }
@@ -61,7 +62,8 @@ function Player({trackList}) {
   function onPlayButtonClick() {
     console.log('onPlayButtonClick');
     if (!player) {
-      createPlayer()
+      createPlayer();
+
     } else {
       player.play();
     }
