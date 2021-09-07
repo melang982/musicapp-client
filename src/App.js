@@ -5,8 +5,10 @@ import './styles/components.scss';
 import Sidebar from './components/Sidebar';
 import Artist from './components/Artist';
 import AlbumPage from './components/AlbumPage';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 function App() {
 
@@ -16,6 +18,8 @@ function App() {
 
       <Sidebar/>
 
+      <Link to="/signup" className="link_signup">Sign up</Link>
+      
       <Switch >
         <Route path="/artist/:id">
           <Artist/>
@@ -23,6 +27,8 @@ function App() {
         <Route path="/album">
           <AlbumPage/>
         </Route>
+        <Route exact="exact" path="/login" component={Login}/>
+        <Route exact="exact" path="/signup" component={Signup}/>
       </Switch>
 
     </div>

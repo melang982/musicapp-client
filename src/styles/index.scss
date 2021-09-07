@@ -8,31 +8,17 @@ html {
 
 body {
   margin: 0;
-  font-family: 'AvenirNext', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
-  font-size: $size-regular;
   overflow: hidden;
 }
 
+body,
+button,
 input {
   font-family: 'AvenirNext', sans-serif;
-  background: none;
-  border: none;
-  outline: none;
-  padding: 0;
-  color: #fff;
   font-size: $size-regular;
-  font-weight: 500;
-
-  &::placeholder {
-    color: #fff;
-  }
-
-  &:focus::placeholder {
-    opacity: 0.5;
-  }
 }
 
 a {
