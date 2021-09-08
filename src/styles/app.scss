@@ -29,3 +29,20 @@
   z-index: -1;
   pointer-events: none;
 }
+
+.links_login {
+  position: fixed;
+  top: 15px;
+  right: 25px;
+  z-index: 2;
+
+  a {
+    margin-right: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: #42464e;
+    border-radius: 16px;
+    padding: 6px 10px;
+  }
+}

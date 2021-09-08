@@ -9,10 +9,10 @@ import '../styles/sidebar.scss';
 function Sidebar() {
   const history = useHistory();
 
-  const id = 1; //TEMP
+
   const USER_PLAYLISTS_QUERY = gql `
     {
-      user(id:${id}){
+      user(name:"test"){
       playlists {
         id
         title
@@ -39,7 +39,7 @@ function Sidebar() {
 
 
   const { data } = useQuery(USER_PLAYLISTS_QUERY);
-  const playlists = data && data.user.playlists;
+  const playlists = data && data.user && data.user.playlists;
   //const playlists = [{id: 0, title: 'UPlabs focus'}, {id: 1, title: 'Golden 80s'}]; TEMP
 
   return <div className='sidebar'>

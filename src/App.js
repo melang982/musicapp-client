@@ -9,9 +9,9 @@ import AlbumPage from './components/AlbumPage';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
-import {AUTH_TOKEN} from './constants';
+import { AUTH_TOKEN } from './constants';
 
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const authToken = localStorage.getItem(AUTH_TOKEN);
 
@@ -21,11 +21,13 @@ function App() {
 
     <div className="app noselect">
 
-      <Sidebar/> {!authToken && <Link to="/signup" className="link_signup">Sign up</Link>}
+      <Sidebar/>
 
-      {
-        authToken ? <div className="avatar"/> : <Link to="/login" className="link_signup">
-        Log in</Link>
+      { authToken ? <div className="avatar"/> :
+        <div className="links_login">
+          <Link to="/login">Log in</Link>
+          <Link to="/signup">Sign up</Link>
+        </div>
       }
 
       <Switch >
