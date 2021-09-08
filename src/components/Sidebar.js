@@ -1,12 +1,14 @@
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { AUTH_TOKEN } from '../constants';
 
 import Button from './Button';
 import PlaylistLink from './PlaylistLink';
 import '../styles/sidebar.scss';
 
 function Sidebar() {
+  const authToken = localStorage.getItem(AUTH_TOKEN);
   const history = useHistory();
 
 
@@ -60,7 +62,7 @@ function Sidebar() {
     </div>
 
     <h2>Playlists
-      <Button title="Create playlist" icon="add" onClicked={createPlaylist}/>
+      { authToken && <Button title="Create playlist" icon="add" onClicked={createPlaylist}/>}
     </h2>
 
     <div className="sidebar__menu">
