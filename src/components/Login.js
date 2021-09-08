@@ -1,8 +1,33 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
+import { AUTH_TOKEN } from '../constants';
 
 function Login() {
+  const history = useHistory();
+  const [formState, setFormState] = useState({ email: '', password: '' });
 
-  const [formState, setFormState] = useState({email: '', password: ''});
+  const LOGIN_MUTATION = gql`
+    mutation LoginMutation(
+      $email: String!
+      $password: String!
+    ) {
+      login(email: $email, password: $password) {
+        token
+      }
+    }
+  `;
+
+  const [login] = useMutation(LOGIN_MUTATION, {
+    variables: {
+      email: formState.email,
+      password: formState.password
+    },
+    onCompleted: ({ login }) => {
+      localStorage.setItem(AUTH_TOKEN, login.token);
+      history.push('/');
+    }
+  });
 
   return <div className="login">
     <h1>Log in</h1>
@@ -17,12 +42,8 @@ function Login() {
         password: e.target.value
       })} placeholder="Password"/>
 
-    <button onClick={() => console.log('onClick')}>
-      Log in
-    </button>
-    <button>
-      Need to create an account?
-    </button>
+    <button onClick={login}>Log in</button>
+    <button>Need to create an account?</button>
   </div>;
 }
 export default Login;

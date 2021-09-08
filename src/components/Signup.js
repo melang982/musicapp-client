@@ -1,11 +1,11 @@
-import {useState} from 'react';
-import {useMutation, gql} from '@apollo/client';
-import {useHistory} from 'react-router-dom';
-import {AUTH_TOKEN} from '../constants';
+import { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
+import { AUTH_TOKEN } from '../constants';
 
 function Login() {
   const history = useHistory();
-  const [formState, setFormState] = useState({email: '', password: '', name: ''});
+  const [formState, setFormState] = useState({ email: '', password: '', name: '' });
 
   const SIGNUP_MUTATION = gql `
     mutation SignupMutation(
@@ -29,7 +29,7 @@ function Login() {
       email: formState.email,
       password: formState.password
     },
-    onCompleted: ({signup}) => {
+    onCompleted: ({ signup }) => {
       localStorage.setItem(AUTH_TOKEN, signup.token);
       history.push('/');
     }
@@ -42,19 +42,19 @@ function Login() {
         ...formState,
         email: e.target.value
       })
-} placeholder="Your email address"/>
+      } placeholder="Your email address"/>
 
     <input value={formState.password} onChange={(e) => setFormState({
         ...formState,
         password: e.target.value
       })
-} type="password" placeholder="Choose a safe password"/>
+      } type="password" placeholder="Choose a safe password"/>
 
     <input value={formState.name} onChange={(e) => setFormState({
         ...formState,
         name: e.target.value
       })
-} type="text" placeholder="Your name"/>
+      } type="text" placeholder="Your name"/>
 
     <button onClick={signup}>Sign up</button>
   </div>;
