@@ -44,11 +44,21 @@
   left: 0.2vw;
 }
 
+.playlist-link {
+  position: relative;
+
+  a {
+    padding-left: 20px;
+  }
+}
+
 .playlist-link__tag {
+  pointer-events: none;
+  left: 0;
+  top: 4px;
   width: 7px;
   height: 7px;
-  display: inline-block;
-  margin-right: 10px;
+  position: absolute;
   border-radius: 7px;
   background: #83E163;
 }

@@ -41,7 +41,7 @@ function Sidebar() {
     </div>
 
     <h2>Playlists
-      <Button icon="add"/>
+      <Button title="Create playlist" icon="add"/>
     </h2>
 
     <div className="sidebar__menu">
