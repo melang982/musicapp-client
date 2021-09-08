@@ -1,7 +1,6 @@
-function Album(props) {
-  const {album} = props;
+function Album({album}) {
 
-  let albumCoverUrl = '/images/album/' + album.id + '.jpg';
+  const albumCoverUrl = '/images/album/' + album.id + '.jpg';
 
   return <div className="album">
     <img className="album__cover" src={albumCoverUrl} alt="album cover"/>

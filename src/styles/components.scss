@@ -109,6 +109,16 @@
   border-radius: 4px;
 }
 
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 100%;
+  background: gray;
+  position: fixed;
+  top: 5px;
+  right: 60px;
+}
+
 .link_signup {
   font-size: 14px;
   text-transform: uppercase;
@@ -154,4 +164,9 @@
     border: 1px solid #777;
     border-radius: 3px;
   }
+}
+
+.playlist {
+  background: #333;
+  flex-grow: 1;
 }

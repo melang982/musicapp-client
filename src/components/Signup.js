@@ -41,15 +41,15 @@ function Login() {
     <input type="text" value={formState.email} onChange={(e) => setFormState({
         ...formState,
         email: e.target.value
-    })
-    } placeholder="Your email address"/>
+      })
+} placeholder="Your email address"/>
 
     <input value={formState.password} onChange={(e) => setFormState({
         ...formState,
         password: e.target.value
-    })
-    } type="password" placeholder="Choose a safe password"/>
-    
+      })
+} type="password" placeholder="Choose a safe password"/>
+
     <input value={formState.name} onChange={(e) => setFormState({
         ...formState,
         name: e.target.value

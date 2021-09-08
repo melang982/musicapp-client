@@ -36,12 +36,12 @@ function Player({trackList}) {
         if (playbackTime >= duration) {
           playbackTime = duration;
 
-          if (shouldRepeat) 
+          if (shouldRepeat)
             jumpTo(0);
-          else 
+          else
             playNext();
           }
-        
+
         setProgress(Math.min(playbackTime / duration, 1));
         setPlaybackTime(playbackTime);
       }
@@ -64,9 +64,9 @@ function Player({trackList}) {
 
   function createPlayer() {
 
-    if (player) 
+    if (player)
       player.shutdown();
-    
+
     let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration, setIsPlaying);
     newPlayer.setVolume(volume);
     console.log(newPlayer);
@@ -75,9 +75,9 @@ function Player({trackList}) {
   }
 
   function onPlayButtonClick() {
-    if (!currentTrack) 
+    if (!currentTrack)
       return;
-    
+
     console.log('onPlayButtonClick');
     if (!player) {
       createPlayer();
@@ -106,9 +106,9 @@ function Player({trackList}) {
   function playPrevious() {
     let index = trackList.findIndex(x => x.id === currentTrack.id) - 1;
 
-    if (index < 0) 
+    if (index < 0)
       index = trackList.length + index;
-    
+
     //console.log(index);
     currentTrackVar(trackList[index]);
   }
