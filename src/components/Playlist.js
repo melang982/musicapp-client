@@ -1,11 +1,12 @@
-import {useParams} from 'react-router-dom';
-import {useQuery, gql} from '@apollo/client';
+import { useParams } from 'react-router-dom';
+import { useQuery, gql } from '@apollo/client';
 
 import Player from './Player';
 
-function Playlist({playlist}) {
+function Playlist({ playlist }) {
 
-  const {id} = useParams();
+  const { id } = useParams();
+  console.log(id);
 
   const PLAYLIST_QUERY = gql `
     {
@@ -25,7 +26,7 @@ function Playlist({playlist}) {
     }
   `;
 
-  const {data} = useQuery(PLAYLIST_QUERY);
+  const { data } = useQuery(PLAYLIST_QUERY);
   console.log(data);
 
   const tracks = data && data.playlist.tracks;

@@ -1,14 +1,16 @@
-import {useQuery, gql} from '@apollo/client';
-import {Link} from 'react-router-dom';
+import { useQuery, useMutation, gql } from '@apollo/client';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Button from './Button';
 import PlaylistLink from './PlaylistLink';
 import '../styles/sidebar.scss';
 
 function Sidebar() {
+  const history = useHistory();
 
   const id = 1; //TEMP
-  const PLAYLISTS_QUERY = gql `
+  const USER_PLAYLISTS_QUERY = gql `
     {
       user(id:${id}){
       playlists {
@@ -19,7 +21,24 @@ function Sidebar() {
     }
   `;
 
-  const {data} = useQuery(PLAYLISTS_QUERY);
+  const CREATE_PLAYLIST_MUTATION = gql `
+    mutation {
+      createPlaylist(title: "80s") {
+        id
+      }
+    }
+  `;
+
+  const [createPlaylist] = useMutation(CREATE_PLAYLIST_MUTATION, {
+    onCompleted: (result) => {
+      console.log('completed');
+      console.log(result);
+      history.push('/playlists/' + result.createPlaylist.id);
+    }
+  });
+
+
+  const { data } = useQuery(USER_PLAYLISTS_QUERY);
   const playlists = data && data.user.playlists;
   //const playlists = [{id: 0, title: 'UPlabs focus'}, {id: 1, title: 'Golden 80s'}]; TEMP
 
@@ -41,7 +60,7 @@ function Sidebar() {
     </div>
 
     <h2>Playlists
-      <Button title="Create playlist" icon="add"/>
+      <Button title="Create playlist" icon="add" onClicked={createPlaylist}/>
     </h2>
 
     <div className="sidebar__menu">
