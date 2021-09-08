@@ -36,12 +36,12 @@ function Player({trackList}) {
         if (playbackTime >= duration) {
           playbackTime = duration;
 
-          if (shouldRepeat)
+          if (shouldRepeat) 
             jumpTo(0);
-          else
+          else 
             playNext();
           }
-
+        
         setProgress(Math.min(playbackTime / duration, 1));
         setPlaybackTime(playbackTime);
       }
@@ -64,9 +64,9 @@ function Player({trackList}) {
 
   function createPlayer() {
 
-    if (player)
+    if (player) 
       player.shutdown();
-
+    
     let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration, setIsPlaying);
     newPlayer.setVolume(volume);
     console.log(newPlayer);
@@ -75,9 +75,9 @@ function Player({trackList}) {
   }
 
   function onPlayButtonClick() {
-    if (!currentTrack)
+    if (!currentTrack) 
       return;
-
+    
     console.log('onPlayButtonClick');
     if (!player) {
       createPlayer();
@@ -104,16 +104,22 @@ function Player({trackList}) {
   }
 
   function playPrevious() {
+    if (!currentTrack) 
+      return;
+    
     let index = trackList.findIndex(x => x.id === currentTrack.id) - 1;
 
-    if (index < 0)
+    if (index < 0) 
       index = trackList.length + index;
-
+    
     //console.log(index);
     currentTrackVar(trackList[index]);
   }
 
   function playNext() {
+    if (!currentTrack) 
+      return;
+    
     const trackListToUse = shouldShuffle
       ? shuffledTrackList
       : trackList;
@@ -161,19 +167,24 @@ function Player({trackList}) {
         {currentTrack && currentTrack.artist}
       </p>
     </div>
-    <Button icon="shuffle" activated={shouldShuffle} onClicked={() => shuffleTracks(!shouldShuffle)}/>
-    <Button icon="previous" onClicked={playPrevious}/> {
+    <Button icon="shuffle" title={shouldShuffle
+      ? 'Disable shufle'
+      : 'Enable shuffle'} activated={shouldShuffle} onClicked={() => shuffleTracks(!shouldShuffle)}/>
+    <Button icon="previous" title="Previous" onClicked={playPrevious}/> {
       playButtonState
-        ? <Button icon="play" styleName="button_play" onClicked={onPlayButtonClick}/>
-        : <Button icon="pause" styleName="button_play" onClicked={onStopButtonClick}/>
+        ? <Button icon="play" title="Play" styleName="button_play" onClicked={onPlayButtonClick}/>
+        : <Button icon="pause" title="Pause" styleName="button_play" onClicked={onStopButtonClick}/>
     }
-    <Button icon="next" onClicked={playNext}/>
+    <Button icon="next" title="Next" onClicked={playNext}/>
 
-    <Button icon="repeat" activated={shouldRepeat} onClicked={() => setShouldRepeat(!shouldRepeat)}/> {
-      isMuted
-        ? <Button icon="volumeOff" styleName="button_volume" onClicked={unMute}/>
-        : <Button icon="volume" styleName="button_volume" onClicked={mute}/>
-    }
+    <Button icon="repeat" title={shouldRepeat
+      ? 'Disable repeat'
+      : 'Enable repeat'} activated={shouldRepeat} onClicked={() => setShouldRepeat(!shouldRepeat)}/> {
+        isMuted
+          ? <Button icon="volumeOff" title="Unmute" styleName="button_volume" onClicked={unMute}/>
+          : <Button icon="volume" title="Mute" styleName="button_volume" onClicked={mute}/>
+      }
+
     <ProgressBar progress={isMuted
         ? 0
         : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" style={{

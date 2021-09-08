@@ -1,9 +1,13 @@
 import {useQuery, gql} from '@apollo/client';
 import {Link} from 'react-router-dom';
 
+import Button from './Button';
+import PlaylistLink from './PlaylistLink';
+import '../styles/sidebar.scss';
+
 function Sidebar() {
 
-  const id = 1;//TEMP
+  const id = 1; //TEMP
   const PLAYLISTS_QUERY = gql `
     {
       user(id:${id}){
@@ -15,9 +19,9 @@ function Sidebar() {
     }
   `;
 
-    const {data} = useQuery(PLAYLISTS_QUERY);
-    const playlists = data && data.user.playlists;
-  //const playlists = [{id: 0, title: 'UPlabs focus'}, {id: 1, title: 'Golden 80s'}]; //TEMP
+  const {data} = useQuery(PLAYLISTS_QUERY);
+  const playlists = data && data.user.playlists;
+  //const playlists = [{id: 0, title: 'UPlabs focus'}, {id: 1, title: 'Golden 80s'}]; TEMP
 
   return <div className='sidebar'>
     <img className="logo" src='/logo.png' alt="logo"/>
@@ -36,9 +40,12 @@ function Sidebar() {
       <Link to={'/artist/2'}>Radio</Link>
     </div>
 
-    <h2>Playlists</h2>
+    <h2>Playlists
+      <Button icon="add"/>
+    </h2>
+
     <div className="sidebar__menu">
-      {playlists && playlists.map((playlist) => <Link to={'/playlists/' + playlist.id } key={playlist.id}>{playlist.title}</Link>)}
+      {playlists && playlists.map((playlist) => <PlaylistLink key={playlist.id} playlist={playlist}></PlaylistLink>)}
     </div>
 
   </div>;

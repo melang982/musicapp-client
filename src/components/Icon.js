@@ -45,6 +45,10 @@ function Icon({icon}) {
       return <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fillRule="evenodd" clipRule="evenodd" d="M1.2896 0.899312C1.19967 0.848014 1.09743 0.820984 0.993332 0.820984C0.668556 0.820984 0.405273 1.0785 0.405273 1.39617V4.26264V6.58095V9.44742C0.405273 9.54925 0.432909 9.64924 0.485355 9.7372C0.648978 10.0116 1.00905 10.1043 1.2896 9.94428L7.18548 6.58095V9.0541C7.18548 9.58904 7.61914 10.0227 8.15409 10.0227C8.68903 10.0227 9.12269 9.58904 9.12269 9.0541V1.78959C9.12269 1.25464 8.68903 0.820984 8.15409 0.820984C7.61914 0.820984 7.18548 1.25464 7.18548 1.78959V4.26264L1.2896 0.899312Z" fill="#A1A4B2"/>
       </svg>;
+    case 'add':
+      return <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" clipRule="evenodd" d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="#5E6E8C"/>
+      </svg>;
     default:
   }
 }

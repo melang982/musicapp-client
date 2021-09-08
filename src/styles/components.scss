@@ -18,13 +18,7 @@
   border-radius: 3px;
   //transition: 0.1s ease-in-out;
 }
-/*.progressBar__handle {
-  width: 10px;
-  height: 10px;
-  background: gray;
-  position: absolute;
-  border-radius: 10px;
-}*/
+
 .player_time {
   color: #737785;
   margin: 0 12px 0 11px;
@@ -32,19 +26,18 @@
 
 .button {
   //padding: 5px;
-  cursor: pointer;
-
-  svg path {
+  //cursor: pointer;
+  path {
     //opacity: 0.5;
     fill: #A1A4B2;
   }
 
-  &:hover svg path {
+  &:hover path {
     fill: #fff;
   }
 }
 
-.button_activated svg path {
+.button_activated path {
   fill: $main-color;
 }
 

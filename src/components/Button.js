@@ -1,6 +1,6 @@
 import Icon from './Icon';
 
-function Button({onClicked, icon, styleName, activated}) {
+function Button({onClicked, icon, title, styleName, activated}) {
 
   let className = 'button';
   if (styleName) 
@@ -8,8 +8,8 @@ function Button({onClicked, icon, styleName, activated}) {
   if (activated) 
     className += ' button_activated';
   
-  return <div className={className} onClick={onClicked}>
+  return <button className={className} title={title} onClick={onClicked}>
     <Icon icon={icon}/>
-  </div>;
+  </button>;
 }
 export default Button;
