@@ -14,6 +14,7 @@ function Album() {
     {
       album(id:${id}){
       title
+      year
       artist {
         id
         name
@@ -43,7 +44,18 @@ function Album() {
 
   return <div className="playlist">
 
-    <h1>{data && data.album.title}</h1>
+    { tracks && <AlbumCover track={tracks[0]}/>}
+
+    <div className="playlist__info">
+      <span className="playlist__type">Album</span>
+      <h1>{data && data.album.title}</h1>
+      {data &&
+      <>
+        <Link to={'/artist/' + artist.id} className="playlist__author">{artist.name}</Link>
+        <span className="playlist__duration">{' · ' + data.album.year + ' · ' + tracks.length + ' songs'}</span>
+      </>
+      }
+    </div>
 
     <table>
       <tbody>
@@ -58,7 +70,7 @@ function Album() {
           <td>
             <div>
               <p className="playlist__track-title">{track.title}</p>
-              <p><Link to={'/artist/' + artist.id}>{artist.name}</Link></p>
+              <Link to={'/artist/' + artist.id}>{artist.name}</Link>
             </div>
           </td>
           <td>{secondsToTime(track.duration)}</td>

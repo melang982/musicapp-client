@@ -44,7 +44,6 @@ function Playlist() {
   console.log(tracks);
 
 
-
   function onClick(track) {
     console.log('clicked!');
     currentTrackVar(track);
@@ -54,12 +53,13 @@ function Playlist() {
   return <div className="playlist">
 
     { tracks && <AlbumCover track={tracks[0]}/>}
+
     <div className="playlist__info">
       <span className="playlist__type">Playlist</span>
       <h1>{data && data.playlist.title}</h1>
       {data && data.playlist.createdBy &&
       <>
-        <span className="playlist__user">{data.playlist.createdBy.name}</span>
+        <span className="playlist__author">{data.playlist.createdBy.name}</span>
         <span className="playlist__duration">{' · ' + data.playlist.tracks.length + ' songs'}</span>
       </>
       }
