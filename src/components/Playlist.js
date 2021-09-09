@@ -63,10 +63,10 @@ function Playlist() {
             <AlbumCover track={track}/>
             <div>
               <p className="playlist__track-title">{track.title}</p>
-              <p><Link to={'/artist/' + track.artist.id}>{track.artist.name}</Link></p>
+              <Link to={'/artist/' + track.artist.id}>{track.artist.name}</Link>
             </div>
           </td>
-          <td>{track.album.title}</td>
+          <td><Link to={'/album/' + track.album.id}>{track.album.title}</Link></td>
           <td>2 days ago</td>
           <td>{secondsToTime(track.duration)}</td>
         </tr>)
