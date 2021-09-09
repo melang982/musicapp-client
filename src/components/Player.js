@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useReactiveVar } from '@apollo/client';
 import { currentTrackVar, tracklistVar } from '../cache';
 import Button from './Button';
@@ -158,9 +159,7 @@ function Player() {
       <p className="player__track">
         {currentTrack && currentTrack.title}
       </p>
-      <p className="player__artist">
-        {currentTrack && currentTrack.artist}
-      </p>
+      {currentTrack && <Link to={'/artist/' + currentTrack.artist.id} className="player__artist">{currentTrack.artist.name}</Link>} 
     </div>
 
     <Button icon="shuffle" title={shouldShuffle ? 'Disable shufle' : 'Enable shuffle'} activated={shouldShuffle} onClicked={() => shuffleTracks(!shouldShuffle)}/>

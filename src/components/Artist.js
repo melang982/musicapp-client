@@ -10,8 +10,8 @@ import '../styles/artist.scss';
 
 function Artist() {
 
-  let { id } = useParams();
-  let backgroundUrl = '/images/artist/' + id + '.png';
+  const { id } = useParams();
+  const backgroundUrl = '/images/artist/' + id + '.png';
   //console.log('requested artist id: ' + id);
 
   const ARTIST_QUERY = gql `
@@ -21,7 +21,6 @@ function Artist() {
       tracks {
         id
         title
-        artist
         album {
           id
           title
@@ -40,7 +39,8 @@ function Artist() {
   const { data } = useQuery(ARTIST_QUERY);
   console.log(data);
 
-  const tracks = data && data.artist.tracks;
+
+  const tracks = data && data.artist.tracks.map(x => ({ ...x, artist: { id: id, name: data.artist.name } }));
   console.log(tracks);
 
   return <div className="artist">

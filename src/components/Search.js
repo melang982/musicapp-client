@@ -1,11 +1,10 @@
-import {useState, useRef, useEffect} from 'react';
-import {useLazyQuery, gql} from '@apollo/client';
-import {withRouter} from 'react-router-dom'; //to detect route change in effect
-import {NavLink} from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { useLazyQuery, gql } from '@apollo/client';
+import { withRouter, NavLink } from 'react-router-dom';
 import Icon from './Icon';
 
-function Search(props) {
-  const {location} = props;
+function Search({ location }) {
+
   //const wrapperRef = useRef(null);
   //useOutsideAlerter(wrapperRef);
 
@@ -27,10 +26,7 @@ function Search(props) {
   `;
 
   const [searchString, setSearchString] = useState(null);
-  const [executeSearch, {
-      data
-    }
-  ] = useLazyQuery(SEARCH_QUERY);
+  const [executeSearch, { data }] = useLazyQuery(SEARCH_QUERY);
 
   function onSearch(str) {
     if (str) {
