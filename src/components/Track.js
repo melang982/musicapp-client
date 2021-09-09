@@ -1,24 +1,23 @@
-import {useReactiveVar} from '@apollo/client';
-import {currentTrackVar} from '../cache';
+import { useReactiveVar } from '@apollo/client';
+import { currentTrackVar, tracklistVar } from '../cache';
 
 import SoundBars from './SoundBars';
-import {secondsToTime} from './../utils.js';
+import { secondsToTime } from './../utils.js';
 
-function Track({track}) {
+function Track({ track, tracks }) {
 
   const currentTrack = useReactiveVar(currentTrackVar);
 
   function onClicked() {
     console.log('clicked!');
     currentTrackVar(track);
+    tracklistVar(tracks);
     //console.log(currentTrack);
   }
 
   const isActiveTrack = currentTrack && currentTrack.id === track.id;
-  let className = 'track';
-  if (isActiveTrack) 
-    className += ' track_active';
-  
+  const className = 'track' + (isActiveTrack ? ' track_active' : '');
+
   return <div className={className} onClick={onClicked}>
     <div>
       <p className="track__name">
