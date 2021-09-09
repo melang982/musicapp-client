@@ -141,6 +141,8 @@ function Player() {
   }
 
   function shuffleTracks(value) {
+    if (!tracklist) return;
+
     setShouldShuffle(value);
     if (value) {
       const sList = tracklist.slice();

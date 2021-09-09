@@ -62,9 +62,10 @@
   border: 1px solid rgba(255,255,255,0.3); //1px solid #A1A4B2;
   padding: 0 !important;
   margin: 0 14px 0 4px !important;
-
+  //transition: transform 0.05s ease-in;
   &:hover {
     border-color: #fff;
+    transform: scale(1.05);
   }
 
   svg path {
