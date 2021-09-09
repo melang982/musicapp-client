@@ -35,7 +35,7 @@ function Album() {
 
   const artist = data && data.album.artist;
 
-  function onClicked(track) {
+  function onClick(track) {
     console.log('clicked!');
     currentTrackVar(track);
     tracklistVar(tracks);
@@ -54,7 +54,7 @@ function Album() {
         </tr>
         {tracks && tracks.map((track, index) =>
         <tr key={track.id}>
-          <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + artist.name} onClicked={() => onClicked(track)}/></td>
+          <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + artist.name} onClick={() => onClick(track)}/></td>
           <td>
             <div>
               <p className="playlist__track-title">{track.title}</p>

@@ -8,7 +8,7 @@ function Track({ track, tracks }) {
 
   const currentTrack = useReactiveVar(currentTrackVar);
 
-  function onClicked() {
+  function onClick() {
     console.log('clicked!');
     currentTrackVar(track);
     tracklistVar(tracks);
@@ -18,7 +18,7 @@ function Track({ track, tracks }) {
   const isActiveTrack = currentTrack && currentTrack.id === track.id;
   const className = 'track' + (isActiveTrack ? ' track_active' : '');
 
-  return <div className={className} onClick={onClicked}>
+  return <div className={className} onClick={onClick}>
     <div>
       <p className="track__name">
         {track.title}

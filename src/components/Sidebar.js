@@ -62,7 +62,7 @@ function Sidebar() {
     </div>
 
     <h2>Playlists
-      { authToken && <Button title="Create playlist" icon="add" onClicked={createPlaylist}/>}
+      { authToken && <Button title="Create playlist" icon="add" onClick={createPlaylist}/>}
     </h2>
 
     <div className="sidebar__menu">

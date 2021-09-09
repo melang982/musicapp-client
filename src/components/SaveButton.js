@@ -1,24 +1,18 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import Icon from './Icon';
 
-function SaveButton({onClicked}) {
+function SaveButton() {
   const [saved, setSaved] = useState(false);
 
-  let className = 'save';
-  if (saved) {
-    className += ' save_saved';
-  }
+  const className = 'save' + (saved ? ' save_saved' : '');
 
-  const label = (
-    saved
-    ? 'Saved'
-    : 'Save') + ' to My stars';
+  const label = (saved ? 'Saved' : 'Save') + ' to My stars';
 
-  function onClicked() {
+  function onClick() {
     setSaved(!saved);
   }
 
-  return <div className={className} onClick={onClicked}>
+  return <div className={className} onClick={onClick}>
     <Icon icon='star'/> {label}
   </div>
 }

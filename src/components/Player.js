@@ -163,19 +163,19 @@ function Player() {
       {currentTrack && <Link to={'/artist/' + currentTrack.artist.id} className="player__artist">{currentTrack.artist.name}</Link>}
     </div>
 
-    <Button icon="shuffle" title={shouldShuffle ? 'Disable shufle' : 'Enable shuffle'} activated={shouldShuffle} onClicked={() => shuffleTracks(!shouldShuffle)}/>
-    <Button icon="previous" title="Previous" onClicked={playPrevious}/>
+    <Button icon="shuffle" title={shouldShuffle ? 'Disable shufle' : 'Enable shuffle'} activated={shouldShuffle} onClick={() => shuffleTracks(!shouldShuffle)}/>
+    <Button icon="previous" title="Previous" onClick={playPrevious}/>
     {
       playButtonState
-        ? <Button icon="play" title="Play" styleName="button_play" onClicked={onPlayButtonClick}/>
-        : <Button icon="pause" title="Pause" styleName="button_play" onClicked={onStopButtonClick}/>
+        ? <Button icon="play" title="Play" styleName="button_play" onClick={onPlayButtonClick}/>
+        : <Button icon="pause" title="Pause" styleName="button_play" onClick={onStopButtonClick}/>
     }
-    <Button icon="next" title="Next" onClicked={playNext}/>
-    <Button icon="repeat" title={shouldRepeat ? 'Disable repeat' : 'Enable repeat'} activated={shouldRepeat} onClicked={() => setShouldRepeat(!shouldRepeat)}/>
+    <Button icon="next" title="Next" onClick={playNext}/>
+    <Button icon="repeat" title={shouldRepeat ? 'Disable repeat' : 'Enable repeat'} activated={shouldRepeat} onClick={() => setShouldRepeat(!shouldRepeat)}/>
     {
       isMuted
-        ? <Button icon="volumeOff" title="Unmute" styleName="button_volume" onClicked={unMute}/>
-        : <Button icon="volume" title="Mute" styleName="button_volume" onClicked={mute}/>
+        ? <Button icon="volumeOff" title="Unmute" styleName="button_volume" onClick={unMute}/>
+        : <Button icon="volume" title="Mute" styleName="button_volume" onClick={mute}/>
     }
     <ProgressBar progress={isMuted ? 0 : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" style={{
         width: '106px',

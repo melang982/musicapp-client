@@ -45,7 +45,7 @@ function Playlist() {
 
 
 
-  function onClicked(track) {
+  function onClick(track) {
     console.log('clicked!');
     currentTrackVar(track);
     tracklistVar(tracks);
@@ -76,7 +76,7 @@ function Playlist() {
         </tr>
         {tracks && tracks.map((track, index) =>
         <tr key={track.id}>
-          <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + track.artist.name} onClicked={() => onClicked(track)}/></td>
+          <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + track.artist.name} onClick={() => onClick(track)}/></td>
           <td>
             <AlbumCover track={track}/>
             <div>
