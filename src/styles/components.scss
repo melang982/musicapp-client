@@ -160,6 +160,29 @@
       font-weight: 400;
     }
 
+    td:first-child {
+      width: 25px;
+
+      .button {
+        display: none;
+      }
+
+      &:hover {
+        .button {
+          display: block;
+          padding: 0;
+
+          path {
+            fill: #fff;
+          }
+        }
+
+        span {
+          display: none;
+        }
+      }
+    }
+
     td:nth-child(2) {
       display: flex;
     }

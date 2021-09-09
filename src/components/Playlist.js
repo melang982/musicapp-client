@@ -1,7 +1,9 @@
+import { currentTrackVar, tracklistVar } from '../cache';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import { secondsToTime } from './../utils.js';
 import AlbumCover from './AlbumCover';
+import Button from './Button';
 
 function Playlist({ playlist }) {
 
@@ -35,6 +37,11 @@ function Playlist({ playlist }) {
   const tracks = data && data.playlist.tracks;
   console.log(tracks);
 
+  function onClicked(track) {
+    console.log('clicked!');
+    currentTrackVar(track);
+    tracklistVar(tracks);
+  }
 
   return <div className="playlist">
 
@@ -50,7 +57,7 @@ function Playlist({ playlist }) {
       </tr>
       {tracks && tracks.map((track, index) =>
       <tr key={track.id}>
-        <td>{index+1}</td>
+        <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + track.artist.name} onClicked={() => onClicked(track)}/></td>
         <td><AlbumCover track={track}/>
           <div>
             <p className="playlist__track-title">{track.title}</p>
