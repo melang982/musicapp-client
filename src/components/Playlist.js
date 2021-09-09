@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { currentTrackVar, tracklistVar } from '../cache';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
@@ -51,6 +52,9 @@ function Playlist() {
   }
 
   return <div className="playlist">
+    <Helmet>
+       <title>{ data && data.playlist.title + ' – playlist' }</title>
+    </Helmet>
 
     { tracks && <AlbumCover track={tracks[0]}/>}
 

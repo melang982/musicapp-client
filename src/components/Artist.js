@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { useParams, NavLink } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 
@@ -44,6 +45,9 @@ function Artist() {
   console.log(tracks);
 
   return <div className="artist">
+    <Helmet>
+       <title>{ data && data.artist.name + ' – listen online' }</title>
+    </Helmet>
 
     <img className="bg" src={backgroundUrl} alt="background"/>
     <div className="bg bg-gradient"/>
