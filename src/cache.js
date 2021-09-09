@@ -9,7 +9,7 @@ import { setContext } from '@apollo/client/link/context';
 import { AUTH_TOKEN } from './constants';
 
 const currentTrackVar = makeVar();
-//const trackListVar = makeVar();
+const tracklistVar = makeVar();
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -18,6 +18,11 @@ const cache = new InMemoryCache({
         currentTrack: {
           read() {
             return currentTrackVar();
+          }
+        },
+        tracklist: {
+          read() {
+            return tracklistVar();
           }
         }
       }
@@ -47,5 +52,5 @@ const client = new ApolloClient({
 export {
   client,
   currentTrackVar,
-  //  trackListVar
+  tracklistVar
 }

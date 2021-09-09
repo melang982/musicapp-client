@@ -6,11 +6,11 @@ import Sidebar from './components/Sidebar';
 import Artist from './components/Artist';
 import Playlist from './components/Playlist';
 import AlbumPage from './components/AlbumPage';
+import Player from './components/Player';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
 import { AUTH_TOKEN } from './constants';
-
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const authToken = localStorage.getItem(AUTH_TOKEN);
@@ -43,6 +43,8 @@ function App() {
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={Signup}/>
       </Switch>
+
+      <Player />
 
     </div>
 

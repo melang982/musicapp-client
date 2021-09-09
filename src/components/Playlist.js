@@ -38,7 +38,6 @@ function Playlist({ playlist }) {
 
     {tracks && tracks.map((track) => <div key={track.id}>{track.title}</div>)}
 
-    <Player trackList={tracks}/>
   </div>;
 }
 export default Playlist;

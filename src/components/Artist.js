@@ -1,18 +1,16 @@
-import {useParams} from 'react-router-dom';
-import {useQuery, gql} from '@apollo/client';
+import { useParams, NavLink } from 'react-router-dom';
+import { useQuery, gql } from '@apollo/client';
 
 import Search from './Search';
 import SaveButton from './SaveButton';
 import Album from './Album';
 import Track from './Track';
-import Player from './Player';
 
-import {NavLink} from 'react-router-dom';
 import '../styles/artist.scss';
 
 function Artist() {
 
-  let {id} = useParams();
+  let { id } = useParams();
   let backgroundUrl = '/images/artist/' + id + '.png';
   //console.log('requested artist id: ' + id);
 
@@ -39,7 +37,7 @@ function Artist() {
     }
   `;
 
-  const {data} = useQuery(ARTIST_QUERY);
+  const { data } = useQuery(ARTIST_QUERY);
   console.log(data);
 
   const tracks = data && data.artist.tracks;
@@ -73,7 +71,6 @@ function Artist() {
       {tracks && tracks.map((track) => <Track key={track.id} track={track}/>)}
     </div>
 
-    <Player trackList={tracks}/>
   </div>
 }
 export default Artist;

@@ -1,15 +1,16 @@
-import {useState, useEffect} from 'react';
-import {useReactiveVar} from '@apollo/client';
-import {currentTrackVar} from '../cache';
+import { useState, useEffect } from 'react';
+import { useReactiveVar } from '@apollo/client';
+import { currentTrackVar, tracklistVar } from '../cache';
 import Button from './Button';
 import ProgressBar from './ProgressBar';
-import {loadFile} from './../audio.js';
-import {secondsToTime, shuffle} from './../utils.js';
+import { loadFile } from './../audio.js';
+import { secondsToTime, shuffle } from './../utils.js';
 import '../styles/player.scss';
 
-function Player({trackList}) {
+function Player() {
 
   const currentTrack = useReactiveVar(currentTrackVar);
+  const tracklist = useReactiveVar(tracklistVar);
 
   const [player, setPlayer] = useState(null);
   const [startedAt, setStartedAt] = useState(null);
@@ -21,7 +22,7 @@ function Player({trackList}) {
   const [isMuted, setIsMuted] = useState(false);
   const [shouldRepeat, setShouldRepeat] = useState(false);
   const [shouldShuffle, setShouldShuffle] = useState(false);
-  const [shuffledTrackList, setShuffledTrackList] = useState(null);
+  const [shuffledTracklist, setShuffledTracklist] = useState(null);
 
   const [playButtonState, setPlayButtonState] = useState(true);
 
@@ -36,18 +37,18 @@ function Player({trackList}) {
         if (playbackTime >= duration) {
           playbackTime = duration;
 
-          if (shouldRepeat) 
+          if (shouldRepeat)
             jumpTo(0);
-          else 
+          else
             playNext();
-          }
-        
+        }
+
         setProgress(Math.min(playbackTime / duration, 1));
         setPlaybackTime(playbackTime);
       }
     }, 50);
 
-    return() => {
+    return () => {
       clearInterval(interval);
     }
   });
@@ -64,9 +65,9 @@ function Player({trackList}) {
 
   function createPlayer() {
 
-    if (player) 
+    if (player)
       player.shutdown();
-    
+
     let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration, setIsPlaying);
     newPlayer.setVolume(volume);
     console.log(newPlayer);
@@ -75,9 +76,8 @@ function Player({trackList}) {
   }
 
   function onPlayButtonClick() {
-    if (!currentTrack) 
-      return;
-    
+    if (!currentTrack) return;
+
     console.log('onPlayButtonClick');
     if (!player) {
       createPlayer();
@@ -104,29 +104,24 @@ function Player({trackList}) {
   }
 
   function playPrevious() {
-    if (!currentTrack) 
-      return;
-    
-    let index = trackList.findIndex(x => x.id === currentTrack.id) - 1;
+    if (!currentTrack) return;
 
-    if (index < 0) 
-      index = trackList.length + index;
-    
+    let index = tracklist.findIndex(x => x.id === currentTrack.id) - 1;
+
+    if (index < 0) index = tracklist.length + index;
+
     //console.log(index);
-    currentTrackVar(trackList[index]);
+    currentTrackVar(tracklist[index]);
   }
 
   function playNext() {
-    if (!currentTrack) 
-      return;
-    
-    const trackListToUse = shouldShuffle
-      ? shuffledTrackList
-      : trackList;
+    if (!currentTrack) return;
 
-    const index = (trackListToUse.findIndex(x => x.id === currentTrack.id) + 1) % trackList.length;
+    const tracklistToUse = shouldShuffle ? shuffledTracklist : tracklist;
 
-    currentTrackVar(trackListToUse[index]);
+    const index = (tracklistToUse.findIndex(x => x.id === currentTrack.id) + 1) % tracklist.length;
+
+    currentTrackVar(tracklistToUse[index]);
   }
 
   function changeVolume(value) {
@@ -148,9 +143,9 @@ function Player({trackList}) {
   function shuffleTracks(value) {
     setShouldShuffle(value);
     if (value) {
-      const sList = trackList.slice();
+      const sList = tracklist.slice();
       shuffle(sList);
-      setShuffledTrackList(sList);
+      setShuffledTracklist(sList);
     }
   }
 
@@ -167,27 +162,22 @@ function Player({trackList}) {
         {currentTrack && currentTrack.artist}
       </p>
     </div>
-    <Button icon="shuffle" title={shouldShuffle
-      ? 'Disable shufle'
-      : 'Enable shuffle'} activated={shouldShuffle} onClicked={() => shuffleTracks(!shouldShuffle)}/>
-    <Button icon="previous" title="Previous" onClicked={playPrevious}/> {
+
+    <Button icon="shuffle" title={shouldShuffle ? 'Disable shufle' : 'Enable shuffle'} activated={shouldShuffle} onClicked={() => shuffleTracks(!shouldShuffle)}/>
+    <Button icon="previous" title="Previous" onClicked={playPrevious}/>
+    {
       playButtonState
         ? <Button icon="play" title="Play" styleName="button_play" onClicked={onPlayButtonClick}/>
         : <Button icon="pause" title="Pause" styleName="button_play" onClicked={onStopButtonClick}/>
     }
     <Button icon="next" title="Next" onClicked={playNext}/>
-
-    <Button icon="repeat" title={shouldRepeat
-      ? 'Disable repeat'
-      : 'Enable repeat'} activated={shouldRepeat} onClicked={() => setShouldRepeat(!shouldRepeat)}/> {
-        isMuted
-          ? <Button icon="volumeOff" title="Unmute" styleName="button_volume" onClicked={unMute}/>
-          : <Button icon="volume" title="Mute" styleName="button_volume" onClicked={mute}/>
-      }
-
-    <ProgressBar progress={isMuted
-        ? 0
-        : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" style={{
+    <Button icon="repeat" title={shouldRepeat ? 'Disable repeat' : 'Enable repeat'} activated={shouldRepeat} onClicked={() => setShouldRepeat(!shouldRepeat)}/>
+    {
+      isMuted
+        ? <Button icon="volumeOff" title="Unmute" styleName="button_volume" onClicked={unMute}/>
+        : <Button icon="volume" title="Mute" styleName="button_volume" onClicked={mute}/>
+    }
+    <ProgressBar progress={isMuted ? 0 : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" style={{
         width: '106px',
         marginRight: '23.3px'
       }}/>
