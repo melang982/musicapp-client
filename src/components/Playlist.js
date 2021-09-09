@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
-
-import Player from './Player';
+import { secondsToTime } from './../utils.js';
+import AlbumCover from './AlbumCover';
 
 function Playlist({ playlist }) {
 
@@ -15,7 +15,10 @@ function Playlist({ playlist }) {
       tracks {
         id
         title
-        artist
+        artist {
+          id
+          name
+        }
         album {
           id
           title
@@ -34,9 +37,32 @@ function Playlist({ playlist }) {
 
 
   return <div className="playlist">
-    <h1>My playlist</h1>
 
-    {tracks && tracks.map((track) => <div key={track.id}>{track.title}</div>)}
+    <h1>{data && data.playlist.title}</h1>
+
+    <table>
+      <tr>
+        <td>#</td>
+        <td>Title</td>
+        <td>Album</td>
+        <td>Date added</td>
+        <td>Duration</td>
+      </tr>
+      {tracks && tracks.map((track, index) =>
+      <tr key={track.id}>
+        <td>{index+1}</td>
+        <td><AlbumCover track={track}/>
+          <div>
+            <p className="playlist__track-title">{track.title}</p>
+            <p><Link to={'/artist/' + track.artist.id}>{track.artist.name}</Link></p>
+          </div>
+        </td>
+        <td>{track.album.title}</td>
+        <td>2 days ago</td>
+        <td>{secondsToTime(track.duration)}</td>
+      </tr>)
+      }
+    </table>
 
   </div>;
 }

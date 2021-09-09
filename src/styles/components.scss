@@ -147,6 +147,41 @@
 }
 
 .playlist {
-  background: #333;
+  background: linear-gradient(180deg , #8da7ba, #25242c);
+  padding-left: 30px;
   flex-grow: 1;
+
+  table {
+    width: 100%;
+    font-weight: 500;
+
+    tr:first-child {
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    td:nth-child(2) {
+      display: flex;
+    }
+
+    div {
+      display: flex;
+      margin-left: 15px;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .album-cover {
+    width: 55px;
+    height: 55px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.playlist__track-title {
+  font-size: 15px;
 }

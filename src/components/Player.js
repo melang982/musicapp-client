@@ -4,6 +4,7 @@ import { useReactiveVar } from '@apollo/client';
 import { currentTrackVar, tracklistVar } from '../cache';
 import Button from './Button';
 import ProgressBar from './ProgressBar';
+import AlbumCover from './AlbumCover';
 import { loadFile } from './../audio.js';
 import { secondsToTime, shuffle } from './../utils.js';
 import '../styles/player.scss';
@@ -26,8 +27,6 @@ function Player() {
   const [shuffledTracklist, setShuffledTracklist] = useState(null);
 
   const [playButtonState, setPlayButtonState] = useState(true);
-
-  let albumCoverUrl = currentTrack && '/images/album/' + currentTrack.album.id + '.jpg';
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -153,13 +152,13 @@ function Player() {
   return <div className="player">
     <div className="player__shadow"></div>
 
-    {currentTrack && <img className="player__album-cover" src={albumCoverUrl} alt="Album cover"/>}
+    {currentTrack && <AlbumCover track={currentTrack}/>}
 
     <div className="player__track-info">
       <p className="player__track">
         {currentTrack && currentTrack.title}
       </p>
-      {currentTrack && <Link to={'/artist/' + currentTrack.artist.id} className="player__artist">{currentTrack.artist.name}</Link>} 
+      {currentTrack && <Link to={'/artist/' + currentTrack.artist.id} className="player__artist">{currentTrack.artist.name}</Link>}
     </div>
 
     <Button icon="shuffle" title={shouldShuffle ? 'Disable shufle' : 'Enable shuffle'} activated={shouldShuffle} onClicked={() => shuffleTracks(!shouldShuffle)}/>
