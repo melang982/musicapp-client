@@ -15,10 +15,8 @@
   z-index: 3;
 
   .album-cover {
-    position: absolute;
     max-width: 40px;
     max-height: 40px;
-    margin: 0 16px 0 0;
   }
 
   .button {
@@ -39,6 +37,11 @@
     content: "";
     z-index: -1;
   }
+}
+
+.player__album {
+  position: absolute;
+  margin: 0 16px 0 0;
 }
 
 .player__shadow {
