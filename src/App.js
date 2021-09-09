@@ -5,7 +5,7 @@ import './styles/components.scss';
 import Sidebar from './components/Sidebar';
 import Artist from './components/Artist';
 import Playlist from './components/Playlist';
-import AlbumPage from './components/AlbumPage';
+import Album from './components/Album';
 import Player from './components/Player';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -31,15 +31,10 @@ function App() {
       }
 
       <Switch >
-        <Route path="/artist/:id">
-          <Artist/>
-        </Route>
-        <Route path="/playlists/:id">
-          <Playlist/>
-        </Route>
-        <Route path="/album">
-          <AlbumPage/>
-        </Route>
+        <Route path="/artist/:id" component={Artist}/>
+        <Route path="/playlists/:id" component={Playlist}/>
+        <Route path="/album/:id" component={Album}/>
+
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={Signup}/>
       </Switch>

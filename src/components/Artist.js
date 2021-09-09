@@ -3,7 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 
 import Search from './Search';
 import SaveButton from './SaveButton';
-import Album from './Album';
+import ArtistAlbum from './ArtistAlbum';
 import Track from './Track';
 
 import '../styles/artist.scss';
@@ -63,7 +63,7 @@ function Artist() {
     </div>
 
     <div className="artist__albums">
-      {data && data.artist.albums.map((album) => <Album key={album.id} album={album}/>)}
+      {data && data.artist.albums.map((album) => <ArtistAlbum key={album.id} album={album}/>)}
     </div>
 
     <div className="tracks">
