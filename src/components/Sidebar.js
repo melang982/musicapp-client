@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AUTH_TOKEN } from '../constants';
 
+
 import Button from './Button';
 import PlaylistLink from './PlaylistLink';
 import '../styles/sidebar.scss';
@@ -11,9 +12,8 @@ function Sidebar() {
   const authToken = localStorage.getItem(AUTH_TOKEN);
   const history = useHistory();
 
-
   const USER_PLAYLISTS_QUERY = gql `
-    {
+    query getUserPlaylists {
       user(name:"test"){
       playlists {
         id

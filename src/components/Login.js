@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { AUTH_TOKEN } from '../constants';
+import { client } from '../cache';
 
 function Login() {
   const history = useHistory();
@@ -18,6 +19,14 @@ function Login() {
     }
   `;
 
+  async function doRefetch() {
+    //console.log('doRefetch');
+
+    await client.refetchQueries({
+      include: ['getUserPlaylists']
+    });
+  }
+
   const [login] = useMutation(LOGIN_MUTATION, {
     variables: {
       email: formState.email,
@@ -25,7 +34,9 @@ function Login() {
     },
     onCompleted: ({ login }) => {
       localStorage.setItem(AUTH_TOKEN, login.token);
+      //console.log(login.token);
       history.push('/');
+      doRefetch();
     }
   });
 

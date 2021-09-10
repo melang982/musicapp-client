@@ -16,7 +16,7 @@ function Artist() {
   //console.log('requested artist id: ' + id);
 
   const ARTIST_QUERY = gql `
-    {
+    query getArtist {
       artist(id:${id}){
       name
       tracks {
