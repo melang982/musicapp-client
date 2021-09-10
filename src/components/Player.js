@@ -54,9 +54,8 @@ function Player() {
   });
 
   useEffect(() => {
-    console.log('CHANGED TRACK');
-
     if (currentTrack) {
+      console.log('CHANGED TRACK');
       createPlayer();
       setPlayButtonState(false);
     }

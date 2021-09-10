@@ -19,13 +19,13 @@ function Login() {
     }
   `;
 
-  async function doRefetch() {
+  /*async function doRefetch() {
     //console.log('doRefetch');
 
     await client.refetchQueries({
       include: ['getUserPlaylists']
     });
-  }
+  }*/
 
   const [login] = useMutation(LOGIN_MUTATION, {
     variables: {
@@ -36,7 +36,7 @@ function Login() {
       localStorage.setItem(AUTH_TOKEN, login.token);
       //console.log(login.token);
       history.push('/');
-      doRefetch();
+      //doRefetch();
     }
   });
 
