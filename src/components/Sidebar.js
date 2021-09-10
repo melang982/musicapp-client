@@ -36,7 +36,8 @@ function Sidebar() {
       console.log('completed');
       console.log(result);
       history.push('/playlists/' + result.createPlaylist.id);
-    }
+    },
+    refetchQueries: () => ['getUserPlaylists']
   });
 
 

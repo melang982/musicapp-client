@@ -14,7 +14,7 @@ function Playlist() {
   console.log(id);
 
   const PLAYLIST_QUERY = gql `
-    {
+    query getPlaylist {
       playlist(id:${id}){
       title
       tracks {
@@ -43,6 +43,7 @@ function Playlist() {
   console.log(data);
 
   const tracks = data && data.playlist.tracks;
+  const album = tracks && tracks[0] && tracks[0].album;
   console.log(tracks);
 
   const songsString = tracks && tracks.length + (tracks.length == 1 ? ' song,' : ' songs,');
@@ -66,7 +67,7 @@ function Playlist() {
        <title>{ data && data.playlist.title + ' – playlist' }</title>
     </Helmet>
 
-    { tracks && <AlbumCover id={tracks[0].album.id}/>}
+    { album && <AlbumCover id={album.id}/>}
 
     <div className="playlist__info">
       <span className="playlist__type">Playlist</span>
