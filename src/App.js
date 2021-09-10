@@ -23,7 +23,11 @@ function App() {
 
       <Sidebar/>
 
-      { authToken ? <div className="avatar"/> :
+      { authToken ?
+        <div className="user">
+          Andrew Z
+          <img className="avatar" src="/user.svg" alt="avatar"/>
+        </div> :
         <div className="links_login">
           <Link to="/login">Log in</Link>
           <Link to="/signup">Sign up</Link>

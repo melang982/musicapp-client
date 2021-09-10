@@ -46,3 +46,22 @@
     padding: 6px 10px;
   }
 }
+
+.user {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 5px;
+  right: 60px;
+  font-weight: 600;
+}
+
+.avatar {
+  box-sizing: border-box;
+  padding: 5px;
+  width: 34px;
+  height: 34px;
+  border-radius: 100%;
+  background: #6c6c6c;
+  margin-left: 9px;
+}

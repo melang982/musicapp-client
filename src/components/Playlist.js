@@ -27,6 +27,7 @@ function Playlist() {
         album {
           id
           title
+          color
         }
         duration
       }
@@ -52,7 +53,7 @@ function Playlist() {
   console.log(totalDuration);
 
   const timeString = parseInt(totalDuration / 60) + ' min ' + (totalDuration % 60) + ' sec';
-
+  const background = data && data.playlist.tracks[0] ? 'linear-gradient(180deg, #' + data.playlist.tracks[0].album.color + ', #25242c)' : 'linear-gradient(180deg , #8da7ba, #25242c)';
 
   function onClick(track) {
     console.log('clicked!');
@@ -60,7 +61,7 @@ function Playlist() {
     tracklistVar(tracks);
   }
 
-  return <div className="playlist">
+  return <div className="playlist" style={{background: background}}>
     <Helmet>
        <title>{ data && data.playlist.title + ' – playlist' }</title>
     </Helmet>
