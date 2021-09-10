@@ -154,7 +154,7 @@ function Player() {
   return <div className="player">
     <div className="player__shadow"></div>
 
-    {currentTrack && <Link to={'/album/' + currentTrack.album.id} className="player__album"><AlbumCover track={currentTrack}/></Link>}
+    {currentTrack && <Link to={'/album/' + currentTrack.album.id} className="player__album"><AlbumCover id={currentTrack.album.id}/></Link>}
 
     <div className="player__track-info">
       <p className="player__track">

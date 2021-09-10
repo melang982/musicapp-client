@@ -37,6 +37,8 @@ function Album() {
 
   const artist = data && data.album.artist;
 
+  const songsString = tracks && tracks.length + (tracks.length == 1 ? ' song' : ' songs');
+
   function onClick(track) {
     console.log('clicked!');
     currentTrackVar(track);
@@ -48,7 +50,7 @@ function Album() {
        <title>{ data && data.album.title + ' – ' + artist.name }</title>
     </Helmet>
 
-    { tracks && <AlbumCover track={tracks[0]}/>}
+    { tracks && <AlbumCover id={id}/>}
 
     <div className="playlist__info">
       <span className="playlist__type">Album</span>
@@ -56,7 +58,7 @@ function Album() {
       {data &&
       <>
         <Link to={'/artist/' + artist.id} className="playlist__author">{artist.name}</Link>
-        <span className="playlist__duration">{' · ' + data.album.year + ' · ' + tracks.length + ' songs'}</span>
+        <span className="playlist__duration">{' · ' + data.album.year + ' · ' + songsString}</span>
       </>
       }
     </div>

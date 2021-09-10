@@ -44,6 +44,15 @@ function Playlist() {
   const tracks = data && data.playlist.tracks;
   console.log(tracks);
 
+  const songsString = tracks && tracks.length + (tracks.length == 1 ? ' song,' : ' songs,');
+
+
+  const totalDuration = tracks && tracks.reduce((previousValue, currentValue) => { return previousValue + currentValue.duration }, 0);
+
+  console.log(totalDuration);
+
+  const timeString = parseInt(totalDuration / 60) + ' min ' + (totalDuration % 60) + ' sec';
+
 
   function onClick(track) {
     console.log('clicked!');
@@ -56,7 +65,7 @@ function Playlist() {
        <title>{ data && data.playlist.title + ' – playlist' }</title>
     </Helmet>
 
-    { tracks && <AlbumCover track={tracks[0]}/>}
+    { tracks && <AlbumCover id={tracks[0].album.id}/>}
 
     <div className="playlist__info">
       <span className="playlist__type">Playlist</span>
@@ -64,7 +73,7 @@ function Playlist() {
       {data && data.playlist.createdBy &&
       <>
         <span className="playlist__author">{data.playlist.createdBy.name}</span>
-        <span className="playlist__duration">{' · ' + data.playlist.tracks.length + ' songs'}</span>
+        <span className="playlist__duration">{' · ' + songsString + ' ' + timeString}</span>
       </>
       }
     </div>
@@ -82,7 +91,7 @@ function Playlist() {
         <tr key={track.id}>
           <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + track.artist.name} onClick={() => onClick(track)}/></td>
           <td>
-            <AlbumCover track={track}/>
+            <AlbumCover id={track.album.id}/>
             <div>
               <p className="playlist__track-title">{track.title}</p>
               <Link to={'/artist/' + track.artist.id}>{track.artist.name}</Link>
