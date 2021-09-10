@@ -16,6 +16,7 @@ function Album() {
       album(id:${id}){
       title
       year
+      color
       artist {
         id
         name
@@ -39,20 +40,22 @@ function Album() {
 
   const songsString = tracks && tracks.length + (tracks.length == 1 ? ' song' : ' songs');
 
+  const background = (data && data.album.color) ? 'linear-gradient(180deg, #' + data.album.color + ', #25242c)' : 'linear-gradient(180deg , #8da7ba, #25242c)';
+
   function onClick(track) {
     console.log('clicked!');
     currentTrackVar(track);
     tracklistVar(tracks);
   }
 
-  return <div className="playlist">
+  return <div className="playlist" style={{background: background}}>
     <Helmet>
        <title>{ data && data.album.title + ' – ' + artist.name }</title>
     </Helmet>
 
-    { tracks && <AlbumCover id={id}/>}
+  { tracks && <AlbumCover id={id}/> }
 
-    <div className="playlist__info">
+  <div className="playlist__info">
       <span className="playlist__type">Album</span>
       <h1>{data && data.album.title}</h1>
       {data &&
@@ -63,8 +66,8 @@ function Album() {
       }
     </div>
 
-    <table>
-      <tbody>
+  <table>
+    <tbody>
         <tr>
           <td>#</td>
           <td>Title</td>
@@ -84,7 +87,6 @@ function Album() {
         }
       </tbody>
     </table>
-
-  </div>;
+    </div>;
 }
 export default Album;
