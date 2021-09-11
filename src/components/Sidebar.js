@@ -1,7 +1,7 @@
-import { useQuery, useMutation, gql } from '@apollo/client';
+import { useQuery, useMutation, gql, useReactiveVar } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { AUTH_TOKEN } from '../constants';
+import { userVar } from '../cache';
 
 
 import Button from './Button';
@@ -9,12 +9,15 @@ import PlaylistLink from './PlaylistLink';
 import '../styles/sidebar.scss';
 
 function Sidebar() {
-  const authToken = localStorage.getItem(AUTH_TOKEN);
+  console.log('Sidebar');
+  const user = useReactiveVar(userVar);
+  console.log(user.name);
   const history = useHistory();
 
   const USER_PLAYLISTS_QUERY = gql `
     query getUserPlaylists {
       user(name:"test"){
+        id
       playlists {
         id
         title
@@ -40,13 +43,16 @@ function Sidebar() {
     refetchQueries: () => ['getUserPlaylists']
   });
 
-
-  const { data } = useQuery(USER_PLAYLISTS_QUERY, { skip: !authToken });
+  console.log('check if should do query:');
+  console.log(!(user.name == null));
+  const { data } = useQuery(USER_PLAYLISTS_QUERY, {
+    skip: !user.name
+  });
   const playlists = data && data.user && data.user.playlists;
   //const playlists = [{id: 0, title: 'UPlabs focus'}, {id: 1, title: 'Golden 80s'}]; TEMP
 
   return <div className='sidebar'>
-    <Link to={'/'}><img className="logo" src='/logo.png' srcSet='/logo2x.png 2x' alt="logo"/></Link> 
+    <Link to={'/'}><img className="logo" src='/logo.png' srcSet='/logo2x.png 2x' alt="logo"/></Link>
     <h2>Music</h2>
     <div className="sidebar__menu">
       <Link to={'/artist/2'}>Discover</Link>
@@ -63,7 +69,7 @@ function Sidebar() {
     </div>
 
     <h2>Playlists
-      { authToken && <Button title="Create playlist" icon="add" onClick={createPlaylist}/>}
+      { user.name && <Button title="Create playlist" icon="add" onClick={createPlaylist}/>}
     </h2>
 
     <div className="sidebar__menu">

@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import './styles/app.scss';
 import './styles/components.scss';
 
@@ -10,8 +12,6 @@ import Player from './components/Player';
 import Header from './components/Header';
 import Login from './components/Login';
 import Signup from './components/Signup';
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
 

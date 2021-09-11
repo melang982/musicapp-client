@@ -6,10 +6,10 @@ import {
 } from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
-import { AUTH_TOKEN } from './constants';
 
 const currentTrackVar = makeVar();
 const tracklistVar = makeVar();
+const userVar = makeVar({ name: null, isLoggedOut: false });
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -24,6 +24,11 @@ const cache = new InMemoryCache({
           read() {
             return tracklistVar();
           }
+        },
+        user: {
+          read() {
+            return userVar();
+          }
         }
       }
     }
@@ -31,16 +36,12 @@ const cache = new InMemoryCache({
 });
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000'
+  uri: 'http://localhost:4000/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem(AUTH_TOKEN);
   return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : ''
-    }
+    credentials: 'include'
   };
 });
 
@@ -52,5 +53,6 @@ const client = new ApolloClient({
 export {
   client,
   currentTrackVar,
-  tracklistVar
+  tracklistVar,
+  userVar
 }

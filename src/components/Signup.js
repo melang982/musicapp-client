@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
-import { AUTH_TOKEN } from '../constants';
+import { userVar } from '../cache';
 
 function Login() {
   const history = useHistory();
@@ -30,7 +30,7 @@ function Login() {
       password: formState.password
     },
     onCompleted: ({ signup }) => {
-      localStorage.setItem(AUTH_TOKEN, signup.token);
+      userVar({ name: signup.name, isLoggedOut: false });
       history.push('/');
     }
   });
