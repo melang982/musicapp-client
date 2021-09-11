@@ -46,7 +46,7 @@ function Sidebar() {
   //const playlists = [{id: 0, title: 'UPlabs focus'}, {id: 1, title: 'Golden 80s'}]; TEMP
 
   return <div className='sidebar'>
-    <img className="logo" src='/logo.png' srcSet='/logo2x.png 2x' alt="logo"/>
+    <Link to={'/'}><img className="logo" src='/logo.png' srcSet='/logo2x.png 2x' alt="logo"/></Link> 
     <h2>Music</h2>
     <div className="sidebar__menu">
       <Link to={'/artist/2'}>Discover</Link>

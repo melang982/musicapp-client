@@ -46,7 +46,7 @@ function Playlist() {
   const album = tracks && tracks[0] && tracks[0].album;
   console.log(tracks);
 
-  const songsString = tracks && tracks.length + (tracks.length == 1 ? ' song,' : ' songs,');
+  const songsString = tracks && tracks.length + (tracks.length === 1 ? ' song,' : ' songs,');
 
 
   const totalDuration = tracks && tracks.reduce((previousValue, currentValue) => { return previousValue + currentValue.duration }, 0);

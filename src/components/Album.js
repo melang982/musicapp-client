@@ -38,7 +38,7 @@ function Album() {
 
   const artist = data && data.album.artist;
 
-  const songsString = tracks && tracks.length + (tracks.length == 1 ? ' song' : ' songs');
+  const songsString = tracks && tracks.length + (tracks.length === 1 ? ' song' : ' songs');
 
   const background = (data && data.album.color) ? 'linear-gradient(180deg, #' + data.album.color + ', #25242c)' : 'linear-gradient(180deg , #8da7ba, #25242c)';
 
