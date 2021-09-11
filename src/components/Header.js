@@ -20,12 +20,13 @@ function Header() {
     }
   `;
 
-  console.log('Header mounted');
+  //console.log('Header mounted');
 
   const user = useReactiveVar(userVar);
-  console.log(user);
+  //console.log(user);
 
-  useQuery(CHECK_IF_LOGGED_IN, { skip: user.name || user.isLoggedOut }, {
+  useQuery(CHECK_IF_LOGGED_IN, {
+    skip: user.name || user.isLoggedOut,
     onCompleted: data => {
       if (data && data.user) {
         console.log('we are logged in');
