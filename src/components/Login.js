@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
-import { client, userVar } from '../cache';
+import { userVar } from '../cache';
 
 function Login() {
   const history = useHistory();
@@ -18,14 +18,6 @@ function Login() {
       }
     }
   `;
-
-  async function doRefetch() {
-    console.log('doRefetch');
-
-    await client.refetchQueries({
-      include: ['getUserPlaylists']
-    });
-  }
 
   const [login] = useMutation(LOGIN_MUTATION, {
     variables: {

@@ -1,11 +1,10 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { userVar } from '../cache';
 import { useQuery, useMutation, gql, useReactiveVar } from '@apollo/client';
 
 function Header() {
 
-  //const authToken = localStorage.getItem(AUTH_TOKEN);
-  //console.log(authToken);
   const CHECK_IF_LOGGED_IN = gql `
     query checkLoggedIn {
       user(name:"test"){
@@ -21,16 +20,19 @@ function Header() {
     }
   `;
 
+  console.log('Header mounted');
+
   const user = useReactiveVar(userVar);
   console.log(user);
 
-  const { data } = useQuery(CHECK_IF_LOGGED_IN, { skip: user.name || user.isLoggedOut });
-  if (data && data.user) {
-    console.log('we are logged in');
-    userVar({ name: data.user.name, isLoggedOut: false });
-  }
-
-  //console.log(username);
+  useQuery(CHECK_IF_LOGGED_IN, { skip: user.name || user.isLoggedOut }, {
+    onCompleted: data => {
+      if (data && data.user) {
+        console.log('we are logged in');
+        userVar({ name: data.user.name, isLoggedOut: false });
+      }
+    }
+  });
 
   const [logout] = useMutation(LOGOUT_MUTATION, {
     onCompleted: ({ logout }) => {
@@ -46,7 +48,7 @@ function Header() {
       <div className="user">
         { user.name }
         <img className="avatar" src="/user.svg" alt="avatar"/>
-        <a onClick={logout}>Logout</a>
+        <button onClick={logout}>Logout</button>
       </div> :
       <div className="links_login">
         <Link to="/login">Log in</Link>
