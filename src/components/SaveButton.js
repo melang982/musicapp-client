@@ -12,8 +12,8 @@ function SaveButton() {
     setSaved(!saved);
   }
 
-  return <div className={className} onClick={onClick}>
+  return <button className={className} onClick={onClick}>
     <Icon icon='star'/> {label}
-  </div>
+  </button>
 }
 export default SaveButton;

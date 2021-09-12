@@ -52,8 +52,8 @@ function Header() {
         <button onClick={logout}>Logout</button>
       </div> :
       <div className="login-links">
-        <Link to="/login">Log in</Link>
-        <Link to="/signup">Sign up</Link>
+        <Link className="link_signup" to="/signup">Sign up</Link>
+        <Link className="link_login" to="/login">Log in</Link>
       </div>
     }
   </>;
