@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useLazyQuery, gql } from '@apollo/client';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Icon from './Icon';
 import SearchResultArtist from './SearchResultArtist';
 import SearchResultAlbum from './SearchResultAlbum';
@@ -8,9 +8,6 @@ import SearchResultTrack from './SearchResultTrack';
 import '../styles/search.scss';
 
 function Search({ location }) {
-
-  //const wrapperRef = useRef(null);
-  //useOutsideAlerter(wrapperRef);
 
   const SEARCH_QUERY = gql `
     query SearchQuery($filter: String!) {
@@ -32,8 +29,30 @@ function Search({ location }) {
     }
   `;
 
-  const [searchString, setSearchString] = useState(null);
+  const [searchString, setSearchString] = useState('');
   const [executeSearch, { data }] = useLazyQuery(SEARCH_QUERY);
+
+  const wrapperRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleClickOutside = event => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setSearchString('');
+      setIsVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, false);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, false);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('updated location');
+    setSearchString('');
+  }, [location]);
 
   function onSearch(str) {
     if (str) {
@@ -44,19 +63,15 @@ function Search({ location }) {
       })
     };
 
+    setIsVisible(true);
     setSearchString(str);
   };
 
-  useEffect(() => {
-    console.log('updated location');
-    setSearchString(null);
-  }, [location]);
-
-  return <div className="search">
+  return <div ref={wrapperRef} className="search">
     <Icon icon='search'/>
 
-    <input type="text" placeholder="Type here to search" onInput={(e) => onSearch(e.target.value)}/> {
-      searchString && data && <div className="search__results">
+    <input type="text" value={searchString} placeholder="Type here to search" onInput={(e) => onSearch(e.target.value)}/> {
+      isVisible && searchString && data && <div className="search__results">
           { data.artists.length > 0 && <h5>Artists</h5> }
           {
             data.artists.map((artist) => <SearchResultArtist key={artist.id} artist={artist}/>)
