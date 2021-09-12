@@ -14,23 +14,24 @@ function Artist({ location }) {
   const ARTIST_QUERY = gql `
     query getArtist {
       artist(id:${id}){
-      name
-      description
-      userStars
-      tracks {
         id
-        title
-        album {
+        name
+        description
+        userStars
+        tracks {
           id
           title
+          album {
+            id
+            title
+          }
+          duration
         }
-        duration
-      }
-      albums {
-        id
-        title
-        year
-      }
+        albums {
+          id
+          title
+          year
+        }
     }
     }
   `;
