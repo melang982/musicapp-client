@@ -58,7 +58,7 @@ function Sidebar() {
       <Link to={'/artist/2'}>Discover</Link>
       <Link to={'/artist/2'}>Rising</Link>
       <Link to={'/artist/2'}>Inspiration</Link>
-      <Link to={'/artist/2'}>My stars</Link>
+      <Link to={'/stars'}>My stars</Link>
     </div>
 
     <div className="sidebar__menu">

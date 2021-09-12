@@ -13,25 +13,18 @@
 }
 
 .artist__menu {
+  position: relative;
   margin-top: 1.65vw;
 
   a {
     display: inline-block;
-    width: 6.7vw;
+    margin-right: 40px;
     font-weight: 500;
     padding-bottom: 10px;
 
     &:hover {
       opacity: 1;
       //color: #3191FB;
-    }
-
-    &:nth-child(2).active ~ hr {
-      margin-left: 100px;
-    }
-
-    &:nth-child(3).active ~ hr {
-      margin-left: 200px;
     }
   }
 

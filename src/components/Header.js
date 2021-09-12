@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { userVar } from '../cache';
 import { useQuery, useMutation, gql, useReactiveVar } from '@apollo/client';

@@ -3,9 +3,43 @@
   display: flex;
 }
 
-.main {
+.main,
+.stars {
   flex-grow: 1;
   background: linear-gradient(180deg , #8da7ba, #25242c);
+}
+
+.stars {
+  padding: 0 20px;
+
+  h1 {
+    font-size: 36px;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-bottom: 16px;
+  }
+}
+
+.stars__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-row-gap: 5px;
+  grid-column-gap: 22px;
 }
 
 .bg {

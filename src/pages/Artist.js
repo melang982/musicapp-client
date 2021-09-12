@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
+import { useState, useRef } from 'react';
 import { useParams, NavLink, Switch, Route } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
-
 import Search from '../components/Search';
 import SaveButton from '../components/SaveButton';
 import ArtistAlbum from '../components/ArtistAlbum';
@@ -9,17 +9,14 @@ import Track from '../components/Track';
 
 import '../styles/artist.scss';
 
-function Artist() {
-
+function Artist({ location }) {
   const { id } = useParams();
-  const backgroundUrl = '/images/artist/' + id + '.png';
-  //console.log('requested artist id: ' + id);
-
   const ARTIST_QUERY = gql `
     query getArtist {
       artist(id:${id}){
       name
       description
+      userStars
       tracks {
         id
         title
@@ -37,13 +34,39 @@ function Artist() {
     }
     }
   `;
+  //console.log(location);
+
+  const menuRef = useRef(null);
+
+  let menuIndex = 0;
+  if (location.pathname.endsWith('about')) menuIndex = 1;
+  else if (location.pathname.endsWith('related')) menuIndex = 2;
+
+  const [activeIndex, setActiveIndex] = useState(menuIndex);
+
+  const backgroundUrl = '/images/artist/' + id + '.png';
+  //console.log('requested artist id: ' + id);
 
   const { data } = useQuery(ARTIST_QUERY);
-  console.log(data);
-
+  //console.log(data);
 
   const tracks = data && data.artist.tracks.map(x => ({ ...x, artist: { id: id, name: data.artist.name } }));
-  console.log(tracks);
+  //console.log(tracks);
+
+  function onNavClick(e) {
+    //console.log('click');
+    const index = Array.from(e.target.parentNode.children).indexOf(e.target);
+    setActiveIndex(index);
+  }
+
+  function getWidth() {
+    return menuRef.current && menuRef.current.children[activeIndex].offsetWidth;
+  }
+
+  function getLeft() {
+    console.log('getLeft');
+    return menuRef.current && menuRef.current.children[activeIndex].offsetLeft;
+  }
 
   return <div className="artist">
     <Helmet>
@@ -56,15 +79,15 @@ function Artist() {
 
     <Search/>
 
-    <SaveButton/>
+    {data && <SaveButton artist={ data.artist }/>}
 
     <h1>{data && data.artist.name}</h1>
 
-    <div className="artist__menu">
-      <NavLink to={'/artist/' + id + '/albums'}>Albums</NavLink>
-      <NavLink to={'/artist/' + id + '/about'}>About</NavLink>
-      <NavLink to={'/artist/' + id + '/related'}>Related artists</NavLink>
-      <hr/>
+    <div ref={ menuRef } className="artist__menu">
+      <NavLink to={'/artist/' + id + '/albums'} onClick={onNavClick}>Albums</NavLink>
+      <NavLink to={'/artist/' + id + '/about'} onClick={onNavClick}>About</NavLink>
+      <NavLink to={'/artist/' + id + '/related'} onClick={onNavClick}>Related artists</NavLink>
+      <hr style={{ width: getWidth(), marginLeft: getLeft() }}/>
     </div>
 
     <Switch>

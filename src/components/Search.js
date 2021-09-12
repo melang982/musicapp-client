@@ -50,7 +50,7 @@ function Search({ location }) {
   }, []);
 
   useEffect(() => {
-    console.log('updated location');
+    //console.log('updated location');
     setSearchString('');
   }, [location]);
 

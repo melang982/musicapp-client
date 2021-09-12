@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Main from './pages/Main';
 import Playlist from './pages/Playlist';
 import Signup from './pages/Signup';
+import Stars from './pages/Stars';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/artist/:id" component={Artist}/>
             <Route path="/playlists/:id" component={Playlist}/>
             <Route path="/album/:id" component={Album}/>
+            <Route path="/stars" component={Stars}/>
             <Route component={Main}/>
           </Switch>
         </Route>
