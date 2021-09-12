@@ -7,7 +7,7 @@ function Header() {
 
   const CHECK_IF_LOGGED_IN = gql `
     query checkLoggedIn {
-      user(name:"test"){
+      user {
         id
         name
     }

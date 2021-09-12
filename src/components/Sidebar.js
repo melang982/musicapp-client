@@ -16,7 +16,7 @@ function Sidebar() {
 
   const USER_PLAYLISTS_QUERY = gql `
     query getUserPlaylists {
-      user(name:"test"){
+      user {
         id
       playlists {
         id
@@ -28,7 +28,7 @@ function Sidebar() {
 
   const CREATE_PLAYLIST_MUTATION = gql `
     mutation {
-      createPlaylist(title: "80s") {
+      createPlaylist {
         id
       }
     }
