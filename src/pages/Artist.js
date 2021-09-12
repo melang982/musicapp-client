@@ -2,10 +2,10 @@ import { Helmet } from 'react-helmet';
 import { useParams, NavLink } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 
-import Search from './Search';
-import SaveButton from './SaveButton';
-import ArtistAlbum from './ArtistAlbum';
-import Track from './Track';
+import Search from '../components/Search';
+import SaveButton from '../components/SaveButton';
+import ArtistAlbum from '../components/ArtistAlbum';
+import Track from '../components/Track';
 
 import '../styles/artist.scss';
 

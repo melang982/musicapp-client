@@ -1,14 +1,14 @@
 import Icon from './Icon';
 
-function Button({ onClick, icon, title, styleName, activated }) {
+function Button({ onClick, icon, title, className, activated }) {
 
-  let className = 'button';
-  if (styleName)
-    className += ' ' + styleName;
+  let classString = 'button';
+  if (className)
+    classString += ' ' + className;
   if (activated)
-    className += ' button_activated';
+    classString += ' button_activated';
 
-  return <button className={className} title={title} onClick={onClick}>
+  return <button className={classString} title={title} onClick={onClick}>
     <Icon icon={icon}/>
   </button>;
 }

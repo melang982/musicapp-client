@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { clamp } from './../utils.js';
 
-function ProgressBar({ progress, style, updateValue, shouldUpdateOnDrag }) {
+function ProgressBar({ progress, className, updateValue, shouldUpdateOnDrag }) {
   const [mouseDown, setMouseDown] = useState(false);
   const [addedEvents, setAddedEvents] = useState(false);
   const [tempProgress, setTempProgress] = useState(0);
 
   const divRef = useRef(null);
+
+  const classString = 'progress__wrapper' + (className ? (' ' + className) : '');
 
   function onMouseDown() {
     setMouseDown(true);
@@ -57,9 +59,9 @@ function ProgressBar({ progress, style, updateValue, shouldUpdateOnDrag }) {
 
   const width = ((mouseDown && !shouldUpdateOnDrag) ? tempProgress : progress) * 100 + '%';
 
-  return <div ref={divRef} className="progressBar__wrapper" style={style} onMouseDown={onMouseDown}>
-    <div className="progressBar">
-      <div className="progressBar__inner" style={{ width: width }}></div>
+  return <div ref={divRef} className={classString} onMouseDown={onMouseDown}>
+    <div className="progress">
+      <div className="progress__inner" style={{ width: width }}></div>
     </div>
   </div>;
 }

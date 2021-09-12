@@ -44,18 +44,18 @@ function Header() {
     }
   });
 
-  return <div className='header'>
+  return <>
     { user.name ?
       <div className="user">
         { user.name }
         <img className="avatar" src="/user.svg" alt="avatar"/>
         <button onClick={logout}>Logout</button>
       </div> :
-      <div className="links_login">
+      <div className="login-links">
         <Link to="/login">Log in</Link>
         <Link to="/signup">Sign up</Link>
       </div>
     }
-  </div>;
+  </>;
 }
 export default Header;

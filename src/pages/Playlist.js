@@ -3,8 +3,8 @@ import { currentTrackVar, tracklistVar } from '../cache';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import { secondsToTime } from './../utils.js';
-import AlbumCover from './AlbumCover';
-import Button from './Button';
+import AlbumCover from '../components/AlbumCover';
+import Button from '../components/Button';
 
 import '../styles/playlist.scss';
 

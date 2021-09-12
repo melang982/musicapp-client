@@ -5,13 +5,15 @@ import './styles/app.scss';
 import './styles/components.scss';
 
 import Sidebar from './components/Sidebar';
-import Artist from './components/Artist';
-import Playlist from './components/Playlist';
-import Album from './components/Album';
 import Player from './components/Player';
 import Header from './components/Header';
-import Login from './components/Login';
-import Signup from './components/Signup';
+
+import Album from './pages/Album';
+import Artist from './pages/Artist';
+import Login from './pages/Login';
+import Main from './pages/Main';
+import Playlist from './pages/Playlist';
+import Signup from './pages/Signup';
 
 function App() {
 
@@ -33,6 +35,9 @@ function App() {
         <Route path="/artist/:id" component={Artist}/>
         <Route path="/playlists/:id" component={Playlist}/>
         <Route path="/album/:id" component={Album}/>
+        <Route>
+          <Main/>
+        </Route>
       </Switch>
     </div>
 

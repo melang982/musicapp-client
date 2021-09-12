@@ -166,27 +166,21 @@ function Player() {
     <Button icon="previous" title="Previous" onClick={playPrevious}/>
     {
       playButtonState
-        ? <Button icon="play" title="Play" styleName="button_play" onClick={onPlayButtonClick}/>
-        : <Button icon="pause" title="Pause" styleName="button_play" onClick={onStopButtonClick}/>
+        ? <Button icon="play" title="Play" className="button_play" onClick={onPlayButtonClick}/>
+        : <Button icon="pause" title="Pause" className="button_play" onClick={onStopButtonClick}/>
     }
     <Button icon="next" title="Next" onClick={playNext}/>
     <Button icon="repeat" title={shouldRepeat ? 'Disable repeat' : 'Enable repeat'} activated={shouldRepeat} onClick={() => setShouldRepeat(!shouldRepeat)}/>
     {
       isMuted
-        ? <Button icon="volumeOff" title="Unmute" styleName="button_volume" onClick={unMute}/>
-        : <Button icon="volume" title="Mute" styleName="button_volume" onClick={mute}/>
+        ? <Button icon="volumeOff" title="Unmute" className="button_volume" onClick={unMute}/>
+        : <Button icon="volume" title="Mute" className="button_volume" onClick={mute}/>
     }
-    <ProgressBar progress={isMuted ? 0 : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" style={{
-        width: '106px',
-        marginRight: '23.3px'
-      }}/>
+    <ProgressBar progress={isMuted ? 0 : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" className="progress_volume" />
 
     <span className="player_time">{secondsToTime(playbackTime)}</span>
 
-    <ProgressBar progress={progress} updateValue={jumpTo} style={{
-        width: '586px',
-        marginRight: '1px'
-      }}/>
+    <ProgressBar progress={progress} updateValue={jumpTo} className="progress_duration" />
     <span className="player_time">{secondsToTime(duration)}</span>
   </div>;
 }

@@ -1,17 +1,17 @@
 @import './variables.scss';
 
-.progressBar__wrapper {
+.progress__wrapper {
   cursor: pointer;
   padding: 5px 0;
 }
 
-.progressBar {
+.progress {
   height: 3px;
   background: rgba(161, 164, 178, 0.1708);
   border-radius: 3px;
 }
 
-.progressBar__inner {
+.progress__inner {
   width: 50px;
   height: 100%;
   background: $main-color;
