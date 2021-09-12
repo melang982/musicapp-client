@@ -20,23 +20,19 @@ function App() {
   return (<Router>
 
     <div className="app noselect">
-
-      <Switch >
+      <Switch>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={Signup}/>
         <Route>
-          <Header />
+          <Header/>
           <Sidebar/>
-          <Player />
-        </Route>
-      </Switch>
-
-      <Switch >
-        <Route path="/artist/:id" component={Artist}/>
-        <Route path="/playlists/:id" component={Playlist}/>
-        <Route path="/album/:id" component={Album}/>
-        <Route>
-          <Main/>
+          <Player/>
+          <Switch>
+            <Route path="/artist/:id" component={Artist}/>
+            <Route path="/playlists/:id" component={Playlist}/>
+            <Route path="/album/:id" component={Album}/>
+            <Route component={Main}/>
+          </Switch>
         </Route>
       </Switch>
     </div>

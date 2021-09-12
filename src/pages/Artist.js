@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { useParams, NavLink } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Search from '../components/Search';
 import SaveButton from '../components/SaveButton';
@@ -19,6 +20,7 @@ function Artist() {
     query getArtist {
       artist(id:${id}){
       name
+      description
       tracks {
         id
         title
@@ -66,9 +68,17 @@ function Artist() {
       <hr/>
     </div>
 
-    <div className="artist__albums">
-      {data && data.artist.albums.map((album) => <ArtistAlbum key={album.id} album={album}/>)}
-    </div>
+    <Switch>
+      <Route path="/artist/:id/about">
+      <p className="artist__about">{data && data.artist.description}</p>
+      </Route>
+      <Route path="/artist/:id/related"><p className="artist__about">Nothing here yet</p></Route>
+      <Route>
+        <div className="artist__albums">
+          {data && data.artist.albums.map((album) => <ArtistAlbum key={album.id} album={album}/>)}
+        </div>
+      </Route>
+    </Switch>
 
     <div className="tracks">
       <div className="tracks__title">Random selection</div>
