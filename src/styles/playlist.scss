@@ -24,7 +24,7 @@
     }
 
     tr {
-      height: 55px;
+      height: 60px;
 
       .button {
         display: none;
@@ -50,15 +50,10 @@
       text-transform: uppercase;
       font-weight: 400;
       font-size: 13px;
-      height: 30px;
     }
 
     td:first-child {
       width: 25px;
-    }
-
-    td:nth-child(2) {
-      display: flex;
     }
 
     div {
@@ -76,7 +71,7 @@
 
 .playlist__info {
   display: inline-block;
-  margin: 0 0 70px 15px;
+  margin: 0 0 30px 15px;
 
   h1 {
     margin: 0 0 10px;
@@ -87,6 +82,10 @@
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.playlist__track-info {
+  display: flex;
 }
 
 .playlist__track-title {

@@ -91,7 +91,7 @@ function Playlist() {
         {tracks && tracks.map((track, index) =>
         <tr key={track.id}>
           <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + track.artist.name} onClick={() => onClick(track)}/></td>
-          <td>
+          <td className="playlist__track-info">
             <AlbumCover id={track.album.id}/>
             <div>
               <p className="playlist__track-title">{track.title}</p>

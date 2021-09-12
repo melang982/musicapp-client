@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, Switch, Route } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Search from '../components/Search';
 import SaveButton from '../components/SaveButton';

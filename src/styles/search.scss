@@ -1,0 +1,67 @@
+@import './variables.scss';
+
+.search {
+  position: absolute;
+  left: 2.25vw;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 13px;
+  }
+
+  input {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    color: #fff;
+    font-size: $size-regular;
+    font-weight: 500;
+
+    &::placeholder {
+      color: #fff;
+    }
+
+    &:focus::placeholder {
+      opacity: 0.5;
+    }
+  }
+}
+
+.search__results {
+  position: absolute;
+  top: 33px;
+  background: #252a34; //#42464e; //#7d7d7dcf;
+  min-width: 250px;
+  font-weight: 500;
+  //border-radius: 4px;
+  h5 {
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 10px 0 5px 15px;
+  }
+}
+
+.search__album,
+.search__artist,
+.search__track {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 10px 15px;
+
+  &:hover {
+    background: gray;
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+    margin-right: 14px;
+  }
+}
+
+.search__artist img {
+  border-radius: 100%;
+  object-fit: cover;
+}

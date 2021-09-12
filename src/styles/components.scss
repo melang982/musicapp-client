@@ -71,44 +71,6 @@
   border: none;
 }
 
-.search {
-  position: absolute;
-  left: 2.25vw;
-  display: flex;
-  align-items: center;
-
-  svg {
-    margin-right: 13px;
-  }
-
-  input {
-    background: none;
-    border: none;
-    outline: none;
-    padding: 0;
-    color: #fff;
-    font-size: $size-regular;
-    font-weight: 500;
-
-    &::placeholder {
-      color: #fff;
-    }
-
-    &:focus::placeholder {
-      opacity: 0.5;
-    }
-  }
-}
-
-.search__results {
-  position: absolute;
-  top: 33px;
-  background: #7d7d7dcf;
-  padding: 12px;
-  min-width: 200px;
-  border-radius: 4px;
-}
-
 .login,
 .signup {
   flex-grow: 1;
