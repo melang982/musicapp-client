@@ -7,27 +7,27 @@ import SearchResultAlbum from './SearchResultAlbum';
 import SearchResultTrack from './SearchResultTrack';
 import '../styles/search.scss';
 
-function Search({ location }) {
-
-  const SEARCH_QUERY = gql `
-    query SearchQuery($filter: String!) {
-      artists(filter: $filter) {
+const SEARCH_QUERY = gql `
+  query SearchQuery($filter: String!) {
+    artists(filter: $filter) {
+      id
+      name
+    }
+    albums(filter: $filter) {
+      id
+      title
+    }
+    tracks(filter: $filter) {
+      id
+      title
+      album {
         id
-        name
-      }
-      albums(filter: $filter) {
-        id
-        title
-      }
-      tracks(filter: $filter) {
-        id
-        title
-        album {
-          id
-        }
       }
     }
-  `;
+  }
+`;
+
+function Search({ location }) {
 
   const [searchString, setSearchString] = useState('');
   const [executeSearch, { data }] = useLazyQuery(SEARCH_QUERY);

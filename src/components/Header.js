@@ -2,24 +2,22 @@ import { Link } from 'react-router-dom';
 import { userVar } from '../cache';
 import { useQuery, useMutation, gql, useReactiveVar } from '@apollo/client';
 
+const CHECK_IF_LOGGED_IN = gql `
+  query checkLoggedIn {
+    user {
+      id
+      name
+    }
+  }
+`;
+
+const LOGOUT_MUTATION = gql`
+  mutation logout {
+    logout
+  }
+`;
+
 function Header() {
-
-  const CHECK_IF_LOGGED_IN = gql `
-    query checkLoggedIn {
-      user {
-        id
-        name
-    }
-    }
-  `;
-
-  const LOGOUT_MUTATION = gql`
-    mutation logout {
-      logout
-    }
-  `;
-
-  //console.log('Header mounted');
 
   const user = useReactiveVar(userVar);
   //console.log(user);

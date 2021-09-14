@@ -1,14 +1,17 @@
 import { Helmet } from 'react-helmet';
-import { currentTrackVar, tracklistVar } from '../cache';
+import { currentTrackVar, tracklistVar, userVar } from '../cache';
 import { useParams, Link } from 'react-router-dom';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, useMutation, gql, useReactiveVar } from '@apollo/client';
 import { secondsToTime } from './../utils.js';
+
 import AlbumCover from '../components/AlbumCover';
 import Button from '../components/Button';
+import PlaylistSearch from '../components/PlaylistSearch';
 
 import '../styles/playlist.scss';
 
 function Playlist() {
+  const user = useReactiveVar(userVar);
 
   const { id } = useParams();
   console.log(id);
@@ -55,8 +58,8 @@ function Playlist() {
   const timeString = parseInt(totalDuration / 60) + ' min ' + (totalDuration % 60) + ' sec';
   const background = data && data.playlist.tracks[0] ? 'linear-gradient(180deg, #' + data.playlist.tracks[0].album.color + ', #25242c)' : 'linear-gradient(180deg , #8da7ba, #25242c)';
 
-  function onClick(track) {
-    console.log('clicked!');
+  function onTrackClick(track) {
+    //console.log('clicked!');
     currentTrackVar(track);
     tracklistVar(tracks);
   }
@@ -74,12 +77,18 @@ function Playlist() {
       {data && data.playlist.createdBy &&
       <>
         <span className="playlist__author">{data.playlist.createdBy.name}</span>
-        <span className="playlist__duration">{' · ' + songsString + ' ' + timeString}</span>
+        <span className="playlist__duration">{tracks.length > 0 && ' · ' + songsString + ' ' + timeString}</span>
       </>
       }
     </div>
 
-    <table>
+    {user.name &&
+      <>
+        {tracks && !tracks.length && <h3>Let's find something for your playlist</h3>}
+        <PlaylistSearch playlistId={ parseInt(id) }/>
+      </>}
+
+    {tracks && tracks.length > 0 && <table>
       <tbody>
         <tr>
           <td>#</td>
@@ -88,9 +97,9 @@ function Playlist() {
           <td>Date added</td>
           <td>Duration</td>
         </tr>
-        {tracks && tracks.map((track, index) =>
+        {tracks.map((track, index) =>
         <tr key={track.id}>
-          <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + track.artist.name} onClick={() => onClick(track)}/></td>
+          <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + track.artist.name} onClick={() => onTrackClick(track)}/></td>
           <td className="playlist__track-info">
             <AlbumCover id={track.album.id}/>
             <div>
@@ -104,7 +113,7 @@ function Playlist() {
         </tr>)
         }
       </tbody>
-    </table>
+    </table>}
 
   </div>;
 }

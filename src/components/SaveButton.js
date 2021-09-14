@@ -1,8 +1,10 @@
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, useReactiveVar } from '@apollo/client';
+import { userVar } from '../cache';
 import Icon from './Icon';
 
 function SaveButton({ artist }) {
-  console.log(artist.id);
+  const user = useReactiveVar(userVar);
+  //console.log(artist.id);
 
   const ADD_STAR_MUTATION = gql `
     mutation AddStar {
@@ -54,11 +56,21 @@ function SaveButton({ artist }) {
     }
   });
 
-  const className = 'save' + (artist.userStars ? ' save_saved' : '');
+  const className = 'save' + (user.name && artist.userStars ? ' save_saved' : '');
 
-  const label = (artist.userStars ? 'Saved' : 'Save') + ' to My stars';
+  const label = (user.name && artist.userStars ? 'Saved' : 'Save') + ' to My stars';
 
-  return <button className={className} onClick={artist.userStars ? removeStar : addStar}>
+  function onClick() {
+    if (!user.name) {
+      alert('Sign in to save artists');
+      return;
+    }
+
+    if (artist.userStars) removeStar();
+    else addStar();
+  }
+
+  return <button className={className} onClick={onClick}>
     <Icon icon='star'/> {label}
   </button>
 }

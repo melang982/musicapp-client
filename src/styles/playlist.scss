@@ -67,6 +67,19 @@
     color: #fff;
     text-decoration: underline;
   }
+
+  .search {
+    position: relative;
+    left: 0;
+    background: #21212194;
+    border-radius: 16px;
+    padding: 10px;
+    width: 250px;
+  }
+
+  .search__results {
+    top: 46px;
+  }
 }
 
 .playlist__info {

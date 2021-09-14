@@ -10,7 +10,7 @@ import Button from '../components/Button';
 function Album() {
 
   const { id } = useParams();
-  console.log(id);
+  //console.log(id);
 
   const ALBUM_QUERY = gql `
     {
@@ -32,10 +32,10 @@ function Album() {
   `;
 
   const { data } = useQuery(ALBUM_QUERY);
-  console.log(data);
+  //console.log(data);
 
   const tracks = data && data.album.tracks.map(x => ({ ...x, album: { id: id, title: data.album.title }, artist: { id: id, name: data.album.artist.name } }));
-  console.log(tracks);
+  //console.log(tracks);
 
   const artist = data && data.album.artist;
 
@@ -44,7 +44,7 @@ function Album() {
   const background = (data && data.album.color) ? 'linear-gradient(180deg, #' + data.album.color + ', #25242c)' : 'linear-gradient(180deg , #8da7ba, #25242c)';
 
   function onClick(track) {
-    console.log('clicked!');
+    //console.log('clicked!');
     currentTrackVar(track);
     tracklistVar(tracks);
   }

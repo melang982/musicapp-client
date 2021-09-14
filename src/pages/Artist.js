@@ -65,7 +65,7 @@ function Artist({ location }) {
   }
 
   function getLeft() {
-    console.log('getLeft');
+    //console.log('getLeft');
     return menuRef.current && menuRef.current.children[activeIndex].offsetLeft;
   }
 

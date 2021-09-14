@@ -3,51 +3,47 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { userVar } from '../cache';
 
-
 import Button from './Button';
 import PlaylistLink from './PlaylistLink';
 import '../styles/sidebar.scss';
 
-function Sidebar() {
-  console.log('Sidebar');
-  const user = useReactiveVar(userVar);
-  console.log(user.name);
-  const history = useHistory();
-
-  const USER_PLAYLISTS_QUERY = gql `
-    query getUserPlaylists {
-      user {
-        id
+const USER_PLAYLISTS_QUERY = gql `
+  query getUserPlaylists {
+    user {
+      id
       playlists {
         id
         title
       }
     }
-    }
-  `;
+  }
+`;
 
-  const CREATE_PLAYLIST_MUTATION = gql `
-    mutation {
-      createPlaylist {
-        id
-      }
+const CREATE_PLAYLIST_MUTATION = gql `
+  mutation {
+    createPlaylist {
+      id
     }
-  `;
+  }
+`;
+
+function Sidebar() {
+  const user = useReactiveVar(userVar);
+  //console.log(user.name);
+  const history = useHistory();
 
   const [createPlaylist] = useMutation(CREATE_PLAYLIST_MUTATION, {
     onCompleted: (result) => {
-      console.log('completed');
+      //console.log('completed');
       console.log(result);
       history.push('/playlists/' + result.createPlaylist.id);
     },
     refetchQueries: () => ['getUserPlaylists']
   });
 
-  console.log('check if should do query:');
+  //console.log('check if should do query:');
   console.log(!(user.name == null));
-  const { data } = useQuery(USER_PLAYLISTS_QUERY, {
-    skip: !user.name
-  });
+  const { data } = useQuery(USER_PLAYLISTS_QUERY, { skip: !user.name });
   const playlists = data && data.user && data.user.playlists;
   //const playlists = [{id: 0, title: 'UPlabs focus'}, {id: 1, title: 'Golden 80s'}]; TEMP
 

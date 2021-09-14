@@ -3,25 +3,25 @@ import { useMutation, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { userVar } from '../cache';
 
+const SIGNUP_MUTATION = gql `
+  mutation SignupMutation(
+    $email: String!
+    $password: String!
+    $name: String!
+  ) {
+    signup(
+      email: $email
+      password: $password
+      name: $name
+    ) {
+      token
+    }
+  }
+`;
+
 function Login() {
   const history = useHistory();
   const [formState, setFormState] = useState({ email: '', password: '', name: '' });
-
-  const SIGNUP_MUTATION = gql `
-    mutation SignupMutation(
-      $email: String!
-      $password: String!
-      $name: String!
-    ) {
-      signup(
-        email: $email
-        password: $password
-        name: $name
-      ) {
-        token
-      }
-    }
-  `;
 
   const [signup] = useMutation(SIGNUP_MUTATION, {
     variables: {

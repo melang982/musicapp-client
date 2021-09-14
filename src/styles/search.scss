@@ -35,7 +35,8 @@
   background: #252a34; //#42464e; //#7d7d7dcf;
   min-width: 250px;
   font-weight: 500;
-  //border-radius: 4px;
+  z-index: 5;
+
   h5 {
     text-transform: uppercase;
     font-weight: 500;
@@ -53,10 +54,14 @@
   &:hover {
     background: gray;
   }
+}
 
+.search__album,
+.search__artist,
+.search__track {
   img {
-    width: 50px;
-    height: 50px;
+    width: 50px !important;
+    height: 50px !important;
     margin-right: 14px;
   }
 }

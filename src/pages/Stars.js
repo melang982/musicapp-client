@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 import { userVar } from '../cache';
 import ArtistImage from '../components/ArtistImage';
 
-function Stars() {
-  const user = useReactiveVar(userVar);
-
-  const USER_STARS_QUERY = gql `
-    query getUserPlaylists {
-      user {
+const USER_STARS_QUERY = gql `
+  query getUserStars {
+    user {
+      id
+      stars {
         id
-        stars {
-          id
-          name
-        }
+        name
       }
     }
-  `;
+  }
+`;
+
+function Stars() {
+  const user = useReactiveVar(userVar);
 
   const { data } = useQuery(USER_STARS_QUERY, { skip: !user.name });
   console.log(data);
@@ -24,12 +24,13 @@ function Stars() {
 
   return <div className="stars">
     <h1>My stars</h1>
-    <div className = "stars__grid">
-    { stars && stars.map((artist) => <Link to={'/artist/' + artist.id} key={artist.id}>
+    {!user.name && 'Sign in to see your artists'}
+    { stars && <div className = "stars__grid">
+    {stars.map((artist) => <Link to={'/artist/' + artist.id} key={artist.id}>
       <ArtistImage id={ artist.id } />
       { artist.name }
     </Link>)}
-      </div>
+      </div>}
   </div>;
 }
 export default Stars;
