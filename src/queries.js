@@ -6,18 +6,21 @@ export const PLAYLIST_QUERY = gql `
       id
       title
       tracks {
-        id
-        title
-        artist {
-          id
-          name
-        }
-        album {
+        assignedAt
+        track {
           id
           title
-          color
+          artist {
+            id
+            name
+          }
+          album {
+            id
+            title
+            color
+          }
+          duration
         }
-        duration
       }
       createdBy {
         id

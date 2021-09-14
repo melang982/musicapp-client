@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet';
 import { currentTrackVar, tracklistVar, userVar } from '../cache';
 import { useParams, Link } from 'react-router-dom';
-import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
-import { secondsToTime } from './../utils.js';
+import { useQuery, useReactiveVar } from '@apollo/client';
+import { secondsToTime, TimeAgo } from './../utils.js';
 import { PLAYLIST_QUERY } from './../queries.js';
 
 import AlbumCover from '../components/AlbumCover';
@@ -15,24 +15,22 @@ function Playlist() {
   const user = useReactiveVar(userVar);
 
   const { id } = useParams();
-  console.log(id);
+  //console.log(id);
 
   const { data } = useQuery(PLAYLIST_QUERY, { variables: { id: parseInt(id) } });
-  console.log('PLAYLIST QUERY');
-  console.log(data);
+  //console.log(data);
 
   const tracks = data && data.playlist.tracks;
-  const album = tracks && tracks[0] && tracks[0].album;
-  console.log(tracks);
+  const album = tracks && tracks[0] && tracks[0].track.album;
+  //console.log(tracks);
 
   const songsString = tracks && tracks.length + (tracks.length === 1 ? ' song,' : ' songs,');
 
-  const totalDuration = tracks && tracks.reduce((previousValue, currentValue) => { return previousValue + currentValue.duration }, 0);
-
-  console.log(totalDuration);
+  const totalDuration = tracks && tracks.reduce((previousValue, currentValue) => { return previousValue + currentValue.track.duration }, 0);
+  //console.log(totalDuration);
 
   const timeString = parseInt(totalDuration / 60) + ' min ' + (totalDuration % 60) + ' sec';
-  const background = data && data.playlist.tracks[0] ? 'linear-gradient(180deg, #' + data.playlist.tracks[0].album.color + ', #25242c)' : 'linear-gradient(180deg , #8da7ba, #25242c)';
+  const background = data && data.playlist.tracks[0] ? 'linear-gradient(180deg, #' + data.playlist.tracks[0].track.album.color + ', #25242c)' : 'linear-gradient(180deg , #8da7ba, #25242c)';
 
   function onTrackClick(track) {
     //console.log('clicked!');
@@ -73,19 +71,19 @@ function Playlist() {
           <td>Date added</td>
           <td>Duration</td>
         </tr>
-        {tracks.map((track, index) =>
-        <tr key={track.id}>
-          <td><span>{index+1}</span><Button icon="play" title={'Play ' + track.title + ' by ' + track.artist.name} onClick={() => onTrackClick(track)}/></td>
+        {tracks.map((t, index) =>
+        <tr key={t.track.id}>
+          <td><span>{index+1}</span><Button icon="play" title={'Play ' + t.track.title + ' by ' + t.track.artist.name} onClick={() => onTrackClick(t.track)}/></td>
           <td className="playlist__track-info">
-            <AlbumCover id={track.album.id}/>
+            <AlbumCover id={t.track.album.id}/>
             <div>
-              <p className="playlist__track-title">{track.title}</p>
-              <Link to={'/artist/' + track.artist.id}>{track.artist.name}</Link>
+              <p className="playlist__track-title">{t.track.title}</p>
+              <Link to={'/artist/' + t.track.artist.id}>{t.track.artist.name}</Link>
             </div>
           </td>
-          <td><Link to={'/album/' + track.album.id}>{track.album.title}</Link></td>
-          <td>2 days ago</td>
-          <td>{secondsToTime(track.duration)}</td>
+          <td><Link to={'/album/' + t.track.album.id}>{t.track.album.title}</Link></td>
+          <td>{TimeAgo.inWords(t.assignedAt)}</td>
+          <td>{secondsToTime(t.track.duration)}</td>
         </tr>)
         }
       </tbody>

@@ -87,7 +87,7 @@ function PlaylistSearch({ location, playlistId }) {
         });
 
         const updatedTracks = playlist.tracks.slice();
-        updatedTracks.push(track);
+        updatedTracks.push({ track: track, assignedAt: Date.now() });
 
         cache.writeQuery({
           query: gql`
