@@ -30,6 +30,8 @@ function SaveButton({ artist }) {
         variables: { id: artist.id },
         data: {
           artist: {
+            __typename: 'Artist',
+            id: artist.id,
             userStars: true
           }
         }
@@ -49,6 +51,8 @@ function SaveButton({ artist }) {
         variables: { id: artist.id },
         data: {
           artist: {
+            __typename: 'Artist',
+            id: artist.id,
             userStars: false
           }
         }

@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet';
 import { currentTrackVar, tracklistVar, userVar } from '../cache';
 import { useParams, Link } from 'react-router-dom';
-import { useQuery, useMutation, gql, useReactiveVar } from '@apollo/client';
+import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
 import { secondsToTime } from './../utils.js';
+import { PLAYLIST_QUERY } from './../queries.js';
 
 import AlbumCover from '../components/AlbumCover';
 import Button from '../components/Button';
@@ -16,33 +17,8 @@ function Playlist() {
   const { id } = useParams();
   console.log(id);
 
-  const PLAYLIST_QUERY = gql `
-    query getPlaylist {
-      playlist(id:${id}){
-      title
-      tracks {
-        id
-        title
-        artist {
-          id
-          name
-        }
-        album {
-          id
-          title
-          color
-        }
-        duration
-      }
-      createdBy {
-        id
-        name
-      }
-    }
-    }
-  `;
-
-  const { data } = useQuery(PLAYLIST_QUERY);
+  const { data } = useQuery(PLAYLIST_QUERY, { variables: { id: parseInt(id) } });
+  console.log('PLAYLIST QUERY');
   console.log(data);
 
   const tracks = data && data.playlist.tracks;

@@ -4,25 +4,23 @@ import { withRouter } from 'react-router-dom';
 import Icon from './Icon';
 import AlbumCover from './AlbumCover';
 import '../styles/search.scss';
-
-const PLAYLIST_QUERY = gql `
-  query GetPlaylist($id: Int!) {
-      playlist(id: $id) {
-      tracks {
-        id
-      }
-    }
-  }
-`;
+import { PLAYLIST_QUERY } from './../queries.js';
 
 const SEARCH_QUERY = gql `
   query SearchTracksQuery($filter: String!) {
     tracks(filter: $filter) {
       id
       title
+      artist {
+        id
+        name
+      }
       album {
         id
+        title
+        color
       }
+      duration
     }
   }
 `;
@@ -75,7 +73,12 @@ function PlaylistSearch({ location, playlistId }) {
   const [addToPlaylist] = useMutation(ADD_TO_PLAYLIST_MUTATION);
 
   function onClick(track) {
+    console.log(playlistId);
+    setSearchString('');
+    setIsVisible(false);
+
     addToPlaylist({
+
       variables: { playlistId: playlistId, trackId: parseInt(track.id) },
       update: (cache, mutationResult) => {
         const { playlist } = cache.readQuery({
@@ -83,15 +86,21 @@ function PlaylistSearch({ location, playlistId }) {
           variables: { id: playlistId }
         });
 
-        const updatedTracks = playlist.tracks.filter(function(obj) {
-          return obj.id !== track.id;
-        });
+        const updatedTracks = playlist.tracks.slice();
+        updatedTracks.push(track);
 
         cache.writeQuery({
-          query: PLAYLIST_QUERY,
+          query: gql`
+            query WritePlaylist($id: Int!) {
+              playlist(id: $id) {
+                tracks
+              }
+            }`,
           variables: { id: playlistId },
           data: {
             playlist: {
+              __typename: 'Playlist',
+              id: playlist.id,
               tracks: updatedTracks
             }
           }

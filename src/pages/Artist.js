@@ -6,35 +6,36 @@ import Search from '../components/Search';
 import SaveButton from '../components/SaveButton';
 import ArtistAlbum from '../components/ArtistAlbum';
 import Track from '../components/Track';
-
 import '../styles/artist.scss';
+
+const ARTIST_QUERY = gql `
+  query getArtist($id: Int!) {
+    artist(id: $id){
+      id
+      name
+      description
+      userStars
+      tracks {
+        id
+        title
+        album {
+          id
+          title
+        }
+        duration
+      }
+      albums {
+        id
+        title
+        year
+      }
+  }
+  }
+`;
 
 function Artist({ location }) {
   const { id } = useParams();
-  const ARTIST_QUERY = gql `
-    query getArtist {
-      artist(id:${id}){
-        id
-        name
-        description
-        userStars
-        tracks {
-          id
-          title
-          album {
-            id
-            title
-          }
-          duration
-        }
-        albums {
-          id
-          title
-          year
-        }
-    }
-    }
-  `;
+
   //console.log(location);
 
   const menuRef = useRef(null);
@@ -48,7 +49,7 @@ function Artist({ location }) {
   const backgroundUrl = '/images/artist/' + id + '.png';
   //console.log('requested artist id: ' + id);
 
-  const { data } = useQuery(ARTIST_QUERY);
+  const { data } = useQuery(ARTIST_QUERY, { variables: { id: parseInt(id) } });
   //console.log(data);
 
   const tracks = data && data.artist.tracks.map(x => ({ ...x, artist: { id: id, name: data.artist.name } }));
