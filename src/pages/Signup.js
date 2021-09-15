@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
@@ -14,7 +15,8 @@ const SIGNUP_MUTATION = gql `
       password: $password
       name: $name
     ) {
-      token
+        id
+        name
     }
   }
 `;
@@ -23,22 +25,29 @@ function Login() {
   const history = useHistory();
   const [formState, setFormState] = useState({ email: '', password: '', name: '' });
 
-  const [signup] = useMutation(SIGNUP_MUTATION, {
+  const [signup, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
     variables: {
       name: formState.name,
       email: formState.email,
       password: formState.password
     },
+    errorPolicy: 'all',
     onCompleted: ({ signup }) => {
-      userVar({ name: signup.name, isLoggedOut: false });
-      history.push('/');
+      if (signup) {
+        userVar({ name: signup.name, isLoggedOut: false });
+        history.push('/');
+      }
     }
   });
 
   return <div className="signup">
+    <Helmet>
+       <title>{ 'Sign up – Pandora' }</title>
+    </Helmet>
     <h1>Sign up to create playlists</h1>
+    { error && <p className="error">{error.message}</p> }
 
-    <input type="text" value={formState.email} onChange={(e) => setFormState({
+    <input type="text" value={formState.email} autoFocus onChange={(e) => setFormState({
         ...formState,
         email: e.target.value
       })

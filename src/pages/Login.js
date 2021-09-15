@@ -1,6 +1,7 @@
+import { Helmet } from 'react-helmet';
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { userVar } from '../cache';
 
 const LOGIN_MUTATION = gql`
@@ -19,22 +20,28 @@ function Login() {
   const history = useHistory();
   const [formState, setFormState] = useState({ email: '', password: '' });
 
-  const [login] = useMutation(LOGIN_MUTATION, {
+  const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION, {
     variables: {
       email: formState.email,
       password: formState.password
     },
+    errorPolicy: 'all',
     onCompleted: ({ login }) => {
-      //console.log(login.name);
-      userVar({ name: login.name, isLoggedOut: false });
-      history.push('/');
+      if (login) {
+        userVar({ name: login.name, isLoggedOut: false });
+        history.push('/');
+      }
     }
   });
 
   return <div className="login">
+    <Helmet>
+       <title>{ 'Login – Pandora' }</title>
+    </Helmet>
     <h1>Log in</h1>
+    { error && <p className="error">{error.message}</p> }
 
-    <input value={formState.email} onChange={(e) => setFormState({
+    <input value={formState.email} autoFocus onChange={(e) => setFormState({
         ...formState,
         email: e.target.value
       })} type="text" placeholder="Your email address"/>
@@ -45,7 +52,7 @@ function Login() {
       })} placeholder="Password"/>
 
     <button onClick={login}>Log in</button>
-    <button>Need to create an account?</button>
+    <Link to="/signup">Need to create an account?</Link>
   </div>;
 }
 export default Login;
