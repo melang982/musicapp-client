@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { isDesktop } from 'react-device-detect';
 
 import './styles/app.scss';
 import './styles/components.scss';
@@ -25,9 +26,13 @@ function App() {
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={Signup}/>
         <Route>
-          <Header/>
-          <Sidebar/>
-          <Player/>
+          { isDesktop &&
+            <>
+              <Header/>
+              <Sidebar/>
+              <Player/>
+            </>
+          }          
           <Switch>
             <Route path="/artist/:id" component={Artist}/>
             <Route path="/playlists/:id" component={Playlist}/>

@@ -25,7 +25,7 @@ function Login() {
   const history = useHistory();
   const [formState, setFormState] = useState({ email: '', password: '', name: '' });
 
-  const [signup, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
+  const [signup, { error }] = useMutation(SIGNUP_MUTATION, {
     variables: {
       name: formState.name,
       email: formState.email,

@@ -1,7 +1,8 @@
 import { useReactiveVar } from '@apollo/client';
 import { currentTrackVar, tracklistVar } from '../cache';
-
+import { isMobile, isDesktop } from 'react-device-detect';
 import SoundBars from './SoundBars';
+import AlbumCover from './AlbumCover';
 import { secondsToTime } from './../utils.js';
 
 function Track({ track, tracks }) {
@@ -16,21 +17,20 @@ function Track({ track, tracks }) {
   }
 
   const isActiveTrack = currentTrack && currentTrack.id === track.id;
-  const className = 'track' + (isActiveTrack ? ' track_active' : '');
+  const className = isMobile ? 'track_mobile' : 'track' + (isActiveTrack ? ' track_active' : '');
 
   return <div className={className} onClick={onClick}>
+    {isMobile && <AlbumCover id={track.album.id} />}
     <div>
-      <p className="track__name">
+      <p className="track__title">
         {track.title}
       </p>
       <p className="track__album">
         {track.album.title}
       </p>
     </div>
-    {isActiveTrack && <SoundBars/>}
-    <p className="track__time">
-      {secondsToTime(track.duration)}
-    </p>
+    {isDesktop && isActiveTrack && <SoundBars/>}
+    {isDesktop && <p className="track__time">{ secondsToTime(track.duration) }</p>}
   </div>
 }
 

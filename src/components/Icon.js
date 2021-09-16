@@ -2,8 +2,8 @@ function Icon({ icon }) {
 
   switch (icon) {
     case 'play':
-      return <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path transform="translate(1,0)" d="M2.55273 0.264591C1.47086 -0.355984 0.59375 0.152398 0.59375 1.39919V10.5999C0.59375 11.848 1.47086 12.3557 2.55273 11.7357L10.5946 7.12372C11.6769 6.50293 11.6769 5.49715 10.5946 4.8765L2.55273 0.264591Z" fill="white"/>
+      return <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path transform="translate(2,0)" d="M2.55273 0.264591C1.47086 -0.355984 0.59375 0.152398 0.59375 1.39919V10.5999C0.59375 11.848 1.47086 12.3557 2.55273 11.7357L10.5946 7.12372C11.6769 6.50293 11.6769 5.49715 10.5946 4.8765L2.55273 0.264591Z" fill="white"/>
       </svg>;
 
     case 'pause':

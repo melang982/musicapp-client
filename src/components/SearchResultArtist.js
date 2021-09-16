@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
+import ArtistImage from './ArtistImage';
 
 function SearchResultArtist({ artist }) {
 
-  const backgroundUrl = '/images/artist/' + artist.id + '.png';
-
   return <Link to={'/artist/' + artist.id} className="search__artist">
-          <img  src={backgroundUrl} alt="artist"/>
-          {artist.name}
+          <ArtistImage id={ artist.id } />
+          { artist.name }
         </Link>;
 }
 export default SearchResultArtist;

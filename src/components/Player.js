@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useReactiveVar } from '@apollo/client';
+import { isDesktop, isMobile } from 'react-device-detect';
 import { currentTrackVar, tracklistVar } from '../cache';
 import Button from './Button';
 import ProgressBar from './ProgressBar';
@@ -75,7 +76,11 @@ function Player() {
   }
 
   function onPlayButtonClick() {
-    if (!currentTrack) return;
+    if (!currentTrack) {
+      console.log(tracklist);
+      if (tracklist && tracklist.length > 0) currentTrackVar(tracklist[0]);
+      return;
+    }
 
     console.log('onPlayButtonClick');
     if (!player) {
@@ -150,39 +155,49 @@ function Player() {
     }
   }
 
-  return <div className="player">
-    <div className="player__shadow"></div>
+  return <>{isDesktop &&
+    <div className="player">
+      <div className="player__shadow"></div>
 
-    {currentTrack && <Link to={'/album/' + currentTrack.album.id} className="player__album"><AlbumCover id={currentTrack.album.id}/></Link>}
+      {currentTrack && <Link to={'/album/' + currentTrack.album.id} className="player__album"><AlbumCover id={currentTrack.album.id}/></Link>}
 
-    <div className="player__track-info">
-      <p className="player__track">
-        {currentTrack && currentTrack.title}
-      </p>
-      {currentTrack && <Link to={'/artist/' + currentTrack.artist.id} className="player__artist">{currentTrack.artist.name}</Link>}
+      <div className="player__track-info">
+        <p className="player__track">
+          {currentTrack && currentTrack.title}
+        </p>
+        {currentTrack && <Link to={'/artist/' + currentTrack.artist.id} className="player__artist">{currentTrack.artist.name}</Link>}
+      </div>
+
+      <Button icon="shuffle" title={shouldShuffle ? 'Disable shufle' : 'Enable shuffle'} activated={shouldShuffle} onClick={() => shuffleTracks(!shouldShuffle)}/>
+      <Button icon="previous" title="Previous" onClick={playPrevious}/>
+      {
+        playButtonState
+          ? <Button icon="play" title="Play" className="button_play" onClick={onPlayButtonClick}/>
+          : <Button icon="pause" title="Pause" className="button_play" onClick={onStopButtonClick}/>
+      }
+      <Button icon="next" title="Next" onClick={playNext}/>
+      <Button icon="repeat" title={shouldRepeat ? 'Disable repeat' : 'Enable repeat'} activated={shouldRepeat} onClick={() => setShouldRepeat(!shouldRepeat)}/>
+      {
+        isMuted
+          ? <Button icon="volumeOff" title="Unmute" className="button_volume" onClick={unMute}/>
+          : <Button icon="volume" title="Mute" className="button_volume" onClick={mute}/>
+      }
+      <ProgressBar progress={isMuted ? 0 : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" className="progress_volume" />
+
+      <span className="player_time">{secondsToTime(playbackTime)}</span>
+
+      <ProgressBar progress={progress} updateValue={jumpTo} className="progress_duration" />
+      <span className="player_time">{secondsToTime(duration)}</span>
     </div>
-
-    <Button icon="shuffle" title={shouldShuffle ? 'Disable shufle' : 'Enable shuffle'} activated={shouldShuffle} onClick={() => shuffleTracks(!shouldShuffle)}/>
-    <Button icon="previous" title="Previous" onClick={playPrevious}/>
+  }
+  { isMobile && <>
     {
       playButtonState
-        ? <Button icon="play" title="Play" className="button_play" onClick={onPlayButtonClick}/>
-        : <Button icon="pause" title="Pause" className="button_play" onClick={onStopButtonClick}/>
+        ? <Button icon="play" title="Play" className="button_play_mobile" onClick={onPlayButtonClick}/>
+        : <Button icon="pause" title="Pause" className="button_play_mobile" onClick={onStopButtonClick}/>
     }
-    <Button icon="next" title="Next" onClick={playNext}/>
-    <Button icon="repeat" title={shouldRepeat ? 'Disable repeat' : 'Enable repeat'} activated={shouldRepeat} onClick={() => setShouldRepeat(!shouldRepeat)}/>
-    {
-      isMuted
-        ? <Button icon="volumeOff" title="Unmute" className="button_volume" onClick={unMute}/>
-        : <Button icon="volume" title="Mute" className="button_volume" onClick={mute}/>
-    }
-    <ProgressBar progress={isMuted ? 0 : volume} updateValue={changeVolume} shouldUpdateOnDrag="true" className="progress_volume" />
-
-    <span className="player_time">{secondsToTime(playbackTime)}</span>
-
-    <ProgressBar progress={progress} updateValue={jumpTo} className="progress_duration" />
-    <span className="player_time">{secondsToTime(duration)}</span>
-  </div>;
+  </> }
+</>;
 }
 
 export default Player;
