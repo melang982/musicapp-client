@@ -169,62 +169,6 @@
   }
 }
 
-.artist_mobile {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 6vw;
-  color: #000;
-
-  h1 {
-    font-size: 24px;
-  }
-
-  h2 {
-    margin-top: 40px;
-  }
-
-  h3 {
-    font-weight: 500;
-    color: #666;
-  }
-
-  .artist-image {
-    width: 64vw;
-    height: 64vw;
-    border-radius: 100%;
-    object-fit: cover;
-  }
-
-  .album-cover {
-    width: 52px;
-    height: 52px;
-    margin-right: 12px;
-  }
-}
-
-.button_play_mobile {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(225deg, #933AAF 0%, #E63C56 100%);
-  border-radius: 100%;
-
-  svg {
-    width: 28px;
-    height: 28px;
-    margin-top: 3px;
-  }
-
-  path {
-    fill: #fff;
-  }
-
-  &:hover path {
-    fill: #fff;
-  }
-}
-
 .track_mobile {
   display: flex;
   width: 100%;
@@ -240,4 +184,17 @@
     font-weight: 500;
     opacity: 0.4;
   }
+
+  img {
+    width: 52px;
+    height: 52px;
+    margin-right: 12px;
+  }
+}
+
+.artist__albums_mobile {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 12px;
 }

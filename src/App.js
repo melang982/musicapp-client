@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { isDesktop } from 'react-device-detect';
+import { isDesktop, isMobile } from 'react-device-detect';
 
 import './styles/app.scss';
 import './styles/components.scss';
@@ -21,27 +21,26 @@ function App() {
 
   return (<Router>
 
-    <div className="app noselect">
-      <Switch>
-        <Route exact path="/login" component={Login}/>
-        <Route exact path="/signup" component={Signup}/>
-        <Route>
+    <div className={isMobile ? "app_mobile" : "app noselect"}>
           { isDesktop &&
-            <>
-              <Header/>
-              <Sidebar/>
-              <Player/>
-            </>
-          }          
-          <Switch>
-            <Route path="/artist/:id" component={Artist}/>
-            <Route path="/playlists/:id" component={Playlist}/>
-            <Route path="/album/:id" component={Album}/>
-            <Route path="/stars" component={Stars}/>
-            <Route component={Main}/>
+            <Switch>
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/signup" component={Signup}/>
+              <Route>
+                <Header/>
+                <Sidebar/>
+                <Player/>
+                <Switch>
+                  <Route path="/artist/:id" component={Artist}/>
+                  <Route path="/playlists/:id" component={Playlist}/>
+                  <Route path="/album/:id" component={Album}/>
+                  <Route path="/stars" component={Stars}/>
+                  <Route component={Main}/>
+                </Switch>
+            </Route>
           </Switch>
-        </Route>
-      </Switch>
+          }
+          { isMobile && <Player/> }
     </div>
 
   </Router>);
