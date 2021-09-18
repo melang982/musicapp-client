@@ -54,8 +54,8 @@ function ProgressBar({ progress, className, updateValue, shouldUpdateOnDrag }) {
       setAddedEvents(true);
     }
 
-    return () => removeEvents, [mouseDown]
-  });
+    return () => removeEvents;
+  }, [mouseDown]); //eslint-disable-line react-hooks/exhaustive-deps
 
   const width = ((mouseDown && !shouldUpdateOnDrag) ? tempProgress : progress) * 100 + '%';
 

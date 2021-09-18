@@ -65,7 +65,7 @@ function Player({ children }) {
       setPlayButtonState(false);
     }
 
-  }, [currentTrack]);
+  }, [currentTrack]); //eslint-disable-line react-hooks/exhaustive-deps
 
   function createPlayer() {
 

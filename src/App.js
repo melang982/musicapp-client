@@ -40,7 +40,12 @@ function App() {
             </Route>
           </Switch>
           }
-          { isMobile && <Player/> }
+          { isMobile &&
+            <>
+              <h1>Pandora</h1>
+              <Player/>
+            </>
+             }
     </div>
 
   </Router>);
