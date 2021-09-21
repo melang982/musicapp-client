@@ -5,7 +5,7 @@
   flex-grow: 1;
   overflow: hidden;
   //overflow-y: scroll;
-  padding: 23px 0 0 6.16vw;
+  padding: 23px 0 0 78px; //6.16vw
 
   h1 {
     margin: -0.35vw 0 0 -0.38vw;
@@ -46,11 +46,11 @@
 
 .artist__albums {
   display: grid;
-  width: 51.75%; //50%;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  //width: 51.75%; //50%;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-row-gap: 5px;
   grid-column-gap: 22px;
-  margin: 30px 0 90px;
+  margin: 30px 505px 90px 0;
 }
 
 .artist__album {
@@ -86,7 +86,7 @@
 
 .tracks {
   position: absolute;
-  right: 2.8vw; //38px;
+  right: 38px; //2.8vw;
   top: 4.25vw;
 }
 
@@ -99,7 +99,7 @@
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  width: 32.34vw; //442px;
+  width: 442px; //32.34vw;
   padding: 0.71vw 44px 0.71vw 1.68vw; //10px 44px 10px 23px;
   margin: 0.2vw 0;
   cursor: pointer;

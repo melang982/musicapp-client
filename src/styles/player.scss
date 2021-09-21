@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 4.4vw; //4.53vw; //62px;
+  height: 62px; //4.4vw;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.582173) 0%, rgba(255, 255, 255, 0.554121) 100%); //figma
   display: flex;
   align-items: center;
@@ -30,7 +30,7 @@
     bottom: 0;
     padding-top: 5px;
     width: 100%;
-    height: 4.22vw; //100%;
+    height: 58px; //4.22vw; //100%;
     background: rgba(3, 7, 15, 0.92346);
     opacity: 0.93;
     backdrop-filter: blur(3px);
@@ -47,7 +47,7 @@
 .player__shadow {
   position: fixed;
   box-shadow: 0 -5px 43px rgba(0, 0, 0, 0.31383);
-  height: 4.6vw;
+  height: 62px; //4.6vw;
   bottom: 0;
   width: 100%;
   left: 0;
