@@ -1,12 +1,13 @@
 .sidebar {
-  width: 13.5%; //16.1%; //220px;
-  padding: 7.3vw 0 0 2.57vw;
+  width: 13.5%;
+  min-width: 124px;
+  padding: 94px 0 0 2.57vw; //7.3vw
   background: linear-gradient(180deg, #151B25 0%, #1C212B 100%);
   z-index: 1;
 
   a {
     color: #B4CFF2;
-    padding: 0.56vw 0;
+    padding: calc(max(6px, 0.56vw)) 0;
 
     &:hover {
       color: #fff;

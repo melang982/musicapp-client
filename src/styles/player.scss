@@ -4,12 +4,12 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   height: 62px; //4.4vw;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.582173) 0%, rgba(255, 255, 255, 0.554121) 100%); //figma
   display: flex;
   align-items: center;
-  padding: 0 13px 1px;
+  padding: 0 2px 1px 13px;
   font-weight: 450;
   font-size: $size-small;
   z-index: 3;
@@ -70,7 +70,7 @@
   align-items: center;
   justify-content: center;
   height: 29px;
-  width: 29px;
+  min-width: 29px;
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.3); //1px solid #A1A4B2;
   padding: 0 !important;
@@ -118,5 +118,31 @@
 
   .progressBar__inner {
     background: #fff;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .progress_duration {
+    width: auto;
+    flex-grow: 1;
+  }
+
+  .button_volume,
+  .player__time {
+    margin: 0 !important;
+  }
+
+  .player__track-info {
+    margin: 0;
+    width: 14vw;
+  }
+
+  .player__album,
+  .player__artist {
+    display: none;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .progress_volume {
+    display: none;
   }
 }

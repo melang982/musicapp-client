@@ -105,6 +105,7 @@ function Player({ children }) {
   }
 
   function jumpTo(value) {
+    if (!currentTrack) return;
     let timeSeconds = duration * value;
     //console.log(timeSeconds);
     player.play(timeSeconds);

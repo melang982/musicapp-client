@@ -84,7 +84,7 @@
   font-weight: 500;
 }
 
-.tracks {
+.artist__tracks {
   position: absolute;
   right: 38px; //2.8vw;
   top: 4.25vw;
@@ -197,4 +197,44 @@
   width: 100%;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 12px;
+}
+@media only screen and (max-width: 1280px) {
+  .artist h1 {
+    font-size: 7.2vw;
+  }
+
+  .artist__tracks {
+    right: 2vw;
+  }
+
+  .track {
+    padding-right: 2vw;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .artist {
+    padding-left: 4.6vw;
+
+    h1 {
+      margin: 10px;
+    }
+
+    .track {
+      width: auto;
+      max-width: 520px;
+    }
+  }
+
+  .artist__menu {
+    display: none;
+  }
+
+  .artist__tracks {
+    position: unset;
+    margin-right: 3vw;
+  }
+
+  .artist__albums {
+    margin: 30px 30px 0 0;
+  }
 }

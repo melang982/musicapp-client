@@ -105,6 +105,11 @@ function Artist({ children, location }) {
         <hr style={{ width: getWidth(), marginLeft: getLeft() }}/>
       </div>
 
+      <div className="artist__tracks">
+        <div className="tracks__title">Random selection</div>
+        {tracks && tracks.map((track) => <Track key={track.id} track={track} tracks={tracks}/>)}
+      </div>
+
       <Switch>
         <Route path="/artist/:id/about">
         <p className="artist__about">{data && artist.description}</p>
@@ -117,10 +122,6 @@ function Artist({ children, location }) {
         </Route>
       </Switch>
 
-      <div className="tracks">
-        <div className="tracks__title">Random selection</div>
-        {tracks && tracks.map((track) => <Track key={track.id} track={track} tracks={tracks}/>)}
-      </div>
     </div> }
 
   { isMobile &&

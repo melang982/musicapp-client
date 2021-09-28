@@ -85,7 +85,7 @@ const loadFile = (trackId, setStartedAt, setDuration, setIsPlaying) => {
       if (isPlaying) {
         const inSec = (Date.now() - startAt) / 1000;
 
-        console.log('playWhileLoadingDuration: ' + playWhileLoadingDuration + ' inSec: ' + inSec);
+        //console.log('playWhileLoadingDuration: ' + playWhileLoadingDuration + ' inSec: ' + inSec);
         if (playWhileLoadingDuration && inSec >= (playWhileLoadingDuration - intervalTime * 0.001)) {
           playWhileLoading(inSec);
           playWhileLoadingDuration = source.buffer.duration;
