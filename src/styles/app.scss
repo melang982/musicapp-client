@@ -90,7 +90,7 @@
 
 .main__grid {
   display: grid;
-  grid-template-columns: 190px 190px 190px 190px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   grid-column-gap: 12px;
   grid-row-gap: 12px;
 }
@@ -203,6 +203,14 @@
   color: #fff;
 }
 
+.link_login:hover {
+  color: #3191FB;
+}
+
+.link_signup:hover {
+  background: #3191FB;
+}
+
 .user {
   position: fixed;
   display: flex;
@@ -211,6 +219,14 @@
   right: 60px;
   font-weight: 600;
   z-index: 5;
+}
+
+.user button {
+  color: #ccc;
+}
+
+.user button:hover {
+  color: #fff;
 }
 
 .avatar {
