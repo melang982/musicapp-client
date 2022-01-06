@@ -26,6 +26,7 @@ function Album({ children }) {
         id
         title
         duration
+        number
       }
     }
     }

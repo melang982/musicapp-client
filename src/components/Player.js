@@ -72,7 +72,7 @@ function Player({ children }) {
     if (player)
       player.shutdown();
 
-    let newPlayer = loadFile(currentTrack.id, setStartedAt, setDuration, setIsPlaying);
+    let newPlayer = loadFile(currentTrack.album.id, currentTrack.number, setStartedAt, setDuration, setIsPlaying);
     newPlayer.setVolume(volume);
     console.log(newPlayer);
     setPlayer(newPlayer);

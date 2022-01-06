@@ -26,6 +26,7 @@ const ARTIST_QUERY = gql `
           title
         }
         duration
+        number
       }
       albums {
         id

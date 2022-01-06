@@ -20,6 +20,7 @@ export const PLAYLIST_QUERY = gql `
             color
           }
           duration
+          number
         }
       }
       createdBy {

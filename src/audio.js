@@ -13,7 +13,8 @@ function getAudioContext() {
   };
 };
 
-const loadFile = (trackId, setStartedAt, setDuration, setIsPlaying) => {
+const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying) => {
+  console.log(albumId);
 
   let source = null;
   let playWhileLoadingDuration = 0;
@@ -125,7 +126,7 @@ const loadFile = (trackId, setStartedAt, setDuration, setIsPlaying) => {
   let socket = io();
 
   console.log('test hello');
-  socket.emit('track', trackId, () => {});
+  socket.emit('track', albumId, trackNumber, () => {});
 
   ss(socket).on('track-stream', (stream, {
     stat
