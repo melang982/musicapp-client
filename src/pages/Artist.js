@@ -52,6 +52,7 @@ function Artist({ children, location }) {
   const [activeIndex, setActiveIndex] = useState(menuIndex);
 
   const backgroundUrl = '/images/artist/' + id + '.png';
+  const backgroundUrl2x = '/images/artist/' + id + '_2x.png';
   //console.log('requested artist id: ' + id);
 
   const { data } = useQuery(ARTIST_QUERY, {
@@ -89,7 +90,7 @@ function Artist({ children, location }) {
 
       { isDesktop && <div className="artist">
 
-      <img className="bg" src={backgroundUrl} alt="background"/>
+      <img className="bg" src={backgroundUrl} srcSet={backgroundUrl2x} alt="background"/>
       <div className="bg bg-gradient"/>
       <div className="shadow"></div>
 
