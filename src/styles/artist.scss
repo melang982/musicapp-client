@@ -1,16 +1,15 @@
 @import './variables.scss';
 
 .artist,
+.main,
 .playlist {
   overflow-y: scroll;
   margin-bottom: 62px;
 }
 
 .artist {
-  //position: relative;
   flex-grow: 1;
-  //overflow: hidden;
-  padding: 23px 0 0 78px;
+  padding: 24px 0 0 83px;
 
   h1 {
     margin: -0.35vw 0 0 -0.38vw;
@@ -39,11 +38,11 @@
 
 .artist__menu {
   position: relative;
-  margin-top: 1.65vw;
+  margin: 1.7vw 0 0 4px;
 
   a {
     display: inline-block;
-    margin-right: 40px;
+    margin-right: 40.5px;
     font-weight: 500;
     padding-bottom: 10px;
 
@@ -75,7 +74,7 @@
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-row-gap: 5px;
   grid-column-gap: 22px;
-  margin: 30px 505px 90px 0;
+  margin: 32px 496px 90px 1px;
 }
 
 .artist__album {
@@ -105,8 +104,12 @@
 }
 
 .album__title {
-  margin-top: 3px;
+  margin: 9px 0 1.5px;
   font-weight: 500;
+}
+
+.album__year {
+  opacity: 0.75;
 }
 
 .artist__tracks {
@@ -116,7 +119,8 @@
 }
 
 .tracks__title {
-  margin: 0 0 0.87vw 1.68vw;
+  font-weight: 600;
+  margin: 1px 0 0.87vw 1.68vw;
 }
 
 .track {

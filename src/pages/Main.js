@@ -8,7 +8,6 @@ const MAIN_QUERY = gql `
       id
       title
     }
-
   }
 `;
 
@@ -18,6 +17,7 @@ function Main() {
   console.log(data);
 
   return <div className="main">
+    <div className="playlists__bg" />
     <h1>Top playlists</h1>
     <div className="main__grid">
     { data && data.playlists.map((playlist) =>

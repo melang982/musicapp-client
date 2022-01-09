@@ -41,7 +41,7 @@
 
 .player__album {
   position: absolute;
-  margin: 0 16px 0 0;
+  margin: 3px 16px 0 0;
 }
 
 .player__shadow {
@@ -69,12 +69,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 29px;
-  min-width: 29px;
+  height: 30px;
+  min-width: 30px;
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.3); //1px solid #A1A4B2;
   padding: 0 !important;
-  margin: 0 14px 0 4px !important;
+  margin: 0 15px 0 4px !important;
   //transition: transform 0.05s ease-in;
   &:hover {
     border-color: #fff;

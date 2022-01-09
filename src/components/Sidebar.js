@@ -51,17 +51,14 @@ function Sidebar() {
     <Link to={'/'}><img className="logo" src='/logo.png' srcSet='/logo2x.png 2x' alt="logo"/></Link>
     <h2>Music</h2>
     <div className="sidebar__menu">
-      <Link to={'/artist/2'}>Discover</Link>
-      <Link to={'/artist/2'}>Rising</Link>
-      <Link to={'/artist/2'}>Inspiration</Link>
+      <Link to={'/'}>Playlists</Link>
       <Link to={'/stars'}>My stars</Link>
     </div>
 
     <div className="sidebar__menu">
-      <Link to={'/artist/2'}>Songs</Link>
-      <Link to={'/artist/2'}>Artists</Link>
-      <Link to={'/artist/2'}>Albums</Link>
-      <Link to={'/artist/2'}>Radio</Link>
+      <Link to={'/artist/3'}>Tycho</Link>
+      <Link to={'/artist/1'}>Katy Perry</Link>
+      <Link to={'/artist/2'}>Gorillaz</Link>
     </div>
 
     <h2>Playlists

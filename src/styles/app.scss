@@ -106,14 +106,23 @@
   }
 }
 
-.main,
-.stars {
-  flex-grow: 1;
+.playlists__bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
   background: linear-gradient(180deg , #0f171e, #25242c);
-  //background: linear-gradient(180deg , #8da7ba, #25242c);
+}
+
+.main {
+  flex-grow: 1;
 }
 
 .stars {
+  background: linear-gradient(180deg , #0f171e, #25242c);
+  flex-grow: 1;
   padding: 0 20px;
 
   h1 {
