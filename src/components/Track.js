@@ -10,7 +10,7 @@ function Track({ track, tracks }) {
   const currentTrack = useReactiveVar(currentTrackVar);
 
   function onClick() {
-    console.log('clicked!');
+    //console.log('clicked!');
     currentTrackVar(track);
     tracklistVar(tracks);
     //console.log(currentTrack);

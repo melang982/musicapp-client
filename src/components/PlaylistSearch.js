@@ -73,7 +73,7 @@ function PlaylistSearch({ location, playlistId }) {
   const [addToPlaylist] = useMutation(ADD_TO_PLAYLIST_MUTATION);
 
   function onClick(track) {
-    console.log(playlistId);
+    //console.log(playlistId);
     setSearchString('');
     setIsVisible(false);
 

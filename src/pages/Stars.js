@@ -19,7 +19,7 @@ function Stars() {
   const user = useReactiveVar(userVar);
 
   const { data } = useQuery(USER_STARS_QUERY, { skip: !user.name });
-  console.log(data);
+  //console.log(data);
   const stars = data && data.user.stars;
 
   return <div className="stars">

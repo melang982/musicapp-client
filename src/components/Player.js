@@ -60,7 +60,7 @@ function Player({ children }) {
 
   useEffect(() => {
     if (currentTrack) {
-      console.log('CHANGED TRACK');
+      //console.log('CHANGED TRACK');
       createPlayer();
       setPlayButtonState(false);
     }
@@ -74,19 +74,19 @@ function Player({ children }) {
 
     let newPlayer = loadFile(currentTrack.album.id, currentTrack.number, setStartedAt, setDuration, setIsPlaying);
     newPlayer.setVolume(volume);
-    console.log(newPlayer);
+    //console.log(newPlayer);
     setPlayer(newPlayer);
     document.title = currentTrack.title + ' · ' + currentTrack.artist;
   }
 
   function onPlayButtonClick() {
     if (!currentTrack) {
-      console.log(tracklist);
+      //console.log(tracklist);
       if (tracklist && tracklist.length > 0) currentTrackVar(tracklist[0]);
       return;
     }
 
-    console.log('onPlayButtonClick');
+    //console.log('onPlayButtonClick');
     if (!player) {
       createPlayer();
 
@@ -98,7 +98,7 @@ function Player({ children }) {
   }
 
   function onStopButtonClick() {
-    console.log(player);
+    //console.log(player);
     player && player.stop();
     setPlayButtonState(true);
     document.title = 'Pandora – Web Player';

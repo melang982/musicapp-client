@@ -14,7 +14,7 @@ function getAudioContext() {
 };
 
 const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying) => {
-  console.log(albumId);
+  //console.log(albumId);
 
   let source = null;
   let playWhileLoadingDuration = 0;
@@ -37,7 +37,7 @@ const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying)
     source.connect(gainNode);
     gainNode.connect(audioContext.destination);
 
-    console.log('calling start');
+    //console.log('calling start');
     source.start(0, offset);
     activeSource = source;
     isPlaying = true;
@@ -46,7 +46,7 @@ const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying)
 
   const resume = (resumeTime = 0) => {
 
-    console.log('resume ' + resumeTime)
+    //console.log('resume ' + resumeTime)
     activeSource && activeSource.stop();
     source = audioContext.createBufferSource();
     source.buffer = audioBuffer;
@@ -60,7 +60,7 @@ const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying)
   }
 
   const play = (timeSeconds) => {
-    console.log('play player, pausedAt: ' + pausedAt);
+    //console.log('play player, pausedAt: ' + pausedAt);
     isPlaying = true;
     setIsPlaying(true);
 
@@ -70,7 +70,7 @@ const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying)
 
     setStartedAt(startAt);
 
-    console.log('startAt: ' + time);
+    //console.log('startAt: ' + time);
 
     if (audioBuffer) resume(time);
     else playWhileLoading(time);
@@ -119,13 +119,13 @@ const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying)
 
   const setVolume = (level) => {
     level = level * 2 - 1;
-    console.log(level);
+    //console.log(level);
     gainNode.gain.setValueAtTime(level, audioContext.currentTime);
   };
 
   let socket = io();
 
-  console.log('test hello');
+  //console.log('test hello');
   socket.emit('track', albumId, trackNumber, () => {});
 
   ss(socket).on('track-stream', (stream, {
@@ -134,7 +134,7 @@ const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying)
     const size = stat.size;
     let total = 0;
 
-    console.log('audio file size: ' + size);
+    //console.log('audio file size: ' + size);
     stream.on('data', async (data) => { //chunk
 
       total = total + data.length;
@@ -142,7 +142,7 @@ const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying)
       //console.log(loadProgress);
 
       if (loadProgress >= 1) {
-        console.log('fully loaded');
+        //console.log('fully loaded');
         clearInterval(whileLoadingInterval);
         audioBuffer = source.buffer;
         if (isPlaying) {
@@ -158,7 +158,7 @@ const loadFile = (albumId, trackNumber, setStartedAt, setDuration, setIsPlaying)
 
         const loadRate = data.length / size;
         const duration = (1 / loadRate) * audioBufferChunk.duration;
-        console.log('CALCULATE DURATION: ' + duration);
+        //console.log('CALCULATE DURATION: ' + duration);
         setDuration(duration)
       }
 

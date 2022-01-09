@@ -26,7 +26,7 @@ function Header() {
     skip: user.name || user.isLoggedOut,
     onCompleted: data => {
       if (data && data.user) {
-        console.log('we are logged in');
+        //console.log('we are logged in');
         userVar({ name: data.user.name, isLoggedOut: false });
       }
     }
@@ -35,7 +35,7 @@ function Header() {
   const [logout] = useMutation(LOGOUT_MUTATION, {
     onCompleted: ({ logout }) => {
       if (logout === 'success') {
-        console.log('logout success');
+        //console.log('logout success');
         userVar({ name: null, isLoggedOut: true });
       }
     }

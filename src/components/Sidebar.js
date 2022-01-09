@@ -35,14 +35,14 @@ function Sidebar() {
   const [createPlaylist] = useMutation(CREATE_PLAYLIST_MUTATION, {
     onCompleted: (result) => {
       //console.log('completed');
-      console.log(result);
+      //console.log(result);
       history.push('/playlists/' + result.createPlaylist.id);
     },
     refetchQueries: () => ['getUserPlaylists']
   });
 
   //console.log('check if should do query:');
-  console.log(!(user.name == null));
+  //console.log(!(user.name == null));
   const { data } = useQuery(USER_PLAYLISTS_QUERY, { skip: !user.name });
   const playlists = data && data.user && data.user.playlists;
   //const playlists = [{id: 0, title: 'UPlabs focus'}, {id: 1, title: 'Golden 80s'}]; TEMP

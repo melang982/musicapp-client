@@ -14,7 +14,7 @@ const MAIN_QUERY = gql `
 function Main() {
 
   const { data } = useQuery(MAIN_QUERY);
-  console.log(data);
+  //console.log(data);
 
   return <div className="main">
     <div className="playlists__bg" />

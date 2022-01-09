@@ -34,7 +34,7 @@ function ProgressBar({ progress, className, updateValue, shouldUpdateOnDrag }) {
     };
 
     const onMouseUp = (e) => {
-      console.log('mouse up');
+      //console.log('mouse up');
       updateValue(calculateValue(e));
       removeEvents();
     };
@@ -42,7 +42,7 @@ function ProgressBar({ progress, className, updateValue, shouldUpdateOnDrag }) {
     const removeEvents = () => {
       window.removeEventListener('mousemove', onWindowMouseMove);
       window.removeEventListener('mouseup', onMouseUp);
-      console.log('removed events');
+      //console.log('removed events');
       setMouseDown(false);
       setAddedEvents(false);
     };
