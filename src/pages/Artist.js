@@ -52,7 +52,7 @@ function Artist({ children, location }) {
   const [activeIndex, setActiveIndex] = useState(menuIndex);
 
   const backgroundUrl = '/images/artist/' + id + '.png';
-  const backgroundUrl2x = '/images/artist/' + id + '_2x.png';
+  const backgroundUrl2x = '/images/artist/' + id + '_2x.png 2x';
   //console.log('requested artist id: ' + id);
 
   const { data } = useQuery(ARTIST_QUERY, {
