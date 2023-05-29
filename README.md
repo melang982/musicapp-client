@@ -1,7 +1,7 @@
 <h3 align="center">Lossless Music Streaming React/GraphQL</h3>  
 <p align="center">  
-  <a href="http://185.248.103.151:5000/artist/2"><img src="https://raw.githubusercontent.com/melang982/musicapp-client/main/screenshots/screenshot.png"></a>
-  <a href="http://185.248.103.151:5000/artist/2">Live Demo</a>
+  <a href="http://176.117.210.233:5000/artist/2"><img src="https://raw.githubusercontent.com/melang982/musicapp-client/main/screenshots/screenshot.png"></a>
+  <a href="http://176.117.210.233:5000/artist/2">Live Demo</a>
 </p>
 
 
